@@ -1,12 +1,13 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-<h2>These are the reviews</h2>
-<ul>
-    {% for items in result_list %}
-        <li>
-            <p>Rating: {{items.rating}}</p>
-            <p>Review: {{items.review}}</p>
-        </li>
-    {% endfor %}
-</ul>
+  <h2>These are the reviews</h2>
+  <ul>
+      {% for items in result_list %}
+          <li>
+              <p>Rating: {{items.rating}}</p>
+              <p>Review: {{items.review}}</p>
+          </li>
+      {% endfor %}
+  </ul>
+{% endblock %}
