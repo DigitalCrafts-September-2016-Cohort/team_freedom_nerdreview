@@ -1,15 +1,22 @@
 {% extends 'layout.html' %}
 
 {% block nav %}
+    <p>(There should be a list here)</p>
 <ul>
-    {% for subcategory_prod in result_list %}
+    {% for sub_category in sub_categories_list %}
     <li>
-        <a href="#">{{subcategory_prod.id}}</a>
+        <a href="/categories/{{cat_id}}/{{sub_category.id}}">{{sub_category.name}}</a>
     </li>
     {% endfor %}
 </ul>
 {% endblock %}
 
 {% block body %}
-    <h1> PRODUCTSSSSSS</h1>
+<ul>
+    {% for sub_category_prod in sub_categories_products_list %}
+    <li>
+        <a href="#">{{sub_category_prod.id}}</a>
+    </li>
+    {% endfor %}
+</ul>
 {% endblock %}
