@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+
+{% block nav %}
+<ul>
+    {% for subcategory_prod in result_list %}
+    <li>
+        <a href="#">{{subcategory_prod.id}}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
+
+{% block body %}
+    <h1> PRODUCTSSSSSS</h1>
+{% endblock %}
