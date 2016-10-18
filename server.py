@@ -27,7 +27,7 @@ def render_reviews():
     )
 
 @app.route('/companies')
-def render_reviews():
+def render_companies():
     query = db.query('select * from company')
     return render_template(
         '/companies.html',
