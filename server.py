@@ -19,9 +19,10 @@ def render_categories():
         result_list = query.namedresult()
     )
 
-@app.route('/categories/<sub_cat>')
-def render_sub_cats(sub_cat):
-    query = db.query('select product.name from product_uses_category inner join products on product_uses_category.product_id = product.id')
+@app.route('/categories/sub_cat', methods=['POST'])
+def render_sub_cats():
+    main_cat_id = request.form.get('main_cat')
+    query = db.query('select name from secondary_cat where secondary_cat.main_cat_id = %s' % main_cat_id)
 
 
 # Selects all of the names from the review table and renders them in the reviews.html page
@@ -34,12 +35,12 @@ def render_reviews():
         result_list = query.namedresult()
     )
 
-# Selects all of the names from the company table and renders them in the companies.html page
-@app.route('/companies')
-def render_companies():
+# Selects all of the names from the company table and renders them in the brands.html page
+@app.route('/brands')
+def render_brands():
     query = db.query('select * from company')
     return render_template(
-        '/companies.html',
+        '/brands.html',
         result_list = query.namedresult()
     )
 
