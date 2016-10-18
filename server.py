@@ -48,7 +48,15 @@ def render_reviews():
    query = db.query('select * from review')
    return render_template(
       '/reviews.html',
-      result_list = query.namedresult()
+      reviews_list = query.namedresult()
+   )
+
+@app.route('/reviews/<review_id>')
+def render_individual_review(review_id):
+   review_query = db.query('select * from review where id = %s' % review_id)
+   return render_template(
+      '/individual_review.html',
+      review = review_query.namedresult()[0]
    )
 
 # Selects all of the names from the company table and renders them in the brands.html page
