@@ -19,10 +19,13 @@ def render_categories():
         result_list = query.namedresult()
     )
 
-@app.route('/categories/sub_cat', methods=['POST'])
-def render_sub_cats():
-    main_cat_id = request.form.get('main_cat')
-    query = db.query('select name from secondary_cat where secondary_cat.main_cat_id = %s' % main_cat_id)
+@app.route('/categories/<cat_id>')
+def render_sub_cats(cat_id):
+   query = db.query('select * from secondary_cat where secondary_cat.main_cat_id = %s' % cat_id)
+   return render_template(
+       '/sub_categories.html',
+       result_list = query.namedresult()
+   )
 
 
 # Selects all of the names from the review table and renders them in the reviews.html page
