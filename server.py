@@ -27,6 +27,13 @@ def render_sub_cats(cat_id):
        result_list = query.namedresult()
    )
 
+@app.route('/categories/<cat_id>/<sub_cat_id>')
+def render_sub_cat_products(sub_cat_id):
+    query = db.query('select * from products where products.secondary_cat_id = %s' % sub_cat_id)
+    return render_template(
+        '/sub_categories_products.html',
+        result_list = query.namedresult()
+    )
 
 # Selects all of the names from the review table and renders them in the reviews.html page
 @app.route('/reviews')
