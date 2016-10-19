@@ -9,8 +9,19 @@
   </ul>
 {% endblock %}
 
+{% block sort %}
+    <select class="form-control" name="Sort by">
+        <option>Highest rating</option>
+        <option>Lowest rating</option>
+        <option>Alphabetical (by user)</option>
+        <option>Length (shortest to longest)</option>
+        <option>Length (longest to shortest)</option>
+        <option>Date (oldest)</option>
+        <option>Date (newest)</option>
+    </select>
+{% endblock %}
+
 {% block body %}
-  <h2>These are the reviews</h2>
   <ul>
       {% for review in reviews_list %}
       <li>

@@ -1,7 +1,17 @@
-nav {
-    background: #ccd4d4;
+html, body {
+    height: 100%;
+}
+
+.nav-menu {
+    background: #393939;
+    position: fixed;
+    height: 100%;
+    width: 25%;
 }
 
 main {
+    min-height: 100%;
     background: #8fcece;
+    float: right;
+    width: 75%;
 }

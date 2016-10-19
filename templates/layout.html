@@ -9,16 +9,16 @@
         <title>Nerd Review</title>
     </head>
     <body>
-        <div class="page">
-            <nav>
-                {% block nav %}
-                {% endblock %}
-            </nav>
-            <main>
-                {% block body %}
-                {% endblock %}
-            </main>
-        </div>
+        <nav class="nav-menu">
+            {% block nav %}
+            {% endblock %}
+        </nav>
+        <main class="main">
+            {% block sort %}
+            {% endblock %}
+            {% block body %}
+            {% endblock %}
+        </main>
 
         <!-- JavaScript -->
         <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
