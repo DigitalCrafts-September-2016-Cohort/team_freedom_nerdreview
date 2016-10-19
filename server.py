@@ -94,5 +94,14 @@ def render_brands():
       result_list = query.namedresult()
    )
 
+# Users page
+@app.route('/users')
+def users():
+   user_list = db.query("select * from users").namedresult()
+   return render_template(
+      '/users.html',
+      user_list = user_list
+   )
+
 if __name__ == '__main__':
    app.run(debug=True)
