@@ -138,10 +138,34 @@ def render_review():
 @app.route('/add_product_review', methods=['POST'])
 def add_review():
     product_name = request.form.get('product_name')
-    print product_name
     rating = request.form.get('rating')
     review = request.form.get('review')
     company_name = request.form.get('company_name')
+    main_cat_name = request.form.get('main_cat_name')
+    second_cat_name = request.form.get('second_cat_name')
+
+    main_cat_check = db.query("select * from main_cat where main_cat.name = '%s'" % main_cat_name).namedresult()
+    if main_cat_check:
+        main_category_id = main_cat_check[0].id
+    else:
+        db.insert(
+            'main_cat',
+            name=main_cat_name,
+        )
+        main_cat_check = db.query("select * from main_cat where main_cat.name = '%s'" % main_cat_name).namedresult()
+        main_category_id = main_cat_check[0].id
+
+    second_cat_check = db.query("select * from secondary_cat where secondary_cat.name = '%s'" % second_cat_name).namedresult()
+    if second_cat_check:
+        second_cat_id = second_cat_check[0].id
+    else:
+        db.insert(
+            'secondary_cat',
+            name=second_cat_name,
+            main_cat_id=main_category_id
+        )
+        second_cat_check = db.query("select * from secondary_cat where secondary_cat.name = '%s'" % second_cat_name).namedresult()
+        second_cat_id = second_cat_check[0].id
 
     company_check = db.query("select * from company where company.name = '%s'" % company_name).namedresult()
     if company_check:
@@ -165,6 +189,11 @@ def add_review():
         )
         product_check = db.query("select product.id from product where product.name = '%s'" % product_name).namedresult()
         prod_id = product_check[0].id
+        db.insert(
+            'product_uses_category',
+            product_id=prod_id,
+            secondary_cat_id=second_cat_id
+        )
 
     db.insert(
         'review',
@@ -172,11 +201,6 @@ def add_review():
         rating=rating,
         review=review
     )
-
-    # db.insert(
-    #     'product_uses_category',
-    #
-    # )
     return redirect('/')
 
 

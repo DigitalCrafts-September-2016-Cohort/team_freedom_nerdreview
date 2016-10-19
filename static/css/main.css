@@ -17,7 +17,7 @@ body {
     background: rgba(0,0,0,0.87);
 }
 
-form[type="text"] {
+form, input[type="text"] {
     color: rgba(0,0,0,0.87);
 }
 
