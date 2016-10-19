@@ -32,17 +32,13 @@ def render_sub_cats(cat_id):
 
 @app.route('/categories/<cat_id>/<sub_cat_id>')
 def render_sub_cat_products(cat_id, sub_cat_id):
-    # Is this query for product.name redundant? Find out next time, on dragon ball z
-   product_query = db.query('select product.name from product_uses_category inner join product on product.id = product_uses_category.product_id where product_uses_category.secondary_cat_id = %s' % sub_cat_id)
    sub_cat_query = db.query('select * from secondary_cat where secondary_cat.main_cat_id = %s' % cat_id)
-   sub_cat_products_query = db.query('select * from product_uses_category where product_uses_category.secondary_cat_id = %s' % sub_cat_id)
+   sub_cat_products_query = db.query('select product.name, product_uses_category.id from product_uses_category inner join product on product.id = product_uses_category.product_id where product_uses_category.secondary_cat_id = %s' % sub_cat_id)
    return render_template(
       '/sub_categories_products.html',
       cat_id = cat_id,
       sub_categories_list = sub_cat_query.namedresult(),
-      sub_categories_products_list = sub_cat_products_query.namedresult(),
-      # Added this to create a list of product names (see main body of sub_categories_products.html for the iteration through list)
-      product_list = product_query.namedresult()
+      sub_categories_products_list = sub_cat_products_query.namedresult()
    )
 
 # Selects all of the names from the review table and renders them in the reviews.html page
