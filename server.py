@@ -128,6 +128,41 @@ def users():
         user_list = user_list
     )
 
+@app.route('/product_review')
+def render_review():
+    return render_template(
+        '/add_product_review.html'
+    )
+
+@app.route('/add_product_review', methods=['POST'])
+def add_review():
+    product_name = request.form.get('product_name')
+    print product_name
+    rating = request.form.get('rating')
+    review = request.form.get('review')
+    company_name = request.form.get('company_name')
+    db.insert(
+        'company',
+        name=company_name
+    )
+    company_query = db.query("select id from company where company.name = '%s'" % company_name).namedresult()
+    comp_id = company_query[0].id
+    db.insert(
+        'product',
+        name=product_name,
+        company_id=comp_id
+    )
+    product_query = db.query("select product.id from product where product.name = '%s'" % product_name).namedresult()[0]
+    prod_id = product_query.id
+    db.insert(
+        'review',
+        product_id=prod_id,
+        rating=rating,
+        review=review
+    )
+
+    return redirect('/')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
