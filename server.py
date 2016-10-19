@@ -24,7 +24,7 @@ def render_categories():
 def render_sub_cats(cat_id):
     # Reduce reduncancy by joining tables and being more specific in our select
     cat_query = db.query('select * from secondary_cat where secondary_cat.main_cat_id = %s' % cat_id)
-    sub_cat_query = db.query('select product.name as prod_name, avg(review.rating) as avg_rating,  count(review.product_id) as review_count from review inner join product on product.id = review.product_id  inner join secondary_cat on secondary_cat.id = %s group by product.name' % cat_id)
+    sub_cat_query = db.query('select product.name as prod_name, product.id as prod_id, avg(review.rating) as avg_rating,  count(review.product_id) as review_count from review inner join product on product.id = review.product_id inner join product_uses_category on product.id = product_uses_category.product_id inner join secondary_cat on product_uses_category.secondary_cat_id = secondary_cat.id where secondary_cat.main_cat_id = %s group by product.name, prod_id' % cat_id)
     return render_template(
         '/sub_categories.html',
         cat_id = cat_id,
@@ -40,6 +40,7 @@ def render_sub_cat_products(cat_id, sub_cat_id):
     #Gets all products in the secondary category with id = sub_cat_id
     ## THIS IS THE RIGHT ONE
     sub_cat_products_query = db.query('select product.name as prod_name, product.id as prod_id, avg(review.rating) as avg_rating, count(review.product_id) as review_count from review inner join product on product.id = review.product_id inner join product_uses_category on product.id = product_uses_category.product_id inner join secondary_cat on product_uses_category.secondary_cat_id = secondary_cat.id where secondary_cat.id = %s group by product.name, product.id order by prod_name' % sub_cat_id)
+
 
     return render_template(
         '/sub_categories_products.html',
@@ -142,19 +143,29 @@ def add_review():
     review = request.form.get('review')
     company_name = request.form.get('company_name')
 
-    db.insert(
-        'company',
-        name=company_name
-    )
-    company_query = db.query("select id from company where company.name = '%s'" % company_name).namedresult()[0]
-    comp_id = company_query.id
-    db.insert(
-        'product',
-        name=product_name,
-        company_id=comp_id
-    )
-    product_query = db.query("select product.id from product where product.name = '%s'" % product_name).namedresult()[0]
-    prod_id = product_query.id
+    company_check = db.query("select * from company where company.name = '%s'" % company_name).namedresult()
+    if company_check:
+        comp_id = company_check[0].id
+    else:
+        db.insert(
+            'company',
+            name=company_name
+        )
+        company_check = db.query("select * from company where company.name = '%s'" % company_name).namedresult()
+        comp_id = company_check[0].id
+
+    product_check = db.query("select * from product where product.name = '%s'" % product_name).namedresult()
+    if product_check:
+        prod_id = product_check[0].id
+    else:
+        db.insert(
+            'product',
+            name=product_name,
+            company_id=comp_id
+        )
+        product_check = db.query("select product.id from product where product.name = '%s'" % product_name).namedresult()
+        prod_id = product_check[0].id
+
     db.insert(
         'review',
         product_id=prod_id,
@@ -162,6 +173,10 @@ def add_review():
         review=review
     )
 
+    # db.insert(
+    #     'product_uses_category',
+    #
+    # )
     return redirect('/')
 
 

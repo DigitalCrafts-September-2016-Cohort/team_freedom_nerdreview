@@ -9,8 +9,14 @@
     </ul>
 {% endblock %}
 
+{% block header %}
+  <h1>Reviews</h1>
+  <h3>Look at all these awesome reviews</h3>
+{% endblock %}
+
 {% block sort %}
     <select class="form-control" name="Sort by">
+        <option selected disabled>Sort</option>
         <option>Highest rating</option>
         <option>Lowest rating</option>
         <option>Alphabetical (by user)</option>
