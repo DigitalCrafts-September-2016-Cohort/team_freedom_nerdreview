@@ -49,16 +49,29 @@ def render_sub_cat_products(cat_id, sub_cat_id):
 #Displays a page for a single product, navbar menu stays the same
 @app.route('/products/<product_id>')
 def disp_individual_product(product_id):
-    #Selects single product and its reviews
+    # Gets the main category id number for the product
+    main_cat = db.query('select main_cat.id as main_id from product inner join product_uses_category on product.id = product_uses_category.product_id inner join secondary_cat on product_uses_category.secondary_cat_id = secondary_cat.id inner join main_cat on secondary_cat.main_cat_id = main_cat.id and product.id = %s' % product_id).namedresult()[0].main_id
+
+    #Gets all the secondary categories in the main category (above)
+    parent_categories_list = db.query('select secondary_cat.id as sub_cat_id, secondary_cat.name as cat_name from secondary_cat where secondary_cat.main_cat_id = %s' % main_cat)
+
+    #Gets the individual product
     product_query = db.query('select * from product where product.id = %s' % product_id)
+
+    #Gets the summary stats (count, avg rating) for all the product (see above) reviews
     product_reviews_summary_query = db.query('select count(review.id) as review_count, avg(review.rating) as avg_rating from product inner join review on review.product_id = product.id and product.id = %s' % product_id)
+
+    #Gets all the reviews for the indiviudal product from above
     reviews_query = db.query('select review.id as review_id from product inner join review on product.id = review.product_id and product.id = %s' % product_id)
 
     return render_template(
     'individual_product.html',
+    cat_id = main_cat,
+    parent_categories = parent_categories_list.namedresult(),
     product = product_query.namedresult()[0],
     product_summary = product_reviews_summary_query.namedresult()[0],
     reviews_list = reviews_query.namedresult()
+
     )
 
 # Selects all of the names from the review table and renders them in the reviews.html page
