@@ -1,12 +1,12 @@
 {% extends 'layout.html' %}
 
 {% block nav %}
-  <ul>
-      <li><a href="/categories">Categories</a></li>
-      <li><a href="/brands">Brands</a></li>
-      <li><a href="/reviews">Reviews</a></li>
-      <li><a href="/users">Users</a></li>
-  </ul>
+    <ul>
+        <li><a href="/categories">Categories</a></li>
+        <li><a href="/brands">Brands</a></li>
+        <li><a href="/reviews">Reviews</a></li>
+        <li><a href="/users">Users</a></li>
+    </ul>
 {% endblock %}
 
 {% block sort %}
@@ -22,16 +22,18 @@
 {% endblock %}
 
 {% block body %}
-  <ul>
-      {% for review in reviews_list %}
-      <li>
-          <a href="/reviews/{{review.id}}">
-              <p>Reviewer Name: {{review.user_name}}</p>
-              <p>Product Name: {{review.prod_name}}</p>
-              <p>Rating: {{review.rating}}</p>
-              <p>Date: {{review.date}}</p>
-          </a>
-      </li>
-      {% endfor %}
-  </ul>
+    <ul>
+        {% for review in reviews_list %}
+        <li class="tile">
+            <a href="/reviews/{{review.id}}">
+                <div class="cf">
+                    <h4 class="rating">{{review.rating}} / 5</h4>
+                    <h4 class="date">Date: {{review.date}}</h4>
+                </div>
+                <h3 class="product">{{review.prod_name}}</h3>
+                <h4 class="reviewer">By {{review.user_name}}</h4>
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
 {% endblock %}
