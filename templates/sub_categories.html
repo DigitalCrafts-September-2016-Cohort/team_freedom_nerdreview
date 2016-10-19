@@ -2,7 +2,7 @@
 
 {% block nav %}
 <ul>
-    {% for sub_category in sub_categories_list %}
+    {% for sub_category in categories_list %}
     <li>
         <a href="/categories/{{cat_id}}/{{sub_category.id}}">{{sub_category.name}}</a>
     </li>
@@ -11,5 +11,16 @@
 {% endblock %}
 
 {% block body %}
-    <h1> SUB CATEGORRRRRIES</h1>
+    <h1> SUB CATEGORRRRRIES PRODUCTSSSS</h1>
+    <ul>
+        {% for product in sub_categories_list %}
+        <li>
+            <a href="">
+              <p>Product Name: {{product.prod_name}}</p>
+              <p>Average Rating: {{product.avg_rating}}</p>
+              <p>Review Count: {{product.review_count}}</p>
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
 {% endblock %}
