@@ -17,7 +17,8 @@ def render_categories():
     return render_template(
         '/categories.html',
         categories_list = cat_query.namedresult()
-   )
+    )
+
 
 @app.route('/categories/<cat_id>')
 def render_sub_cats(cat_id):
@@ -29,7 +30,7 @@ def render_sub_cats(cat_id):
         cat_id = cat_id,
         categories_list = cat_query.namedresult(),
         sub_categories_list = sub_cat_query.namedresult()
-   )
+    )
 
 @app.route('/categories/<cat_id>/<sub_cat_id>')
 def render_sub_cat_products(cat_id, sub_cat_id):
@@ -44,7 +45,24 @@ def render_sub_cat_products(cat_id, sub_cat_id):
         cat_id = cat_id,
         sub_categories_list = sub_cat_query.namedresult(),
         sub_categories_products_list = sub_cat_products_query.namedresult()
-   )
+    )
+
+
+#Displays a page for a single product, navbar menu stays the same
+@app.route('/products/<product_id>')
+def disp_individual_product(product_id):
+    #Selects single product and its reviews
+    product_query = db.query('select * from product where product.id = %s' % product_id)
+    product_reviews_summary_query = db.query('select count(review.id) as review_count, avg(review.rating) as avg_rating from product inner join review on review.product_id = product.id and product.id = %s' % product_id)
+    reviews_query = db.query('select review.id as review_id from product inner join review on product.id = review.product_id and product.id = %s' % product_id)
+
+    return render_template(
+        'individual_product.html',
+        product = product_query.namedresult()[0],
+        product_summary = product_reviews_summary_query.namedresult()[0],
+        reviews_list = reviews_query.namedresult()
+    )
+
 
 # Selects all of the names from the review table and renders them in the reviews.html page
 @app.route('/reviews')
@@ -54,13 +72,14 @@ def render_reviews():
     return render_template(
         '/reviews.html',
         reviews_list = query.namedresult()
-   )
+    )
+
 
 @app.route('/icon')
 def icon():
     return render_template(
         '/icon.html'
-   )
+    )
 
 @app.route('/reviews/<review_id>')
 def render_individual_review(review_id):
@@ -68,7 +87,7 @@ def render_individual_review(review_id):
     return render_template(
         '/individual_review.html',
         review = review_query.namedresult()[0]
-   )
+    )
 
 # Selects all of the names from the company table and renders them in the brands.html page
 @app.route('/brands')
@@ -77,7 +96,8 @@ def render_brands():
     return render_template(
         '/brands.html',
         result_list = query.namedresult()
-   )
+    )
+
 
 # Users page
 @app.route('/users')
@@ -86,7 +106,8 @@ def users():
     return render_template(
         '/users.html',
         user_list = user_list
-   )
+    )
+
 
 if __name__ == '__main__':
     app.run(debug=True)
