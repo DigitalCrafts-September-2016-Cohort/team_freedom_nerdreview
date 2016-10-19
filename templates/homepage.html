@@ -2,7 +2,7 @@
 {% extends 'layout.html' %}
 
 {% block nav %}
-<ul>
+<ul class="super-categories list">
     <li><a href="/categories">Categories</a></li>
     <li><a href="/brands">Brands</a></li>
     <li><a href="/reviews">Reviews</a></li>
@@ -11,5 +11,8 @@
 {% endblock %}
 
 {% block body %}
-    <p>SELECT A CATEGORY NOW!!!</p>
+    <div class="welcome">
+        <h1>Welcome to Nerd Review!</h1>
+        <p>Select an option from the menu, <a href="/log_in">log in</a>, or <a href="/sign_up">sign up</a>.</p>
+    </div>
 {% endblock %}

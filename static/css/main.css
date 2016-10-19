@@ -1,3 +1,9 @@
+/*------------------------
+STYLES/LAYOUT
+-------------------------*
+
+/* ------ GLOBAL ------ */
+
 * {
     box-sizing: border-box;
 }
@@ -10,9 +16,17 @@ body {
     font-family: 'Roboto Mono', Courier, monospace;
 }
 
+form[type="text"] {
+    color: rgba(0,0,0,0.87);
+}
+
 ul {
     padding: 0;
     list-style: none;
+}
+
+p {
+    margin: 0;
 }
 
 .cf::after {
@@ -21,38 +35,89 @@ ul {
     clear: both;
 }
 
+
+/* ------ NAVBAR ------ */
+
 .nav-wrapper {
     margin: 0 auto;
     width: 90%;
 }
 
 .nav-menu {
-    background: #648381;
-    color: #fff;
+    background: #F4CF6F;
+    color: rgba(0,0,0,0.87);
     position: fixed;
     height: 100%;
+    max-width: 400px;
     width: 25%;
+    display: flex;
+    align-items: center;
 }
 
-.nav-menu a {
-    color: #fff;
+.nr-logo {
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    width: 120px;
+    margin-left: -60px;
+    left: 50%;
 }
+
+    .nr-logo img {
+        padding: 10px 0;
+        width: 80px;
+    }
+
+    .nr-logo p {
+        font-weight: 100;
+        letter-spacing: 10px;
+        font-size: 16px;
+    }
+
+.nav-menu a {
+    color: rgba(0,0,0,0.87);
+    text-decoration: none;
+}
+
+.super-categories {
+    margin-top: 20px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.super-categories li {
+    padding-bottom: 15px;
+}
+
+
+/* ------ MAIN SECTION ----- */
 
 main {
     min-height: 100%;
+    background: rgba(0,0,0,0.87);
     color: #fff;
-    background: #55505C;
     float: right;
-    width: 75%;
+    min-width: 75%;
+    display: flex;
+    align-items: center;
 }
 
 .main-wrapper {
     margin: 0 auto;
     width: 80%;
+    display: flex;
 }
 
 main a {
     color: #fff;
+}
+
+.welcome {
+    margin: 0 auto;
+    position: relative;
+    text-align: center;
 }
 
 .tile {
@@ -61,7 +126,6 @@ main a {
     height: 300px;
     text-align: center;
     display: inline-block;
-    box-sizing: padding-box;
 }
 
 .tile a {
@@ -75,8 +139,8 @@ main a {
 }
 
 .tile a:hover {
-    color: #FFBF46;
-    border-color: #FFBF46;
+    color: #F4CF6F;
+    border-color: #F4CF6F;
 }
 
 .tile .rating,
@@ -94,3 +158,8 @@ main a {
 .tile .date {
     float: right;
 }
+
+
+/*------------------------
+MEDIA QUERIES
+-------------------------*
