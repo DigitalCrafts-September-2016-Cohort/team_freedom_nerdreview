@@ -10,12 +10,22 @@
 </ul>
 {% endblock %}
 
+{% block sort %}
+    <select class="form-control" name="Sort by">
+        <option>Highest rating</option>
+        <option>Lowest rating</option>
+        <option>Alphabetical (by product name)</option>
+        <option>MSRP (descending)</option>
+        <option>MSRP (ascending)</option>
+    </select>
+{% endblock %}
+
 {% block body %}
     <h1> SUB CATEGORRRRRIES PRODUCTSSSS</h1>
     <ul>
         {% for product in sub_categories_list %}
         <li>
-            <a href="">
+            <a href="/products/{{product.prod_id}}">
               <p>Product Name: {{product.prod_name}}</p>
               <p>Average Rating: {{product.avg_rating}}</p>
               <p>Review Count: {{product.review_count}}</p>
