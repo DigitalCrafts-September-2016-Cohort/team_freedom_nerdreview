@@ -22,28 +22,42 @@ def render_categories():
 @app.route('/categories/<cat_id>')
 def render_sub_cats(cat_id):
     # Reduce reduncancy by joining tables and being more specific in our select
-    cat_query = db.query('select * from main_cat')
-    sub_cat_query = db.query('select product.name as prod_name, avg(review.rating) as avg_rating, count(review.product_id) as review_count from review inner join product on product.id = review.product_id inner join secondary_cat on secondary_cat.id = %s group by product.name' % cat_id)
+    cat_query = db.query('select * from secondary_cat where secondary_cat.main_cat_id = %s' % cat_id)
+    sub_cat_query = db.query('select product.id as prod_id, product.name as prod_name, avg(review.rating) as avg_rating, count(review.product_id) as review_count from review inner join product on product.id = review.product_id inner join secondary_cat on secondary_cat.id = %s group by product.name, product.id' % cat_id)
+
     return render_template(
-        '/sub_categories.html',
-        cat_id = cat_id,
-        categories_list = cat_query.namedresult(),
-        sub_categories_list = sub_cat_query.namedresult()
+      '/sub_categories.html',
+      cat_id = cat_id,
+      categories_list = cat_query.namedresult(),
+      sub_categories_list = sub_cat_query.namedresult()
     )
 
 @app.route('/categories/<cat_id>/<sub_cat_id>')
 def render_sub_cat_products(cat_id, sub_cat_id):
     # Reduce reduncancy by joining tables and being more specific in our select
     sub_cat_query = db.query('select * from secondary_cat where secondary_cat.main_cat_id = %s' % cat_id)
-    sub_cat_products_query = db.query('select product.name, product_uses_category.id from product_uses_category inner join product on product.id = product_uses_category.product_id where product_uses_category.secondary_cat_id = %s' % sub_cat_id)
-
-    sub_cat_query = db.query('select product.name as prod_name, avg(review.rating) as avg_rating, count(review.product_id) as review_count from review inner join product on product.id = review.product_id inner join secondary_cat on secondary_cat.id = %s group by product.name' % cat_id)
+    sub_cat_products_query = db.query('select product.id as prod_id, product.name as prod_name, avg(review.rating) as avg_rating, count(review.product_id) as review_count from review inner join product on product.id = review.product_id inner join product_uses_category on product.id = product_uses_category.product_id inner join secondary_cat on product_uses_category.secondary_cat_id = secondary_cat.id where secondary_cat.id = %s group by product.name, product.id order by prod_name' % sub_cat_id)
 
     return render_template(
-        '/sub_categories_products.html',
-        cat_id = cat_id,
-        sub_categories_list = sub_cat_query.namedresult(),
-        sub_categories_products_list = sub_cat_products_query.namedresult()
+      '/sub_categories_products.html',
+      cat_id = cat_id,
+      sub_categories_list = sub_cat_query.namedresult(),
+      sub_categories_products_list = sub_cat_products_query.namedresult()
+    )
+
+#Displays a page for a single product, navbar menu stays the same
+@app.route('/products/<product_id>')
+def disp_individual_product(product_id):
+    #Selects single product and its reviews
+    product_query = db.query('select * from product where product.id = %s' % product_id)
+    product_reviews_summary_query = db.query('select count(review.id) as review_count, avg(review.rating) as avg_rating from product inner join review on review.product_id = product.id and product.id = %s' % product_id)
+    reviews_query = db.query('select review.id as review_id from product inner join review on product.id = review.product_id and product.id = %s' % product_id)
+
+    return render_template(
+    'individual_product.html',
+    product = product_query.namedresult()[0],
+    product_summary = product_reviews_summary_query.namedresult()[0],
+    reviews_list = reviews_query.namedresult()
     )
 
 # Selects all of the names from the review table and renders them in the reviews.html page
