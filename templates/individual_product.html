@@ -1,11 +1,10 @@
 {% extends 'layout.html' %}
 
 {% block nav %}
-    <p>(There should be a list here)</p>
     <ul>
-      {% for sub_category in sub_categories_list %}
+      {% for category in parent_categories %}
       <li>
-          <a href="/categories/{{cat_id}}/{{sub_category.id}}">{{sub_category.name}}</a>
+          <a href="/categories/{{cat_id}}/{{category.sub_cat_id}}">{{category.cat_name}}</a>
       </li>
       {% endfor %}
     </ul>
