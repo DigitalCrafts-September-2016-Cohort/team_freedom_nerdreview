@@ -143,12 +143,17 @@ def add_review():
     review = request.form.get('review')
     company_name = request.form.get('company_name')
 
-    db.insert(
-        'company',
-        name=company_name
-    )
-    company_query = db.query("select id from company where company.name = '%s'" % company_name).namedresult()[0]
-    comp_id = company_query.id
+    company_check = db.query("select * from company where company.name = '%s'" % company_name).namedresult()
+    if company_check:
+        comp_id = company_check[0].id
+    else:
+        db.insert(
+            'company',
+            name=company_name
+        )
+        company_check = db.query("select * from company where company.name = '%s'" % company_name).namedresult()
+        comp_id = company_check[0].id
+        
     db.insert(
         'product',
         name=product_name,
@@ -163,6 +168,10 @@ def add_review():
         review=review
     )
 
+    # db.insert(
+    #     'product_uses_category',
+    #
+    # )
     return redirect('/')
 
 
