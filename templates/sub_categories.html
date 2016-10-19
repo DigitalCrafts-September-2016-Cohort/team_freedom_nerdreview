@@ -2,6 +2,7 @@
 
 {% block nav %}
 <ul>
+    <li><a href="/categories">Categories</a></li>
     {% for sub_category in categories_list %}
     <li>
         <a href="/categories/{{cat_id}}/{{sub_category.id}}">{{sub_category.name}}</a>

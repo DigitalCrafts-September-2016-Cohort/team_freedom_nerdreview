@@ -83,16 +83,24 @@ def render_individual_review(review_id):
     return render_template(
       '/individual_review.html',
       review = review_query.namedresult()[0]
-   )
+    )
 
 # Selects all of the names from the company table and renders them in the brands.html page
 @app.route('/brands')
 def render_brands():
-   query = db.query('select * from company')
-   return render_template(
-      '/brands.html',
-      result_list = query.namedresult()
-   )
+    brand_query = db.query('select * from company order by company.name')
+    return render_template(
+        '/brands.html',
+        brand_list = brand_query.namedresult()
+    )
+
+@app.route('/brands/<brand_id>')
+def render_brand_prod(brand_id):
+    brand_prod_query = db.query('select product.name as prod_name from product inner join company on product.company_id = %s group by product.name' % brand_id)
+    return render_template(
+        '/brand_products.html',
+        brand_prod_list = brand_prod_query.namedresult()
+    )
 
 # Users page
 @app.route('/users')
