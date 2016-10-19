@@ -19,8 +19,10 @@
         </nav>
         <main class="main">
             <div class="main-wrapper">
-            {% block sort %}
-            {% endblock %}
+            <div class="sort">
+              {% block sort %}
+              {% endblock %}
+            </div>
             {% block body %}
             {% endblock %}
             </div>
