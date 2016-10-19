@@ -153,14 +153,19 @@ def add_review():
         )
         company_check = db.query("select * from company where company.name = '%s'" % company_name).namedresult()
         comp_id = company_check[0].id
-        
-    db.insert(
-        'product',
-        name=product_name,
-        company_id=comp_id
-    )
-    product_query = db.query("select product.id from product where product.name = '%s'" % product_name).namedresult()[0]
-    prod_id = product_query.id
+
+    product_check = db.query("select * from product where product.name = '%s'" % product_name).namedresult()
+    if product_check:
+        prod_id = product_check[0].id
+    else:
+        db.insert(
+            'product',
+            name=product_name,
+            company_id=comp_id
+        )
+        product_check = db.query("select product.id from product where product.name = '%s'" % product_name).namedresult()
+        prod_id = product_check[0].id
+
     db.insert(
         'review',
         product_id=prod_id,
