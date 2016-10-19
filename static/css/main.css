@@ -15,6 +15,12 @@ ul {
     list-style: none;
 }
 
+.cf::after {
+    content: " ";
+    display: block;
+    clear: both;
+}
+
 .nav-wrapper {
     margin: 0 auto;
     width: 90%;
@@ -76,7 +82,8 @@ main a {
 .tile .rating,
 .tile .date,
 .tile .product,
-.tile .reviewer {
+.tile .reviewer,
+.tile .review-count {
     margin: 0;
 }
 

@@ -1,14 +1,14 @@
 {% extends 'layout.html' %}
 
 {% block nav %}
-<ul>
-    <li><a href="/categories">Categories</a></li>
-    {% for sub_category in categories_list %}
-    <li>
-        <a href="/categories/{{cat_id}}/{{sub_category.id}}">{{sub_category.name}}</a>
-    </li>
-    {% endfor %}
-</ul>
+    <ul>
+        <li><a href="/categories">Categories</a></li>
+        {% for sub_category in categories_list %}
+        <li>
+            <a href="/categories/{{cat_id}}/{{sub_category.id}}">{{sub_category.name}}</a>
+        </li>
+        {% endfor %}
+    </ul>
 {% endblock %}
 
 {% block sort %}
@@ -25,11 +25,14 @@
     <h1> SUB CATEGORRRRRIES PRODUCTSSSS</h1>
     <ul>
         {% for product in sub_categories_list %}
-        <li>
+        <li class="tile">
             <a href="/products/{{product.prod_id}}">
-              <p>Product Name: {{product.prod_name}}</p>
-              <p>Average Rating: {{product.avg_rating}}</p>
-              <p>Review Count: {{product.review_count}}</p>
+                <div class="cf">
+                    <h4 class="rating">{{product.avg_rating}}</h4>
+                    <h4 class="date">Date:</h4>
+                </div>
+                <h3 class="product">{{product.prod_name}}</h3>
+                <h4 class="review-count">{{product.review_count}} reviews</h4>
             </a>
         </li>
         {% endfor %}
