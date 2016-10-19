@@ -6,7 +6,7 @@
 [NerdReview](https://nerdreview.co)
 
 ##Github Link:
-[Phonebook Apps](https://github.com/jesslynlandgren/phonebook_obj)
+[NerdReview](https://github.com/DigitalCrafts-September-2016-Cohort/team_freedom_nerdreview.git)
 
 ##Team Members & Roles:
 ####Click on each member's name to see their github profile
@@ -28,9 +28,6 @@
 
 ##Screenshots
 
-![Phonebook1](/images/.png)
-![Phonebook1](/images/.png)
-![Phonebook1](/images/.png)
 
 ##Copyright
 
@@ -46,4 +43,4 @@
 4. Push to your feature branch: `git push origin my-new-feature`
 5. Submit a pull request!
 
-##History
+##Project History
