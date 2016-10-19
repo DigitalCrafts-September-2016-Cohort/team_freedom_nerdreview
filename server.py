@@ -21,6 +21,7 @@ def render_categories():
 
 @app.route('/categories/<cat_id>')
 def render_sub_cats(cat_id):
+   # Reduce reduncancy by joining tables and being more specific in our select
    cat_query = db.query('select * from main_cat')
    sub_cat_query = db.query('select * from secondary_cat where secondary_cat.main_cat_id = %s' % cat_id)
    return render_template(
@@ -32,6 +33,7 @@ def render_sub_cats(cat_id):
 
 @app.route('/categories/<cat_id>/<sub_cat_id>')
 def render_sub_cat_products(cat_id, sub_cat_id):
+   # Reduce reduncancy by joining tables and being more specific in our select
    sub_cat_query = db.query('select * from secondary_cat where secondary_cat.main_cat_id = %s' % cat_id)
    sub_cat_products_query = db.query('select product.name, product_uses_category.id from product_uses_category inner join product on product.id = product_uses_category.product_id where product_uses_category.secondary_cat_id = %s' % sub_cat_id)
    return render_template(
