@@ -26,8 +26,10 @@
       {% for review in reviews_list %}
       <li>
           <a href="/reviews/{{review.id}}">
+              <p>Reviewer Name: {{review.user_name}}</p>
+              <p>Product Name: {{review.prod_name}}</p>
               <p>Rating: {{review.rating}}</p>
-              <p>Review: {{review.review}}</p>
+              <p>Date: {{review.date}}</p>
           </a>
       </li>
       {% endfor %}
