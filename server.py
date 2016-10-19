@@ -53,6 +53,12 @@ def render_reviews():
       reviews_list = query.namedresult()
    )
 
+@app.route('/icon')
+def icon():
+   return render_template(
+      '/icon.html'
+   )
+
 @app.route('/reviews/<review_id>')
 def render_individual_review(review_id):
    review_query = db.query('select * from review where id = %s' % review_id)
