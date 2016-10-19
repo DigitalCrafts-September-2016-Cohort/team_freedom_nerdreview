@@ -1,17 +1,89 @@
+* {
+    box-sizing: border-box;
+}
+
 html, body {
     height: 100%;
 }
 
+body {
+    font-family: 'Roboto Mono', Courier, monospace;
+}
+
+ul {
+    padding: 0;
+    list-style: none;
+}
+
+.nav-wrapper {
+    margin: 0 auto;
+    width: 90%;
+}
+
 .nav-menu {
-    background: #ecf9ba;
+    background: #648381;
+    color: #fff;
     position: fixed;
     height: 100%;
     width: 25%;
 }
 
+.nav-menu a {
+    color: #fff;
+}
+
 main {
     min-height: 100%;
-    background: #8fcece;
+    color: #fff;
+    background: #55505C;
     float: right;
     width: 75%;
+}
+
+.main-wrapper {
+    margin: 0 auto;
+    width: 80%;
+}
+
+main a {
+    color: #fff;
+}
+
+.tile {
+    margin: 20px;
+    width: 300px;
+    height: 300px;
+    text-align: center;
+    display: inline-block;
+    box-sizing: padding-box;
+}
+
+.tile a {
+    display: block;
+    height: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 5px solid #fff;
+}
+
+.tile a:hover {
+    color: #FFBF46;
+    border-color: #FFBF46;
+}
+
+.tile .rating,
+.tile .date,
+.tile .product,
+.tile .reviewer {
+    margin: 0;
+}
+
+.tile .rating {
+    float: left;
+}
+
+.tile .date {
+    float: right;
 }

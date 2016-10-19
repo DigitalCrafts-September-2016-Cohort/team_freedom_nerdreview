@@ -4,21 +4,26 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:100,400,700" rel="stylesheet">
         <link rel="stylesheet" href="/static/css/normalize.css">
         <link rel="stylesheet" href="/static/css/main.css">
         <title>Nerd Review</title>
     </head>
     <body>
         <nav class="nav-menu">
-            <a href="/">Start Over</a>
-            {% block nav %}
-            {% endblock %}
+            <div class="nav-wrapper">
+                <a href="/">Start Over</a>
+                {% block nav %}
+                {% endblock %}
+            </div>
         </nav>
         <main class="main">
+            <div class="main-wrapper">
             {% block sort %}
             {% endblock %}
             {% block body %}
             {% endblock %}
+            </div>
         </main>
 
         <!-- JavaScript -->
