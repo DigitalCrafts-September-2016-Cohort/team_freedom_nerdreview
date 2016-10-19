@@ -1,13 +1,24 @@
 {% extends 'layout.html' %}
 
+{% block nav %}
+  <ul>
+      <li><a href="/categories">Categories</a></li>
+      <li><a href="/brands">Brands</a></li>
+      <li><a href="/reviews">Reviews</a></li>
+      <li><a href="/users">Users</a></li>
+  </ul>
+{% endblock %}
+
 {% block body %}
   <h2>These are the reviews</h2>
   <ul>
-      {% for items in result_list %}
-          <li>
-              <p>Rating: {{items.rating}}</p>
-              <p>Review: {{items.review}}</p>
-          </li>
+      {% for review in reviews_list %}
+      <li>
+          <a href="/reviews/{{review.id}}">
+              <p>Rating: {{review.rating}}</p>
+              <p>Review: {{review.review}}</p>
+          </a>
+      </li>
       {% endfor %}
   </ul>
 {% endblock %}
