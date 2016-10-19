@@ -141,12 +141,13 @@ def add_review():
     rating = request.form.get('rating')
     review = request.form.get('review')
     company_name = request.form.get('company_name')
+
     db.insert(
         'company',
         name=company_name
     )
-    company_query = db.query("select id from company where company.name = '%s'" % company_name).namedresult()
-    comp_id = company_query[0].id
+    company_query = db.query("select id from company where company.name = '%s'" % company_name).namedresult()[0]
+    comp_id = company_query.id
     db.insert(
         'product',
         name=product_name,
