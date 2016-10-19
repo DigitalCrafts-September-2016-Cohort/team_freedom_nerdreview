@@ -11,18 +11,24 @@
     </ul>
 {% endblock %}
 
+{% block header %}
+  <h1>Category Title</h1>
+  <h3>These are some products in this category</h3>
+{% endblock %}
+
 {% block sort %}
-    <select class="form-control" name="Sort by">
-        <option>Highest rating</option>
-        <option>Lowest rating</option>
-        <option>Alphabetical (by product name)</option>
-        <option>MSRP (descending)</option>
-        <option>MSRP (ascending)</option>
-    </select>
+<div class="sort">
+  <select class="form-control" name="Sort by">
+      <option>Highest rating</option>
+      <option>Lowest rating</option>
+      <option>Alphabetical (by product name)</option>
+      <option>MSRP (descending)</option>
+      <option>MSRP (ascending)</option>
+  </select>
+</div>
 {% endblock %}
 
 {% block body %}
-    <h1> SUB CATEGORRRRRIES PRODUCTSSSS</h1>
     <ul>
         {% for product in sub_categories_list %}
         <li class="tile">
