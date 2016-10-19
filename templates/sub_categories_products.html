@@ -18,5 +18,11 @@
         <a href="#">{{sub_category_prod.id}}</a>
     </li>
     {% endfor %}
+    <!-- This is the part I was talking about with the products list and such -->
+    {% for product in product_list %}
+    <li>
+        <a href="#">{{product.name}}</a>
+    </li>
+    {% endfor %}
 </ul>
 {% endblock %}
