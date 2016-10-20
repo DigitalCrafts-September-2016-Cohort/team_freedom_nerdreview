@@ -20,8 +20,9 @@
   <div class="sort">
     <form class="" action="/reviews" method="post">
       <select class="form-control" name="sortby" onchange="this.form.submit()">
-          {% for choice in sort_choice_list %}
-            <option {% if choice == 'sort' %} style="font-weight: bold;" {% endif %} {% if choice == current_sort %} selected {% endif %} {% if choice == 'sort' %} disabled {% endif %} value="{{choice}}">{{choice}}</option>
+          <option selected value="prod_name">Product Name</option>
+          {% for choice, choice_name in sort_choices %}
+            <option {% if choice == current_sort %} selected {% endif %} value="{{choice}}">{{choice_name}}</option>
           {% endfor %}
       </select>
     </form>
