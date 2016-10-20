@@ -17,7 +17,7 @@ body {
     background: rgba(0,0,0,0.87);
 }
 
-form[type="text"] {
+form, input[type="text"] {
     color: rgba(0,0,0,0.87);
 }
 
@@ -96,7 +96,7 @@ p {
 /* ------ MAIN SECTION ----- */
 
 main {
-    border: 4px solid orange;
+    /*border: 4px solid orange;*/
     /*display: flex;*/
     color: #fff;
     float: right;
@@ -106,11 +106,12 @@ main {
 }
 
 .main-wrapper {
-    border: 4px solid green;
-    margin: 0 auto;
-    /*display: flex;*/
+    /*border: 4px solid green;*/
+    display: flex;
     flex-direction: column;
     align-items: flex-end;
+    margin: 0 auto;
+    text-align: center;
 }
 
 main a {
@@ -123,25 +124,38 @@ main a {
     text-align: center;
 }
 
+/* --- Header block --- */
+.header {
+  /*border: 4px solid purple;*/
+    padding-bottom: 20px;
+    text-align: right;
+}
+
+.title {
+    display: inline-block;
+}
+
+.title h1,
+.title h3 {
+    margin: 0;
+    padding-bottom: 10px;
+}
+
 .sort {
-  border: 4px solid red;
+  /*border: 4px solid red;*/
   max-width: 25%;
   float: right;
 }
 
 .grid {
-  border: 4px solid blue;
+  /*border: 4px solid blue;*/
   text-align: center;
   /*display: flex;
   flex-wrap: wrap;
   justify-content: center;*/
 }
 
-.main-header {
-  /*border: 4px solid purple;*/
-  text-align: right;
-}
-
+/* --- Main body (tiles section) --- */
 .tile {
     margin: 20px;
     width: 300px;
@@ -158,7 +172,7 @@ main a {
     padding: 20px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-between;;
     border: 5px solid #fff;
 }
 
@@ -170,6 +184,8 @@ main a {
 .tile .rating,
 .tile .date,
 .tile .product,
+.tile .brand,
+.tile .spacer,
 .tile .reviewer,
 .tile .review-count {
     margin: 0;
