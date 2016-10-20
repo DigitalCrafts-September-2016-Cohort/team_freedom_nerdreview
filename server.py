@@ -185,7 +185,7 @@ def render_review():
     return render_template(
         '/add_product_review.html'
     )
-
+# Route and method for the
 @app.route('/add_product_review', methods=['POST'])
 def add_review():
     main_cat_name = request.form.get('main_cat_name')
@@ -194,7 +194,7 @@ def add_review():
     rating = request.form.get('rating')
     review = request.form.get('review')
     company_name = request.form.get('company_name')
-
+    # Checks the input against the main_cat table
     main_cat_check = db.query("select name, id from main_cat where main_cat.name = '%s'" % main_cat_name).namedresult()
     if main_cat_check:
         main_category_id = main_cat_check[0].id
@@ -205,7 +205,7 @@ def add_review():
         )
         main_cat_check = db.query("select * from main_cat where main_cat.name = '%s'" % main_cat_name).namedresult()
         main_category_id = main_cat_check[0].id
-
+    # Checks the
     second_cat_check = db.query("select * from secondary_cat where secondary_cat.name = '%s'" % second_cat_name).namedresult()
     if second_cat_check:
         second_cat_id = second_cat_check[0].id
@@ -232,6 +232,11 @@ def add_review():
     product_check = db.query("select * from product where product.name = '%s'" % product_name).namedresult()
     if product_check:
         prod_id = product_check[0].id
+        db.insert(
+            'product_uses_category',
+            product_id=prod_id,
+            secondary_cat_id=second_cat_id
+        )
     else:
         db.insert(
             'product',
