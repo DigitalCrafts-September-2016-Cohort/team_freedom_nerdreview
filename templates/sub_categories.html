@@ -19,7 +19,7 @@
 {% endblock %}
 
 {% block sort %}
-<div class="sort">
+<div class="sort cf">
     <select class="form-control" name="Sort by">
         <option>Highest rating</option>
         <option>Lowest rating</option>
@@ -36,7 +36,7 @@
     <li class="tile">
         <a href="/products/{{product.prod_id}}">
             <div class="cf">
-                <h4 class="rating">{{product.avg_rating}}</h4>
+                <h4 class="rating">{{product.avg_rating}} / 5 <i class="ion-star"></i></h4>
                 <h4 class="date">Date:</h4>
             </div>
             <h3 class="product">{{product.prod_name}}</h3>

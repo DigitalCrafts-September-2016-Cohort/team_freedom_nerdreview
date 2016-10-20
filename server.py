@@ -10,6 +10,7 @@ app = Flask('NerdReview')
 def display_page():
     return render_template('/homepage.html')
 
+
 # Selects all of the names from the category table and renders them in the categories.html page
 @app.route('/categories')
 def render_categories():
@@ -31,6 +32,7 @@ def render_sub_cats(cat_id):
         categories_list = cat_query.namedresult(),
         sub_categories_list = sub_cat_query.namedresult()
     )
+
 
 @app.route('/categories/<cat_id>/<sub_cat_id>')
 def render_sub_cat_products(cat_id, sub_cat_id):
@@ -120,6 +122,7 @@ def icon():
         '/icon.html'
     )
 
+
 @app.route('/reviews/<review_id>')
 def render_individual_review(review_id):
     review_query = db.query("select product.name as prod_name, review.rating, review.date, users.name as user_name, review.id, review.review from review, product, users where review.product_id = product.id and review.user_id = users.id and review.id = '%s'" % review_id)
@@ -127,6 +130,7 @@ def render_individual_review(review_id):
       '/individual_review.html',
       review = review_query.namedresult()[0]
     )
+
 
 # Selects all of the names from the company table and renders them in the brands.html page
 @app.route('/brands', methods = ['POST', 'GET'])
@@ -215,6 +219,8 @@ def render_brand_prod(brand_id):
 
     brand_prod_query = db.query("select product.id as prod_id, product.name as prod_name, product.msrp as prod_msrp, product.date as prod_date, avg(review.rating) as avg_rating, count(review.id) as review_count from company inner join product on company.id = product.company_id inner join review on product.id = review.product_id where company.id = %s group by prod_id, prod_name, prod_msrp, prod_date order by %s %s" % (brand_id, sort_method, direction))
 
+    # brand_prod_query = db.query('select product.name as prod_name, product.id as prod_id from product inner join company on product.company_id = %s group by product.name, product.id' % brand_id)
+
     return render_template(
         '/brand_products.html',
         brand_id = brand_id,
@@ -222,6 +228,7 @@ def render_brand_prod(brand_id):
         current_sort = sort_choice,
         brand_prod_list = brand_prod_query.namedresult()
     )
+
 
 # Users page
 @app.route('/users')
@@ -232,11 +239,14 @@ def users():
         user_list = user_list
     )
 
+
 @app.route('/product_review')
 def render_review():
     return render_template(
         '/add_product_review.html'
     )
+
+
 # Route and method for the
 @app.route('/add_product_review', methods=['POST'])
 def add_review():
