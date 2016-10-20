@@ -10,23 +10,25 @@
 {% endblock %}
 
 {% block header %}
-  <h1>Reviews</h1>
-  <h3>Look at all these awesome reviews</h3>
+    <div class="title">
+        <h1>Reviews</h1>
+        <h3>Look at all these awesome reviews!</h3>
+    </div>
 {% endblock %}
 
 {% block sort %}
-  <div class="sort">
-    <select class="form-control" name="Sort by">
-        <option selected disabled>Sort</option>
-        <option>Highest rating</option>
-        <option>Lowest rating</option>
-        <option>Alphabetical (by user)</option>
-        <option>Length (shortest to longest)</option>
-        <option>Length (longest to shortest)</option>
-        <option>Date (oldest)</option>
-        <option>Date (newest)</option>
-    </select>
-  </div>
+    <div class="sort">
+        <select class="form-control" name="Sort by">
+            <option selected disabled>Sort</option>
+            <option>Highest rating</option>
+            <option>Lowest rating</option>
+            <option>Alphabetical (by user)</option>
+            <option>Length (shortest to longest)</option>
+            <option>Length (longest to shortest)</option>
+            <option>Date (oldest)</option>
+            <option>Date (newest)</option>
+        </select>
+    </div>
 {% endblock %}
 
 {% block body %}
