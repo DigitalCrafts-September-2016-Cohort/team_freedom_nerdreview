@@ -9,12 +9,23 @@
 </ul>
 {% endblock %}
 
+{% block header %}
+<header>
+    <h1>Users</h1>
+    <h3>Look at these fine members!</h3>
+</header>
+{% endblock %}
+
 {% block body %}
-    <ul>
-        {% for user in user_list %}
-            <li>
-                <a href="#">{{user.user_name}}</a>
-            </li>
-        {% endfor %}
-    </ul>
+<ul>
+    {% for user in user_list %}
+    <li class="tile">
+        <a href="#">
+            <h4 class="spacer">
+            <h3 class="user">{{user.user_name}}</h3>
+            <h4 class="spacer"></h4>
+        </a>
+    </li>
+    {% endfor %}
+</ul>
 {% endblock %}

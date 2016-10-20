@@ -10,7 +10,15 @@
     </ul>
 {% endblock %}
 
+{% block header %}
+<header>
+    <h1>Categories > Sub-categories > Products</h1>
+    <h3>Here we display products</h3>
+</header>
+{% endblock %}
+
 {% block sort %}
+<div class="sort">
     <select class="form-control" name="Sort by">
         <option>Highest rating</option>
         <option>Lowest rating</option>
@@ -18,20 +26,19 @@
         <option>MSRP (descending)</option>
         <option>MSRP (ascending)</option>
     </select>
+</div>
 {% endblock %}
 
-
 {% block body %}
-  <h1> SUB CATEGORRRRRIES SUB CAT PRODUCTSSSSS</h1>
-  <ul>
+<ul>
     {% for product in sub_categories_products_list %}
-    <li>
+    <li class="tile">
         <a href="/products/{{product.prod_id}}">
-          <p>Product Name: {{product.prod_name}}</p>
-          <p>Average Rating: {{product.avg_rating}}</p>
-          <p>Review Count: {{product.review_count}}</p>
+            <h4>{{product.avg_rating}} * average rating</h4>
+            <h3 class="product">{{product.prod_name}}</h3>
+            <h4>{{product.review_count}} reviews</h4>
         </a>
     </li>
     {% endfor %}
-  </ul>
+</ul>
 {% endblock %}

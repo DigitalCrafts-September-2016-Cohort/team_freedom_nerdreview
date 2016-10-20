@@ -10,20 +10,22 @@
 {% endblock %}
 
 {% block header %}
+<header>
     <h1>Brands</h1>
     <h3>Look at all these killer brands!</h3>
+</header>
 {% endblock %}
 
 {% block body %}
-    <ul>
-      {% for brand in brand_list %}
-        <li class="tile">
-            <a href="/brands/{{brand.id}}">
-                <h4 class="spacer"></h4>
-                <h3 class="brand">{{brand.name}}</h3>
-                <h4 class="spacer"></h4>
-            </a>
-        </li>
-        {% endfor %}
-    </ul>
+<ul>
+    {% for brand in brand_list %}
+    <li class="tile">
+        <a href="/brands/{{brand.id}}">
+            <h4 class="spacer"></h4>
+            <h3 class="brand">{{brand.name}}</h3>
+            <h4 class="spacer"></h4>
+        </a>
+    </li>
+    {% endfor %}
+</ul>
 {% endblock %}

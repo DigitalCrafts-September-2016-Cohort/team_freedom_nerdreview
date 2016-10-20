@@ -9,14 +9,22 @@
   </ul>
 {% endblock %}
 
+{% block header %}
+<header>
+    <h1><a href="/brands">Brands</a> > Products</h3>
+</header>
+{% endblock %}
+
 {% block body %}
-  <ul>
-      {% for product in brand_prod_list %}
-      <li>
-          <a href="">
-              <p>{{product.prod_name}}</p>
-          </a>
-      </li>
-      {% endfor %}
-  </ul>
+<ul>
+    {% for product in brand_prod_list %}
+    <li class="tile">
+        <a href="#">
+            <h4 class="spacer"></h4>
+            <h3 class="product">{{product.prod_name}}</h3>
+            <h4 class="spacer"></h4>
+        </a>
+    </li>
+    {% endfor %}
+</ul>
 {% endblock %}

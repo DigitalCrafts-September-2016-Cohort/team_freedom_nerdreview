@@ -12,35 +12,37 @@
 {% endblock %}
 
 {% block header %}
-  <h1>Category Title</h1>
-  <h3>These are some products in this category</h3>
+<header>
+    <h1>Category > Sub-category</h1>
+    <h3>These are some products in this category</h3>
+</header>
 {% endblock %}
 
 {% block sort %}
 <div class="sort">
-  <select class="form-control" name="Sort by">
-      <option>Highest rating</option>
-      <option>Lowest rating</option>
-      <option>Alphabetical (by product name)</option>
-      <option>MSRP (descending)</option>
-      <option>MSRP (ascending)</option>
-  </select>
+    <select class="form-control" name="Sort by">
+        <option>Highest rating</option>
+        <option>Lowest rating</option>
+        <option>Alphabetical (by product name)</option>
+        <option>MSRP (descending)</option>
+        <option>MSRP (ascending)</option>
+    </select>
 </div>
 {% endblock %}
 
 {% block body %}
-    <ul>
-        {% for product in sub_categories_list %}
-        <li class="tile">
-            <a href="/products/{{product.prod_id}}">
-                <div class="cf">
-                    <h4 class="rating">{{product.avg_rating}}</h4>
-                    <h4 class="date">Date:</h4>
-                </div>
-                <h3 class="product">{{product.prod_name}}</h3>
-                <h4 class="review-count">{{product.review_count}} reviews</h4>
-            </a>
-        </li>
-        {% endfor %}
-    </ul>
+<ul>
+    {% for product in sub_categories_list %}
+    <li class="tile">
+        <a href="/products/{{product.prod_id}}">
+            <div class="cf">
+                <h4 class="rating">{{product.avg_rating}}</h4>
+                <h4 class="date">Date:</h4>
+            </div>
+            <h3 class="product">{{product.prod_name}}</h3>
+            <h4 class="review-count">{{product.review_count}} reviews</h4>
+        </a>
+    </li>
+    {% endfor %}
+</ul>
 {% endblock %}
