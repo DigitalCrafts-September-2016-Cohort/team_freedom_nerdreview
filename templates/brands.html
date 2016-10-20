@@ -11,6 +11,9 @@
 
 {% block header %}
 <header>
+    <a class="back-btn-link cf" href="/">
+        <i class="back-btn ion-arrow-left-a"></i>
+    </a>
     <h1>Brands</h1>
     <h3>Look at all these killer brands!</h3>
 </header>
@@ -30,7 +33,6 @@
 {% endblock %}
 
 {% block body %}
-<<<<<<< HEAD
 <ul>
   {% for brand in brand_list %}
     <li class="tile">
@@ -42,18 +44,4 @@
     </li>
     {% endfor %}
 </ul>
-=======
-    <ul>
-      {% for brand in brand_list %}
-        <li class="tile">
-            <a href="/brands/{{brand.brand_id}}">
-                <h4 class="spacer"></h4>
-                <h3 class="brand">{{brand.brand_name}}</h3>
-                <h4 class="spacer">{{brand.prod_count}}</h4>
-            </a>
-        </li>
-        {% endfor %}
-    </ul>
->>>>>>> master
-
 {% endblock %}

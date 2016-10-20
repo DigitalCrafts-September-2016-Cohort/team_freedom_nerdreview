@@ -71,12 +71,12 @@ def disp_individual_product(product_id):
     reviews_query = db.query('select review.id as review_id from product inner join review on product.id = review.product_id and product.id = %s' % product_id)
 
     return render_template(
-    'individual_product.html',
-    cat_id = main_cat,
-    parent_categories = parent_categories_list.namedresult(),
-    product = product_query.namedresult()[0],
-    product_summary = product_reviews_summary_query.namedresult()[0],
-    reviews_list = reviews_query.namedresult()
+        'individual_product.html',
+        cat_id = main_cat,
+        parent_categories = parent_categories_list.namedresult(),
+        product = product_query.namedresult()[0],
+        product_summary = product_reviews_summary_query.namedresult()[0],
+        reviews_list = reviews_query.namedresult()
     )
 
 
@@ -184,6 +184,14 @@ def users():
     return render_template(
         '/users.html',
         user_list = user_list
+    )
+
+@app.route('/users/<user_id>')
+def render_individual_user(user_id):
+    return render_template(
+    # write db query here
+        '/individual_user.html'
+        # send query to Jinja here
     )
 
 
