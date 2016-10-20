@@ -36,7 +36,7 @@
             <a href="/brands/{{brand.brand_id}}">
                 <h4 class="spacer"></h4>
                 <h3 class="brand">{{brand.brand_name}}</h3>
-                <h4 class="spacer">{{brand.prod_count}}</h4>
+                <h4 class="spacer">{{brand.prod_count}} product{% if brand.prod_count>1 %}s{% endif %}</h4>
             </a>
         </li>
         {% endfor %}
