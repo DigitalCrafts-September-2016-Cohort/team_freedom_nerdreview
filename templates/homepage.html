@@ -10,9 +10,27 @@
 </ul>
 {% endblock %}
 
+{% block header %}
+<header>
+    <h1 class="welcome">Welcome to Nerd Review!</h1>
+</header>
+{% endblock %}
+
 {% block body %}
-    <div class="welcome">
-        <h1>Welcome to Nerd Review!</h1>
-        <p>Select an option from the menu, <a href="/log_in">log in</a>, or <a href="/sign_up">sign up</a>.</p>
-    </div>
+<ul>
+    <li class="tile">
+        <a href="/log_in">
+            <h4 class="spacer"></h4>
+            <h3>Log In</h3>
+            <h4 class="spacer"></h4>
+        </a>
+    </li>
+    <li class="tile">
+        <a href="/sign_up">
+            <h4 class="spacer"></h4>
+            <h3>Sign Up</h3>
+            <h4 class="spacer"></h4>
+        </a>
+    </li>
+</ul>
 {% endblock %}
