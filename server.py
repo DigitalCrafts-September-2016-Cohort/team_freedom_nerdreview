@@ -154,7 +154,7 @@ def render_brands():
         sort_method = 'company.name'
         direction = ''
 
-    brand_query = db.query("select company.name as brand_name, company.id as brand_id, count(product.id) as prod_count from company inner join product on company.id = product.company_id group by brand_name, brand_id order by %s %s" % (sort_method, direction))
+    brand_query = db.query("select company.name as brand_name, company.id as brand_id, count(product.id) as prod_count, count(review.id) as review_count from company inner join product on company.id = product.company_id inner join review on product.id = review.product_id group by brand_name, brand_id order by %s %s" % (sort_method, direction))
 
     return render_template(
         '/brands.html',
