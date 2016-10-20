@@ -21,20 +21,18 @@
             </div>
         </nav>
         <main class="main">
-          <div class="main-header">
-            {% block header %}
-            {% endblock %}
-            
-            {% block sort %}
-            {% endblock %}
-          </div>
-          <div class="main-wrapper cf">
-
+            <header class="header">
+                {% block header %}
+                {% endblock %}
+            </header>
+            <div class="main-wrapper cf">
             <!-- <div class="grid"> -->
-              {% block body %}
-              {% endblock %}
+                {% block sort %}
+                {% endblock %}
+                {% block body %}
+                {% endblock %}
             <!-- </div> -->
-          </div>
+            </div>
         </main>
 
         <!-- JavaScript -->
