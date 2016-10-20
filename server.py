@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, redirect, session, flash
 import pg
+from dotenv import load_dotenv, find_dotenv
+import os
 
 db = pg.DB(dbname='project_db')
 
@@ -8,7 +10,54 @@ app = Flask('NerdReview')
 # Renders the homepage at the root directory
 @app.route('/')
 def display_page():
-    return render_template('/homepage.html')
+    loggedin = False
+    try:
+        session['username']
+        loggedin = True
+    except:
+        loggedin = False
+    return render_template(
+        '/homepage.html',
+        loggedin = loggedin
+        )
+
+
+# Log In
+@app.route('/log_in', methods=['POST'])
+def submit_login():
+   username = request.form.get('username')
+   password = request.form.get('password')
+   results = db.query("select * from users where username = $1", username).namedresult()
+   if len(results) > 0:
+       user = results[0]
+       if user.password == password:
+           session['username'] = user.username
+           flash("Successfully Logged In")
+           return redirect('/')
+       else:
+           return redirect('/')
+   else:
+       return redirect('/')
+
+# Sign up
+@app.route('/sign_up', methods=['POST'])
+def submit_signup():
+   username = request.form.get('username')
+   password = request.form.get('password')
+   try:
+       db.insert('users',username=username, password=password)
+       session['username'] = username
+       flash('Sign Up Succesful')
+       return redirect('/')
+   except:
+       return render_template('signup_error.html')
+
+# Log out
+@app.route('/logout', methods=['POST'])
+def logout():
+   del session['username']
+   flash("Successfully Logged Out")
+   return redirect('/')
 
 
 # Selects all of the names from the category table and renders them in the categories.html page
