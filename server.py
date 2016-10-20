@@ -129,11 +129,37 @@ def render_individual_review(review_id):
     )
 
 # Selects all of the names from the company table and renders them in the brands.html page
-@app.route('/brands')
+@app.route('/brands', methods = ['POST', 'GET'])
 def render_brands():
-    brand_query = db.query('select * from company order by company.name')
+    #Defines 2 iterable lists for sort choices: one for the value attributes from form and one for the names to display
+    sort_choice_list = ['name_za', 'num_prod_desc', 'num_prod_asc']
+    sort_choice_list_names = ['Product Name (Z-A)', 'Number of Products (high to low)', 'Number of Products (low to high)']
+    #Zips the two lists together so that we can iterate over the corresponding pairs
+    sort_choices = zip(sort_choice_list, sort_choice_list_names)
+
+    # Get the selected sort choice, 'prod_name' if none is selected
+    # Two string variables are assigned for each possible choice, they will be substitued into the SQL query below
+    sort_choice = request.form.get('sortby')
+    if sort_choice == 'name_za':
+        sort_method = 'company.name'
+        direction = 'desc'
+    elif sort_choice == 'num_prod_desc':
+        sort_method = 'prod_count'
+        direction = 'desc'
+    elif sort_choice == "num_prod_asc":
+        sort_method = 'prod_count'
+        direction = ''
+    else:
+        #Default or fall back sort method (not dependent on drop-down)
+        sort_method = 'company.name'
+        direction = ''
+
+    brand_query = db.query("select company.name as brand_name, company.id as brand_id, count(product.id) as prod_count from company inner join product on company.id = product.company_id group by brand_name, brand_id order by %s %s" % (sort_method, direction))
+
     return render_template(
         '/brands.html',
+        sort_choices = sort_choices,
+        current_sort = sort_choice,
         brand_list = brand_query.namedresult()
     )
 

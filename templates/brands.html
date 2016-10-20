@@ -14,13 +14,26 @@
     <h3>Look at all these killer brands!</h3>
 {% endblock %}
 
+{% block sort %}
+    <div class="sort">
+      <form class="" action="/brands" method="post">
+        <select class="form-control" name="sortby" onchange="this.form.submit()">
+            <option selected value="name_az">Product Name (A-Z)</option>
+            {% for choice, choice_name in sort_choices %}
+              <option {% if choice == current_sort %} selected {% endif %} value="{{choice}}">{{choice_name}}</option>
+            {% endfor %}
+        </select>
+      </form>
+    </div>
+{% endblock %}
+
 {% block body %}
     <ul>
       {% for brand in brand_list %}
         <li class="tile">
-            <a href="/brands/{{brand.id}}">
+            <a href="/brands/{{brand.brand_id}}">
                 <h4 class="spacer"></h4>
-                <h3 class="brand">{{brand.name}}</h3>
+                <h3 class="brand">{{brand.brand_name}}</h3>
                 <h4 class="spacer"></h4>
             </a>
         </li>
