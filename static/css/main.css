@@ -15,9 +15,10 @@ html, body {
 body {
     font-family: 'Roboto Mono', Courier, monospace;
     background: rgba(0,0,0,0.87);
+    color: #fff;
 }
 
-form, input[type="text"] {
+.nav-menu a, form, input[type="text"] {
     color: rgba(0,0,0,0.87);
 }
 
@@ -28,6 +29,10 @@ ul {
 
 p {
     margin: 0;
+}
+
+a {
+    text-decoration: none;
 }
 
 .cf::after {
@@ -66,6 +71,16 @@ p {
     left: 50%;
 }
 
+.nr-logo:hover,
+.nr-logo:focus {
+    text-decoration: none;
+ }
+
+.nr-logo:hover,
+.nr-logo:focus {
+    border-bottom: 2px solid rgba(0,0,0,0.87);
+}
+
     .nr-logo img {
         padding: 10px 0;
         width: 80px;
@@ -75,22 +90,25 @@ p {
         font-weight: 100;
         letter-spacing: 10px;
         font-size: 16px;
+        position: relative;
+        left: 5.5px;
     }
 
-.nav-menu a {
-    color: rgba(0,0,0,0.87);
-    text-decoration: none;
-}
-
+/* Top level list in navbar */
 .super-categories {
     margin-top: 20px;
     font-size: 20px;
     text-align: center;
 }
 
-.super-categories li {
-    padding-bottom: 15px;
-}
+    .super-categories a {
+        display: block;
+        padding: 10px 0;
+    }
+
+    .super-categories a:hover {
+        text-decoration: underline;
+    }
 
 
 /* ------ MAIN SECTION ----- */
@@ -98,7 +116,6 @@ p {
 main {
     /*border: 4px solid orange;*/
     /*display: flex;*/
-    color: #fff;
     float: right;
     width: 75%;
     align-items: center;
@@ -109,7 +126,6 @@ main {
     /*border: 4px solid green;*/
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
     margin: 0 auto;
     text-align: center;
 }
@@ -118,32 +134,25 @@ main a {
     color: #fff;
 }
 
+main a:hover,
+main a:focus {
+    color: #F4CF6F;
+}
+
 .welcome {
-    margin: 0 auto;
-    position: relative;
-    text-align: center;
+    font-size: 4em;
 }
 
 /* --- Header block --- */
-.header {
+header {
   /*border: 4px solid purple;*/
     padding-bottom: 20px;
     text-align: right;
 }
 
-.title {
-    display: inline-block;
-}
-
-.title h1,
-.title h3 {
-    margin: 0;
-    padding-bottom: 10px;
-}
-
-.sort {
+.sort select {
   /*border: 4px solid red;*/
-  max-width: 25%;
+  width: 230px;
   float: right;
 }
 
@@ -181,13 +190,7 @@ main a {
     border-color: #F4CF6F;
 }
 
-.tile .rating,
-.tile .date,
-.tile .product,
-.tile .brand,
-.tile .spacer,
-.tile .reviewer,
-.tile .review-count {
+.tile h3, .tile h4 {
     margin: 0;
 }
 

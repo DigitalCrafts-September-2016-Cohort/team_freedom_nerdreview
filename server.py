@@ -82,9 +82,14 @@ def disp_individual_product(product_id):
 # Redirects (refreshes the page) to this route every time a different option is selected from the sort element
 @app.route('/reviews', methods=['POST', 'GET'])
 def render_reviews():
+    #Defines 2 iterable lists for sort choices: one for the value attributes from form and one for the names to display
     sort_choice_list = ['rating_high', 'rating_low']
+    sort_choice_list_names = ['Rating (Highest to Lowest)', 'Rating (Lowest to Highest)']
+    #Zips the two lists together so that we can iterate over the corresponding pairs
+    sort_choices = zip(sort_choice_list, sort_choice_list_names)
 
-    # Get the selected sort choice, 'default' if none is selected
+    # Get the selected sort choice, 'prod_name' if none is selected
+    # Two string variables are assigned for each possible choice, they will be substitued into the SQL query below
     sort_choice = request.form.get('sortby')
     if sort_choice == 'rating_high':
         sort_method = 'review.rating'
@@ -97,13 +102,15 @@ def render_reviews():
         sort_method = 'prod_name'
         direction = 'desc'
 
-    query = db.query("select product.name as prod_name, review.rating, users.name as user_name, review.id from review, product, users where review.product_id = product.id and review.user_id = users.id order by {0}{1}{2}".format(sort_method, ' ',direction))
+    #Use string substiution to run a SQL query for the selected sort choice
+    sorted_review_query = db.query("select product.name as prod_name, review.rating, users.name as user_name, review.id from review, product, users where review.product_id = product.id and review.user_id = users.id order by %s %s" % (sort_method, direction))
 
+    #Render reviews template again with the chosen sort order, passing through the sort choices zipped list, the current choice, and the reviews list
     return render_template(
-        '/reviews.html',
-        reviews_list = query.namedresult(),
-        sort_choice_list = sort_choice_list,
-        current_sort = sort_choice
+        'reviews.html',
+        sort_choices = sort_choices,
+        current_sort = sort_choice,
+        reviews_list = sorted_review_query.namedresult(),
     )
 
 
