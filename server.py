@@ -25,7 +25,7 @@ def render_categories():
 def render_sub_cats(cat_id):
     # Reduce reduncancy by joining tables and being more specific in our select
     cat_query = db.query('select * from secondary_cat where secondary_cat.main_cat_id = %s' % cat_id)
-    sub_cat_query = db.query('select product.name as prod_name, product.id as prod_id, round(avg(review.rating), 2) as avg_rating,  count(review.product_id) as review_count from review inner join product on product.id = review.product_id inner join product_uses_category on product.id = product_uses_category.product_id inner join secondary_cat on product_uses_category.secondary_cat_id = secondary_cat.id where secondary_cat.main_cat_id = %s group by product.name, prod_id' % cat_id)
+    sub_cat_query = db.query('select distinct query.prod_id, query.prod_name, query.review_count, query.avg_rating from (select product_uses_category.secondary_cat_id as sub_cat_id, count(review.product_id) as review_count, product.name as prod_name, product.id as prod_id, round(avg(review.rating), 2) as avg_rating from review inner join product on product.id = review.product_id inner join product_uses_category on product.id = product_uses_category.product_id inner join secondary_cat on product_uses_category.secondary_cat_id = secondary_cat.id where secondary_cat.main_cat_id = %s group by prod_name, prod_id, product_uses_category.secondary_cat_id) query' % cat_id);
     return render_template(
         '/sub_categories.html',
         cat_id = cat_id,
@@ -56,7 +56,7 @@ def render_sub_cat_products(cat_id, sub_cat_id):
 @app.route('/products/<product_id>')
 def disp_individual_product(product_id):
     # Gets the main category id number for the product
-    main_cat = db.query('select main_cat.id as main_id from product inner join product_uses_category on product.id = product_uses_category.product_id inner join secondary_cat on product_uses_category.secondary_cat_id = secondary_cat.id inner join main_cat on secondary_cat.main_cat_id = main_cat.id and product.id = %s' % product_id).namedresult()[0].main_id
+    main_cat = db.query('select main_cat.id as main_id from product inner join product_uses_category on product.id = product_uses_category.product_id inner join secondary_cat on product_uses_category.secondary_cat_id = secondary_cat.id inner join main_cat on secondary_cat.main_cat_id = main_cat.id where product.id = %s' % product_id).namedresult()[0].main_id
 
     #Gets all the secondary categories in the main category (above)
     parent_categories_list = db.query('select secondary_cat.id as sub_cat_id, secondary_cat.name as cat_name from secondary_cat where secondary_cat.main_cat_id = %s' % main_cat)
@@ -158,7 +158,7 @@ def render_brands():
         sort_method = 'company.name'
         direction = ''
 
-    brand_query = db.query("select company.name as brand_name, company.id as brand_id, count(product.id) as prod_count, count(review.id) as review_count from company inner join product on company.id = product.company_id inner join review on product.id = review.product_id group by brand_name, brand_id order by %s %s" % (sort_method, direction))
+    brand_query = db.query("select company.name as brand_name, company.id as brand_id, count(product.id) as prod_count from company inner join product on company.id = product.company_id group by brand_name, brand_id order by %s %s" % (sort_method, direction))
 
     return render_template(
         '/brands.html',
@@ -167,12 +167,65 @@ def render_brands():
         brand_list = brand_query.namedresult()
     )
 
-
-@app.route('/brands/<brand_id>')
+@app.route('/brands/<brand_id>', methods=['POST','GET'])
 def render_brand_prod(brand_id):
-    brand_prod_query = db.query('select product.name as prod_name, product.id as prod_id from product inner join company on product.company_id = %s group by product.name, product.id' % brand_id)
+    #Defines 2 iterable lists for sort choices: one for the value attributes from form and one for the names to display
+    sort_choice_list = ['rating_asc',
+                        'name_az',
+                        'name_za',
+                        'msrp_asc',
+                        'msrp_desc',
+                        'date_desc',
+                        'date_asc']
+
+    sort_choice_list_names = ['Rating (low to high)',
+                              'Product Name (A-Z)',
+                              'Product Name (Z-A)',
+                              'MSRP (high to low)',
+                              'MSRP (low to high)',
+                              'Release Date (new to old)',
+                              'Release Date (old to new)']
+    #Zips the two lists together so that we can iterate over the corresponding pairs
+    sort_choices = zip(sort_choice_list, sort_choice_list_names)
+
+    # Get the selected sort choice, 'prod_name' if none is selected
+    # Two string variables are assigned for each possible choice, they will be substitued into the SQL query below
+    sort_choice = request.form.get('sortby')
+    if sort_choice == 'rating_asc':
+        sort_method = 'avg_rating'
+        direction = ''
+    elif sort_choice == 'name_az':
+        sort_method = 'prod_name'
+        direction = ''
+    elif sort_choice == 'name_za':
+        sort_method = 'prod_name'
+        direction = 'desc'
+    elif sort_choice == 'msrp_asc':
+        sort_method = 'prod_msrp'
+        direction = ''
+    elif sort_choice == "msrp_desc":
+        sort_method = 'prod_msrp'
+        direction = 'desc'
+    elif sort_choice == "date_desc":
+        sort_method = 'prod_release_date'
+        direction = 'desc'
+    elif sort_choice == "date_asc":
+            sort_method = 'prod_release_date'
+            direction = ''
+    else:
+        #Default or fall back sort method (not dependent on drop-down)
+        sort_method = 'avg_rating'
+        direction = 'desc'
+
+    brand_prod_query = db.query("select product.id as prod_id, product.name as prod_name, product.msrp as prod_msrp, product.date as prod_date, avg(review.rating) as avg_rating, count(review.id) as review_count from company inner join product on company.id = product.company_id inner join review on product.id = review.product_id where company.id = %s group by prod_id, prod_name, prod_msrp, prod_date order by %s %s" % (brand_id, sort_method, direction))
+
+    # brand_prod_query = db.query('select product.name as prod_name, product.id as prod_id from product inner join company on product.company_id = %s group by product.name, product.id' % brand_id)
+
     return render_template(
         '/brand_products.html',
+        brand_id = brand_id,
+        sort_choices = sort_choices,
+        current_sort = sort_choice,
         brand_prod_list = brand_prod_query.namedresult()
     )
 
@@ -249,11 +302,6 @@ def add_review():
     product_check = db.query("select * from product where product.name = '%s'" % product_name).namedresult()
     if product_check:
         prod_id = product_check[0].id
-        db.insert(
-            'product_uses_category',
-            product_id=prod_id,
-            secondary_cat_id=second_cat_id
-        )
     else:
         db.insert(
             'product',
