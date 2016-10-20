@@ -1,18 +1,20 @@
 {% extends 'layout.html' %}
 
 {% block nav %}
-    <ul>
-        <li><a href="/categories">Categories</a></li>
-        {% for sub_category in categories_list %}
-        <li>
-            <a href="/categories/{{cat_id}}/{{sub_category.id}}">{{sub_category.name}}</a>
-        </li>
-        {% endfor %}
-    </ul>
+<ul>
+    {% for sub_category in categories_list %}
+    <li>
+        <a href="/categories/{{cat_id}}/{{sub_category.id}}">{{sub_category.name}}</a>
+    </li>
+    {% endfor %}
+</ul>
 {% endblock %}
 
 {% block header %}
 <header>
+    <a class="back-btn-link cf" href="/categories">
+        <i class="back-btn ion-arrow-left-a"></i>
+    </a>
     <h1>Category > Sub-category</h1>
     <h3>These are some products in this category</h3>
 </header>
