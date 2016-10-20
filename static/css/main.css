@@ -131,14 +131,14 @@ header {
 
 .back-btn-link {
     display: inline-block;
+    border: 5px solid #fff;
+    border-radius: 50%;
     float: left;
 }
 
 .back-btn {
-    font-size: 1.6em;
-    border-radius: 50%;
+    font-size: 2em;
     float: left;
-    border: 5px solid white;
     padding: 10px;
     height: 67px;
     width: 67px;
@@ -156,8 +156,8 @@ height: 76px;
 width: 76px;
 text-align: center;*/
 
-.back-btn-link:hover > .back-btn,
-.back-btn-link:focus > .back-btn {
+.back-btn-link:hover,
+.back-btn-link:focus {
     border-color: #F4CF6F;
 }
 
