@@ -79,13 +79,31 @@ def disp_individual_product(product_id):
 
 
 # Selects all of the names from the review table and renders them in the reviews.html page
-@app.route('/reviews')
+# Redirects (refreshes the page) to this route every time a different option is selected from the sort element
+@app.route('/reviews', methods=['POST', 'GET'])
 def render_reviews():
-   # We can extract the rest of the data we need in the query later
-    query = db.query('select product.name as prod_name, review.rating, users.name as user_name, review.id from  review, product, users where review.product_id = product.id and review.user_id = users.id')
+    sort_choice_list = ['rating_high', 'rating_low']
+
+    # Get the selected sort choice, 'default' if none is selected
+    sort_choice = request.form.get('sortby')
+    if sort_choice == 'rating_high':
+        sort_method = 'review.rating'
+        direction = 'desc'
+    elif sort_choice == 'rating_low':
+        sort_method = 'review.rating'
+        direction = ''
+    else:
+        #Default or fall back sort method (not dependent on drop-down)
+        sort_method = 'prod_name'
+        direction = 'desc'
+
+    query = db.query("select product.name as prod_name, review.rating, users.name as user_name, review.id from review, product, users where review.product_id = product.id and review.user_id = users.id order by {0}{1}{2}".format(sort_method, ' ',direction))
+
     return render_template(
         '/reviews.html',
-        reviews_list = query.namedresult()
+        reviews_list = query.namedresult(),
+        sort_choice_list = sort_choice_list,
+        current_sort = sort_choice
     )
 
 

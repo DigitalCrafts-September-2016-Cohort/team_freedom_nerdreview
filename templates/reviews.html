@@ -16,16 +16,16 @@
 
 {% block sort %}
   <div class="sort">
-    <select class="form-control" name="Sort by">
-        <option selected disabled>Sort</option>
-        <option>Highest rating</option>
-        <option>Lowest rating</option>
-        <option>Alphabetical (by user)</option>
-        <option>Length (shortest to longest)</option>
-        <option>Length (longest to shortest)</option>
-        <option>Date (oldest)</option>
-        <option>Date (newest)</option>
-    </select>
+    <form class="" action="/reviews" method="post">
+      <select class="form-control" name="sortby" onchange="this.form.submit()">
+          <!-- <option value="default" selected disabled>Sort</option> -->
+          {% for choice in sort_choice_list %}
+            <option {% if choice == current_sort %} selected {% endif %} value="{{choice}}">{{choice}}</option>
+          {% endfor %}
+          <!-- <option value="rating_high">Highest rating</option>
+          <option value="rating_low">Lowest rating</option> -->
+      </select>
+    </form>
   </div>
 {% endblock %}
 
