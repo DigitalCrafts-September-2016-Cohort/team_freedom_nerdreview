@@ -82,7 +82,7 @@ def disp_individual_product(product_id):
 # Redirects (refreshes the page) to this route every time a different option is selected from the sort element
 @app.route('/reviews', methods=['POST', 'GET'])
 def render_reviews():
-    sort_choice_list = ['rating_high', 'rating_low']
+    sort_choice_list = ['sort','rating_high', 'rating_low']
 
     # Get the selected sort choice, 'default' if none is selected
     sort_choice = request.form.get('sortby')
