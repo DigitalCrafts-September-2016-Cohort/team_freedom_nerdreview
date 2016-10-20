@@ -1,12 +1,12 @@
 {% extends 'layout.html' %}
 
 {% block nav %}
-    <ul>
-        <li><a href="/categories">Categories</a></li>
-        <li><a href="/brands">Brands</a></li>
-        <li><a href="/reviews">Reviews</a></li>
-        <li><a href="/users">Users</a></li>
-    </ul>
+<ul>
+    <li><a href="/categories">Categories</a></li>
+    <li><a href="/brands">Brands</a></li>
+    <li><a href="/reviews">Reviews</a></li>
+    <li><a href="/users">Users</a></li>
+</ul>
 {% endblock %}
 
 {% block header %}
@@ -17,7 +17,7 @@
 {% endblock %}
 
 {% block sort %}
-    <div class="sort">
+    <div class="sort cf">
       <form class="" action="/brands" method="post">
         <select class="form-control" name="sortby" onchange="this.form.submit()">
             <option selected value="name_az">Product Name (A-Z)</option>
@@ -30,16 +30,16 @@
 {% endblock %}
 
 {% block body %}
-    <ul>
-      {% for brand in brand_list %}
-        <li class="tile">
-            <a href="/brands/{{brand.brand_id}}">
-                <h4 class="spacer"></h4>
-                <h3 class="brand">{{brand.brand_name}}</h3>
-                <h4 class="spacer"></h4>
-            </a>
-        </li>
-        {% endfor %}
-    </ul>
+<ul>
+  {% for brand in brand_list %}
+    <li class="tile">
+        <a href="/brands/{{brand.brand_id}}">
+            <h4 class="spacer"></h4>
+            <h3 class="brand">{{brand.brand_name}}</h3>
+            <h4 class="spacer">{{brand.prod_count}} products</h4>
+        </a>
+    </li>
+    {% endfor %}
+</ul>
 
 {% endblock %}

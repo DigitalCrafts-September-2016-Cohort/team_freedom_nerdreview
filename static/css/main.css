@@ -15,6 +15,7 @@ html, body {
 body {
     font-family: 'Roboto Mono', Courier, monospace;
     background: rgba(0,0,0,0.87);
+    font-size: 16px;
     color: #fff;
 }
 
@@ -113,6 +114,24 @@ a {
 
 /* ------ MAIN SECTION ----- */
 
+/* --- Header --- */
+header {
+  /*border: 4px solid purple;*/
+    padding-bottom: 20px;
+    text-align: right;
+}
+
+.welcome {
+    font-size: 4em;
+}
+
+.sort select {
+    /*border: 4px solid red;*/
+    width: 230px;
+    float: right;
+}
+
+/* --- Body --- */
 main {
     /*border: 4px solid orange;*/
     /*display: flex;*/
@@ -124,8 +143,8 @@ main {
 
 .main-wrapper {
     /*border: 4px solid green;*/
-    display: flex;
-    flex-direction: column;
+    /*display: flex;
+    flex-direction: column;*/
     margin: 0 auto;
     text-align: center;
 }
@@ -139,39 +158,13 @@ main a:focus {
     color: #F4CF6F;
 }
 
-.welcome {
-    font-size: 4em;
-}
-
-/* --- Header block --- */
-header {
-  /*border: 4px solid purple;*/
-    padding-bottom: 20px;
-    text-align: right;
-}
-
-.sort select {
-  /*border: 4px solid red;*/
-  width: 230px;
-  float: right;
-}
-
-.grid {
-  /*border: 4px solid blue;*/
-  text-align: center;
-  /*display: flex;
-  flex-wrap: wrap;
-  justify-content: center;*/
-}
-
-/* --- Main body (tiles section) --- */
+/* --- Body (tiles) --- */
 .tile {
     margin: 20px;
     width: 300px;
     height: 300px;
     text-align: center;
     display: inline-block;
-    box-sizing: padding-box;
     /*flex-grow: 1;*/
 }
 
@@ -202,6 +195,44 @@ header {
     float: right;
 }
 
+/* --- Header (individual item) --- */
+.ind-header {
+    width: 30%;
+    float: right;
+    max-width: 400px;
+}
+
+/* --- Body (individual item) --- */
+.ind-body {
+    margin-top: 20px;
+    width: 65%;
+    display: inline-block;
+    /*text-align: center;*/
+    float: left;
+}
+
+    .ind-body .review {
+        text-align: left;
+    }
+
+.img-list {
+    display: inline-block;
+}
+
+.img-tile {
+    margin-top: 20px;
+    height: 250px;
+    width: 250px;
+    border: 5px solid #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.img-tile i {
+    display: inline-block;
+    font-size: 100px;
+}
 
 /*------------------------
 MEDIA QUERIES

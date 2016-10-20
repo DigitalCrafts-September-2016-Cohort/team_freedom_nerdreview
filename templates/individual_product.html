@@ -1,29 +1,50 @@
 {% extends 'layout.html' %}
 
 {% block nav %}
-    <ul>
-      {% for category in parent_categories %}
-      <li>
-          <a href="/categories/{{cat_id}}/{{category.sub_cat_id}}">{{category.cat_name}}</a>
-      </li>
-      {% endfor %}
+<ul>
+    {% for category in parent_categories %}
+    <li>
+        <a href="/categories/{{cat_id}}/{{category.sub_cat_id}}">{{category.cat_name}}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
+
+{% block header %}
+<header class="ind-header">
+    <div>
+        <h1>{{product.name}}</h1>
+        <h3>{{product_summary.review_count}} reviews</h3>
+        <h1 class="rating">{{product_summary.avg_rating}} / 5 <i class="ion-star"></i></h1>
+    </div>
+    <ul class="img-list">
+    <!-- Include for loop to render images here -->
+        <li class="img-tile">
+            <i class="ion-image"></i>
+        </li>
+        <li class="img-tile">
+            <i class="ion-image"></i>
+        </li>
+        <li class="img-tile">
+            <i class="ion-image"></i>
+        </li>
+    <!-- /end for loop -->
     </ul>
+</header>
 {% endblock %}
 
 {% block body %}
-    <h2>Product Name: {{product.name}}</h2>
-    <h2>Average Rating: {{product_summary.avg_rating}}</h2>
-    <h2>Number of Reviews: {{product_summary.review_count}}</h2>
+<div class="ind-body">
     <ul>
         {% for review in reviews_list %}
-        <li>
+        <li class="tile">
             <a href="/reviews/{{review.review_id}}">
-                <p>Reviewer Name: {{review.user_name}}</p>
-                <p>Product Name: {{review.prod_name}}</p>
-                <p>Rating: {{review.rating}}</p>
-                <p>Date: {{review.date}}</p>
+                <h4>Date: {{review.date}}</h4>
+                <h3>Rating: {{review.rating}}</h3>
+                <h4>Reviewer Name: {{review.user_name}}</h4>
             </a>
         </li>
         {% endfor %}
     </ul>
+</div>
 {% endblock %}
