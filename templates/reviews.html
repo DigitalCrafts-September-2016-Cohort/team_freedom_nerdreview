@@ -22,8 +22,8 @@
     <form action="/reviews" method="post">
         <select class="form-control" name="sortby" onchange="this.form.submit()">
             <option selected value="rating_desc">Rating (high to low)</option>
-            {% for choice in sort_choice_list %}
-            <option {% if choice == current_sort %} selected {% endif %} value="{{choice}}">{{choice}}</option>
+            {% for choice, choice_name in sort_choices %}
+                <option {% if choice == current_sort %} selected {% endif %} value="{{choice}}">{{choice_name}}</option>
             {% endfor %}
         </select>
     </form>

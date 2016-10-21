@@ -22,7 +22,6 @@ def display_page():
         loggedin = loggedin
         )
 
-
 # Log In
 @app.route('/log_in', methods=['POST'])
 def submit_login():
@@ -71,32 +70,123 @@ def render_categories():
     )
 
 
-@app.route('/categories/<cat_id>')
+@app.route('/categories/<cat_id>', methods = ['POST', 'GET'])
 def render_sub_cats(cat_id):
+    #Defines 2 iterable lists for sort choices: one for the value attributes from form and one for the names to display
+    sort_choice_list = ['rating_asc',
+                        'name_az',
+                        'name_za']
+
+    sort_choice_list_names = ['Rating (low to high)',
+                              'Product Name (A-Z)',
+                              'Product Name (Z-A)']
+    #Zips the two lists together so that we can iterate over the corresponding pairs
+    sort_choices = zip(sort_choice_list, sort_choice_list_names)
+
+    # Get the selected sort choice, 'prod_name' if none is selected
+    # Two string variables are assigned for each possible choice, they will be substitued into the SQL query below
+    sort_choice = request.form.get('sortby')
+    if sort_choice == 'rating_asc':
+        sort_method = 'query.avg_rating'
+        direction = 'asc'
+    elif sort_choice == 'name_az':
+        sort_method = 'UPPER(query.prod_name)'
+        direction = 'asc'
+    elif sort_choice == 'name_za':
+        sort_method = 'UPPER(query.prod_name)'
+        direction = 'desc'
+    # elif sort_choice == 'msrp_asc':
+    #     sort_method = 'prod_msrp'
+    #     direction = ''
+    # elif sort_choice == "msrp_desc":
+    #     sort_method = 'prod_msrp'
+    #     direction = 'desc'
+    # elif sort_choice == "date_desc":
+    #     sort_method = 'prod_release_date'
+    #     direction = 'desc'
+    # elif sort_choice == "date_asc":
+    #         sort_method = 'prod_release_date'
+    #         direction = ''
+    else:
+        #Default or fall back sort method (not dependent on drop-down)
+        sort_method = 'query.avg_rating'
+        direction = 'desc'
+
+
     # Reduce reduncancy by joining tables and being more specific in our select
     cat_query = db.query('select * from secondary_cat where secondary_cat.main_cat_id = %s' % cat_id)
-    sub_cat_query = db.query('select distinct query.prod_id, query.prod_name, query.review_count, query.avg_rating from (select product_uses_category.secondary_cat_id as sub_cat_id, count(review.product_id) as review_count, product.name as prod_name, product.id as prod_id, round(avg(review.rating), 2) as avg_rating from review inner join product on product.id = review.product_id inner join product_uses_category on product.id = product_uses_category.product_id inner join secondary_cat on product_uses_category.secondary_cat_id = secondary_cat.id where secondary_cat.main_cat_id = %s group by prod_name, prod_id, product_uses_category.secondary_cat_id) query' % cat_id);
+
+    sub_cat_query = db.query('select distinct query.prod_id, upper(query.prod_name) as product_name, query.review_count, query.avg_rating from (select product_uses_category.secondary_cat_id as sub_cat_id, count(review.product_id) as review_count, product.name as prod_name, product.id as prod_id, round(avg(review.rating), 2) as avg_rating from review inner join product on product.id = review.product_id inner join product_uses_category on product.id = product_uses_category.product_id inner join secondary_cat on product_uses_category.secondary_cat_id = secondary_cat.id where secondary_cat.main_cat_id = %s group by prod_name, prod_id, product_uses_category.secondary_cat_id) query order by %s %s' % (cat_id, sort_method, direction));
+
+    # sub_cat_query = db.query('select distinct query.prod_id, query.prod_name, query.review_count, query.avg_rating from (select product_uses_category.secondary_cat_id as sub_cat_id, count(review.product_id) as review_count, product.name as prod_name, product.id as prod_id, round(avg(review.rating), 2) as avg_rating from review inner join product on product.id = review.product_id inner join product_uses_category on product.id = product_uses_category.product_id inner join secondary_cat on product_uses_category.secondary_cat_id = secondary_cat.id where secondary_cat.main_cat_id = %s group by prod_name, prod_id, product_uses_category.secondary_cat_id) query order by %s %s' % (cat_id,sort_method, direction));
+
     return render_template(
         '/sub_categories.html',
+        sort_choices = sort_choices,
+        current_sort = sort_choice,
         cat_id = cat_id,
         categories_list = cat_query.namedresult(),
         sub_categories_list = sub_cat_query.namedresult()
     )
 
 
-@app.route('/categories/<cat_id>/<sub_cat_id>')
+@app.route('/categories/<cat_id>/<sub_cat_id>', methods=['POST','GET'])
 def render_sub_cat_products(cat_id, sub_cat_id):
+    #Defines 2 iterable lists for sort choices: one for the value attributes from form and one for the names to display
+    sort_choice_list = ['rating_asc',
+                        'name_az',
+                        'name_za']
+
+    sort_choice_list_names = ['Rating (low to high)',
+                              'Product Name (A-Z)',
+                              'Product Name (Z-A)']
+    #Zips the two lists together so that we can iterate over the corresponding pairs
+    sort_choices = zip(sort_choice_list, sort_choice_list_names)
+
+    # Get the selected sort choice, 'prod_name' if none is selected
+    # Two string variables are assigned for each possible choice, they will be substitued into the SQL query below
+    sort_choice = request.form.get('sortby')
+    if sort_choice == 'rating_asc':
+        sort_method = 'avg_rating'
+        direction = 'asc'
+    elif sort_choice == 'name_az':
+        sort_method = 'prod_name'
+        direction = 'asc'
+    elif sort_choice == 'name_za':
+        sort_method = 'prod_name'
+        direction = 'desc'
+    # elif sort_choice == 'msrp_asc':
+    #     sort_method = 'prod_msrp'
+    #     direction = ''
+    # elif sort_choice == "msrp_desc":
+    #     sort_method = 'prod_msrp'
+    #     direction = 'desc'
+    # elif sort_choice == "date_desc":
+    #     sort_method = 'prod_release_date'
+    #     direction = 'desc'
+    # elif sort_choice == "date_asc":
+    #         sort_method = 'prod_release_date'
+    #         direction = ''
+    else:
+        #Default or fall back sort method (not dependent on drop-down)
+        sort_method = 'avg_rating'
+        direction = 'desc'
+
+
     #Gets all the secondary categories in the main category
     sub_cat_query = db.query('select * from secondary_cat where secondary_cat.main_cat_id = %s' % cat_id)
 
     #Gets all products in the secondary category with id = sub_cat_id
     ## THIS IS THE RIGHT ONE
-    sub_cat_products_query = db.query('select product.name as prod_name, product.id as prod_id, round(avg(review.rating), 2) as avg_rating, count(review.product_id) as review_count from review inner join product on product.id = review.product_id inner join product_uses_category on product.id = product_uses_category.product_id inner join secondary_cat on product_uses_category.secondary_cat_id = secondary_cat.id where secondary_cat.id = %s group by product.name, product.id order by prod_name' % sub_cat_id)
+    sub_cat_products_query = db.query('select upper(product.name) as prod_name, product.id as prod_id, round(avg(review.rating), 2) as avg_rating, count(review.product_id) as review_count from review inner join product on product.id = review.product_id inner join product_uses_category on product.id = product_uses_category.product_id inner join secondary_cat on product_uses_category.secondary_cat_id = secondary_cat.id where secondary_cat.id = %s group by product.name, product.id order by %s %s' % (sub_cat_id, sort_method, direction))
 
 
     return render_template(
         '/sub_categories_products.html',
+        sort_choices = sort_choices,
+        current_sort = sort_choice,
         cat_id = cat_id,
+        sub_cat_id = sub_cat_id,
         sub_categories_list = sub_cat_query.namedresult(),
         sub_categories_products_list = sub_cat_products_query.namedresult()
     )
@@ -137,14 +227,13 @@ def disp_individual_product(product_id):
 @app.route('/reviews', methods=['POST', 'GET'])
 def render_reviews():
     #Defines 2 iterable lists for sort choices: one for the value attributes from form and one for the names to display
-    sort_choice_list = ['rating_high',
-                        'rating_low',
+    sort_choice_list = ['rating_low',
                         'prod_name_az',
                         'prod_name_za',
                         'date_asc',
                         'date_desc']
-    sort_choice_list_names = ['Rating (Highest to Lowest)',
-                              'Rating (Lowest to Highest)',
+
+    sort_choice_list_names = ['Rating (low to high)',
                               'Product Name (A-Z)',
                               'Product Name (Z-A)',
                               'Date (new to old)',
@@ -155,31 +244,28 @@ def render_reviews():
     # Get the selected sort choice, 'prod_name' if none is selected
     # Two string variables are assigned for each possible choice, they will be substitued into the SQL query below
     sort_choice = request.form.get('sortby')
-    if sort_choice == 'rating_high':
-        sort_method = 'review.rating'
-        direction = 'desc'
-    elif sort_choice == 'rating_low':
-        sort_method = 'review.rating'
-        direction = ''
+    if sort_choice == 'rating_low':
+        sort_method = 'rating'
+        direction = 'asc'
     elif sort_choice == 'prod_name_az':
-        sort_method = 'prod_name'
-        direction = 'desc'
+        sort_method = 'UPPER(product.name)'
+        direction = 'asc'
     elif sort_choice == 'prod_name_za':
-        sort_method = 'prod_name'
-        direction = ''
+        sort_method = 'UPPER(product.name)'
+        direction = 'desc'
     elif sort_choice == 'date_asc':
         sort_method = 'prod_name'
-        direction = ''
+        direction = 'asc'
     elif sort_choice == 'date_desc':
         sort_method = 'prod_name'
         direction = 'desc'
     else:
         #Default or fall back sort method (not dependent on drop-down)
-        sort_method = 'prod_name'
+        sort_method = 'rating'
         direction = 'desc'
 
     #Use string substiution to run a SQL query for the selected sort choice
-    sorted_review_query = db.query("select product.name as prod_name, review.rating, users.name as user_name, review.id from review, product, users where review.product_id = product.id and review.user_id = users.id order by %s %s" % (sort_method, direction))
+    sorted_review_query = db.query("select product.name as prod_name, review.rating as rating, users.name as user_name, review.id from review, product, users where review.product_id = product.id and review.user_id = users.id order by %s %s" % (sort_method, direction))
 
     #Render reviews template again with the chosen sort order, passing through the sort choices zipped list, the current choice, and the reviews list
     return render_template(
@@ -227,11 +313,11 @@ def render_brands():
         direction = 'desc'
     elif sort_choice == "num_prod_asc":
         sort_method = 'prod_count'
-        direction = ''
+        direction = 'asc'
     else:
         #Default or fall back sort method (not dependent on drop-down)
         sort_method = 'company.name'
-        direction = ''
+        direction = 'asc'
 
     brand_query = db.query("select company.name as brand_name, company.id as brand_id, count(product.id) as prod_count from company inner join product on company.id = product.company_id group by brand_name, brand_id order by %s %s" % (sort_method, direction))
 
@@ -260,10 +346,10 @@ def render_brand_prod(brand_id):
     sort_choice = request.form.get('sortby')
     if sort_choice == 'rating_asc':
         sort_method = 'avg_rating'
-        direction = ''
+        direction = 'asc'
     elif sort_choice == 'name_az':
         sort_method = 'prod_name'
-        direction = ''
+        direction = 'asc'
     elif sort_choice == 'name_za':
         sort_method = 'prod_name'
         direction = 'desc'

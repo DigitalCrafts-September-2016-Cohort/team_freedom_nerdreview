@@ -20,8 +20,8 @@
 
 {% block sort %}
 <div class="sort cf">
-    <form action="/" method="post">
-        <input type="hidden" name="brand_id" value="{{brand_id}}">
+    <form action="/categories/{{cat_id}}" method="post">
+        <input type="hidden" name="brand_id" value="{{cat_id}}">
         <select class="form-control" name="sortby" onchange="this.form.submit()">
             <option selected value="rating_desc">Rating (high to low)</option>
             {% for choice, choice_name in sort_choices %}
@@ -41,7 +41,7 @@
                 <h4 class="fl">{{product.avg_rating}} / 5 <i class="ion-star"></i></h4>
                 <h4 class="fr">Date:</h4>
             </div>
-            <h3>{{product.prod_name}}</h3>
+            <h3>{{product.product_name}}</h3>
             <h4>{{product.review_count}} reviews</h4>
         </a>
     </li>
