@@ -38,11 +38,13 @@
     <li class="tile">
         <a href="/reviews/{{review.id}}">
             <div class="cf">
-                <h4 class="rating">{{review.rating}} / 5 <i class="ion-star"></i></h4>
-                <h4 class="date">Date: {{review.date}}</h4>
+                <h4 class="fl">{{review.rating}} / 5 <i class="ion-star"></i></h4>
+                <h4 class="fr">Date: {{review.date}}</h4>
             </div>
-            <h3 class="product">{{review.prod_name}}</h3>
-            <h4 class="reviewer">By {{review.user_name}}</h4>
+            <div>
+                <h3>{{review.prod_name}}</h3>
+            </div>
+            <h4>By {{review.user_name}}</h4>
         </a>
     </li>
     {% endfor %}
