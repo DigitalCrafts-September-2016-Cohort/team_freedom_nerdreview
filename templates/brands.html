@@ -36,7 +36,9 @@
     <li class="tile">
         <a href="/brands/{{brand.brand_id}}">
             <h4>&nbsp;</h4>
-            <h3 class="fill-top">{{brand.brand_name}}</h3>
+            <div>
+                <h3 class="fill-top">{{brand.brand_name}}</h3>                
+            </div>
             <h4>{{brand.prod_count}} product{% if brand.prod_count > 1 %}s{% endif %}</h4>
         </a>
     </li>

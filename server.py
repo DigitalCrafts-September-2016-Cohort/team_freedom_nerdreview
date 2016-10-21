@@ -7,7 +7,7 @@ import datetime
 db = pg.DB(dbname='project_db')
 
 app = Flask('NerdReview')
-
+app.secret_key = "bigbigbig"
 # Renders the homepage at the root directory
 @app.route('/')
 def display_page():
@@ -31,7 +31,7 @@ def submit_login():
    if len(results) > 0:
        user = results[0]
        if user.password == password:
-           session['username'] = user.username
+           session['username'] = user.user_name
            flash("Successfully Logged In")
            return redirect('/')
        else:
@@ -42,15 +42,17 @@ def submit_login():
 # Sign up
 @app.route('/sign_up', methods=['POST'])
 def submit_signup():
+   name = request.form.get('name')
    username = request.form.get('username')
    password = request.form.get('password')
    try:
-       db.insert('users',user_name=username, password=password)
+       db.insert('users', name=name, user_name=username, password=password)
        session['username'] = username
        flash('Sign Up Succesful')
        return redirect('/')
    except:
-       return render_template('signup_error.html')
+       flash('Sign Up Not Succesful')
+       return redirect('/')
 
 # Log out
 @app.route('/logout', methods=['POST'])
@@ -209,7 +211,7 @@ def disp_individual_product(product_id):
     product_reviews_summary_query = db.query('select count(review.id) as review_count, round(avg(review.rating), 2) as avg_rating from product inner join review on review.product_id = product.id and product.id = %s' % product_id)
 
     #Gets all the reviews for the indiviudal product from above
-    reviews_query = db.query('select review.id as review_id from product inner join review on product.id = review.product_id and product.id = %s' % product_id)
+    reviews_query = db.query('select review.id as review_id, review.rating as rating, date(review.date) as review_date, users.user_name from product inner join review on product.id = review.product_id inner join users on users.id = review.user_id and product.id = %s' % product_id)
 
     return render_template(
         'individual_product.html',
@@ -265,8 +267,7 @@ def render_reviews():
         direction = 'desc'
 
     #Use string substiution to run a SQL query for the selected sort choice
-    sorted_review_query = db.query("select product.name as prod_name, review.rating as rating, users.name as user_name, review.id from review, product, users where review.product_id = product.id and review.user_id = users.id order by %s %s" % (sort_method, direction))
-
+    sorted_review_query = db.query("select product.name as prod_name, review.rating, users.name as user_name, review.id, date(review.date) as review_date from review, product, users where review.product_id = product.id and review.user_id = users.id order by %s %s" % (sort_method, direction))
     #Render reviews template again with the chosen sort order, passing through the sort choices zipped list, the current choice, and the reviews list
     return render_template(
         'reviews.html',
@@ -285,7 +286,7 @@ def icon():
 
 @app.route('/reviews/<review_id>')
 def render_individual_review(review_id):
-    review_query = db.query("select product.name as prod_name, review.rating, review.date, users.name as user_name, review.id, review.review from review, product, users where review.product_id = product.id and review.user_id = users.id and review.id = '%s'" % review_id)
+    review_query = db.query("select product.name as prod_name, review.rating, date(review.date) as review_date, users.name as user_name, review.id, review.review from review, product, users where review.product_id = product.id and review.user_id = users.id and review.id = '%s'" % review_id)
 
     return render_template(
       '/individual_review.html',
@@ -403,8 +404,11 @@ def render_individual_user(user_id):
 
 @app.route('/product_review')
 def render_review():
+    main_cat_query = db.query('select name from main_cat').namedresult()
+
     return render_template(
-        '/add_product_review.html'
+        '/add_product_review.html',
+        main_cat_list=main_cat_query
     )
 
 
@@ -412,14 +416,12 @@ def render_review():
 @app.route('/add_product_review', methods=['POST'])
 def add_review():
     # Reqests the needed information from the form in /product_review
-    print request.form
     main_cat_name = request.form.get('main_cat_name')
     second_cat_name = request.form.get('second_cat_name')
     product_name = request.form.get('product_name')
     rating = request.form.get('rating')
     review = request.form.get('review')
     company_name = request.form.get('company_name')
-    print ('rating', rating)
     # Checks the input against values in the main_cat table. If the query doesn't find a match, a new entry is added.
     main_cat_check = db.query("select name, id from main_cat where main_cat.name = '%s'" % main_cat_name).namedresult()
     if main_cat_check:
