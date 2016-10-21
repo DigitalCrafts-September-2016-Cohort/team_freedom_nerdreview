@@ -10,7 +10,11 @@
 {% block body %}
 <h1>Add a new review</h1>
 <form class="" action="/add_product_review" method="POST">
-  <input type="text" name="main_cat_name" value="{{name}}">
+  <select class="main_cat_name" name="main_cat_name">
+    {% for main_name in main_cat_list %}
+      <option value="{{main_name.name}}">{{main_name.name}}</option>
+    {% endfor %}
+  </select>
   <input type="text" name="second_cat_name" value="{{name}}">
   <input type="text" name="product_name" value="{{name}}">
   <select class="rating" name="rating">
