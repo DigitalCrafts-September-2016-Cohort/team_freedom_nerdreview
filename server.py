@@ -316,8 +316,11 @@ def render_individual_user(user_id):
 
 @app.route('/product_review')
 def render_review():
+    main_cat_query = db.query('select name from main_cat').namedresult()
+
     return render_template(
-        '/add_product_review.html'
+        '/add_product_review.html',
+        main_cat_list=main_cat_query
     )
 
 
@@ -325,14 +328,12 @@ def render_review():
 @app.route('/add_product_review', methods=['POST'])
 def add_review():
     # Reqests the needed information from the form in /product_review
-    print request.form
     main_cat_name = request.form.get('main_cat_name')
     second_cat_name = request.form.get('second_cat_name')
     product_name = request.form.get('product_name')
     rating = request.form.get('rating')
     review = request.form.get('review')
     company_name = request.form.get('company_name')
-    print ('rating', rating)
     # Checks the input against values in the main_cat table. If the query doesn't find a match, a new entry is added.
     main_cat_check = db.query("select name, id from main_cat where main_cat.name = '%s'" % main_cat_name).namedresult()
     if main_cat_check:
