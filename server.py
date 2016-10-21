@@ -105,7 +105,7 @@ def render_reviews():
         direction = 'desc'
 
     #Use string substiution to run a SQL query for the selected sort choice
-    sorted_review_query = db.query("select product.name as prod_name, review.rating, users.name as user_name, review.id from review, product, users where review.product_id = product.id and review.user_id = users.id order by %s %s" % (sort_method, direction))
+    sorted_review_query = db.query("select product.name as prod_name, review.rating, users.name as user_name, review.id from review, product, users where review.product_id = product.id and review.user_id = users.id order by '%s' '%s'" % (sort_method, direction))
 
     #Render reviews template again with the chosen sort order, passing through the sort choices zipped list, the current choice, and the reviews list
     return render_template(
