@@ -19,24 +19,28 @@
                         <p>NERD<br>REVIEW</p>
                     </a>
                 </div>
-                {% if loggedin %}
-                    <p>
-                        Hello, {{session['username']}}!
-                    </p>
-                    <form class="form" action="/logout" method="post">
-                        <div class="form-group">
-                            <button class="btn btn-warning" type="submit" action="/logout" name="logout">Log Out</button>
-                        </div>
-                    </form>
-                {% else %}
-                {% endif %}
                 <ul class="nav-menu-list">
                     {% block nav %}
                     {% endblock %}
                 </ul>
-                <div class="account-btns">
-                    <button type="button" data-toggle="modal" data-target="#log_in_modal" class="btn login-btn">Log In</button>
-                    <button type="button" data-toggle="modal" data-target="#signup" class="btn signup-btn">Sign Up</button>
+                <div class="account">
+                    {% if loggedin %}
+                    <p>Hello {{session['username']}}!</p>
+                        <form class="form" action="/log_out" method="post">
+                            <div class="form-group">
+                                <button class="btn left-btn" type="submit" action="/log_out" name="log_out">Log Out</button>
+                            </div>
+                        </form>
+                        <form class="form" action="/add_product_review" method="post">
+                            <div class="form-group">
+                                <button class="btn right-btn" type="submit" action="/add_product_review" name="add_product_review">New review</button>
+                            </div>
+                        </form>
+                    {% else %}
+                    <p>Hello!</p>
+                        <button type="button" data-toggle="modal" data-target="#log_in_modal" class="btn left-btn">Log In</button>
+                        <button type="button" data-toggle="modal" data-target="#signup" class="btn right-btn">Sign Up</button>
+                    {% endif %}
                 </div>
             </div>
         </nav>
