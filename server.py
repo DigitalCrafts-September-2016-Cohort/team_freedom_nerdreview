@@ -179,7 +179,7 @@ def render_reviews():
         direction = 'desc'
 
     #Use string substiution to run a SQL query for the selected sort choice
-    sorted_review_query = db.query("select product.name as prod_name, review.rating, users.name as user_name, review.id, date(review.date) as review_date from review, product, users where review.product_id = product.id and review.user_id = users.id order by %s %s" % (sort_method, direction))
+    sorted_review_query = db.query("select product.name as prod_name, review.rating, users.user_name as user_name, review.id, date(review.date) as review_date from review, product, users where review.product_id = product.id and review.user_id = users.id order by %s %s" % (sort_method, direction))
     #Render reviews template again with the chosen sort order, passing through the sort choices zipped list, the current choice, and the reviews list
     return render_template(
         'reviews.html',
@@ -317,10 +317,15 @@ def render_individual_user(user_id):
 @app.route('/product_review')
 def render_review():
     main_cat_query = db.query('select name from main_cat').namedresult()
-
+    second_cat_query = db.query('select name from secondary_cat').namedresult()
+    product_query = db.query('select name from product').namedresult()
+    company_query = db.query('select name from company').namedresult()
     return render_template(
         '/add_product_review.html',
-        main_cat_list=main_cat_query
+        main_cat_list=main_cat_query,
+        second_cat_list=second_cat_query,
+        product_list=product_query,
+        company_list=company_query
     )
 
 
