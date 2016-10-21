@@ -7,7 +7,7 @@ import datetime
 db = pg.DB(dbname='project_db')
 
 app = Flask('NerdReview')
-
+app.secret_key = "bigbigbig"
 # Renders the homepage at the root directory
 @app.route('/')
 def display_page():
@@ -32,7 +32,7 @@ def submit_login():
    if len(results) > 0:
        user = results[0]
        if user.password == password:
-           session['username'] = user.username
+           session['username'] = user.user_name
            flash("Successfully Logged In")
            return redirect('/')
        else:
@@ -43,15 +43,17 @@ def submit_login():
 # Sign up
 @app.route('/sign_up', methods=['POST'])
 def submit_signup():
+   name = request.form.get('name')
    username = request.form.get('username')
    password = request.form.get('password')
    try:
-       db.insert('users',user_name=username, password=password)
+       db.insert('users', name=name, user_name=username, password=password)
        session['username'] = username
        flash('Sign Up Succesful')
        return redirect('/')
    except:
-       return render_template('signup_error.html')
+       flash('Sign Up Not Succesful')
+       return redirect('/')
 
 # Log out
 @app.route('/logout', methods=['POST'])
