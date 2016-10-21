@@ -15,8 +15,18 @@
       <option value="{{main_name.name}}">{{main_name.name}}</option>
     {% endfor %}
   </select>
-  <input type="text" name="second_cat_name" value="{{name}}">
-  <input type="text" name="product_name" value="{{name}}">
+  <!-- <input type="text" name="second_cat_name" value="{{name}}"> -->
+  <select class="second_cat_name" name="second_cat_name">
+    {% for second_name in second_cat_list %}
+      <option value="{{second_name.name}}">{{second_name.name}}</option>
+    {% endfor %}
+  </select>
+  <!-- <input type="text" name="product_name" value="{{name}}"> -->
+  <select class="product_name" name="product_name">
+    {% for product_name in product_list %}
+      <option value="{{product_name.name}}">{{product_name.name}}</option>
+    {% endfor %}
+  </select>
   <select class="rating" name="rating">
     <option value="1">1</option>
     <option value="2">2</option>
@@ -25,7 +35,12 @@
     <option value="5">5</option>
   </select>
   <input type="text" name="review" value="{{review}}">
-  <input type="text" name="company_name" value="{{name}}">
+  <!-- <input type="text" name="company_name" value="{{name}}"> -->
+  <select class="company_name" name="company_name">
+    {% for company_name in company_list %}
+      <option value="{{company_name.name}}">{{company_name.name}}</option>
+    {% endfor %}
+  </select>
   <button type="submit">Add</button>
 </form>
   <ul>
