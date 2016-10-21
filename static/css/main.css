@@ -190,7 +190,7 @@ a {
     transition: all 175ms ease-in-out;
 }
 
-    .account-btns button:hover { text-decoration: none; }
+    .account-btns button:hover { text-decoration: underline; }
     /* overwriting unwanted Bootstrap .btn styles*/
     .account-btns button:focus { outline: none !important; }
     .account-btns button:active { box-shadow: none; }
@@ -233,17 +233,6 @@ header {
     border-radius: 50%;
     transition: 175ms all ease-in-out;
 }
-
-/* bigger version of back-btn */
-
-/*font-size: 2em;
-border-radius: 50%;
-float: left;
-border: 5px solid white;
-padding: 10px;
-height: 76px;
-width: 76px;
-text-align: center;*/
 
 .back-btn-link:hover > .back-btn,
 .back-btn-link:focus > .back-btn {
@@ -315,28 +304,31 @@ main a:focus {
     text-decoration: none;
 }
 
-/* option A */
-/*.tile a:hover > h3 {
-    text-decoration: underline;
-}*/
-
-/* option B */
 .tile h3 {
     position: relative;
     display: inline-block;
 }
 
 .tile h3::after {
-    /*content: "";
+    content: "";
     position: relative;
-    border-bottom: 3px solid #fff;*/
-    /*content: "";
-    top: -20px;
     display: inline-block;
-    position: relative;
+    top: -20px;
+    width: 100%;
+    visibility: hidden;
     border-bottom: 3px solid #fff;
-    color: #fff;
-    width: 100%;*/
+    -webkit-transform: scaleX(0);
+    transform: scaleX(0);
+    -webkit-transition: all 175ms ease-in-out;
+    transition: 175ms all ease-in-out;
+}
+
+.tile a:hover h3::after {
+    text-decoration: underline;
+    visibility: visible;
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
+    border-color: #F4CF6F;
 }
 
 .tile h3, .tile h4 {
