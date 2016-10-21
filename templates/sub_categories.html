@@ -13,8 +13,8 @@
     <a class="back-btn-link cf" href="/categories">
         <i class="back-btn ion-arrow-left-a"></i>
     </a>
-    <h1>Category > Sub-category</h1>
-    <h3>These are some products in this category</h3>
+    <h1><a href="/categories">Categories</a> > Sub-categories</h1>
+    <h3>More categories to the left, products below</h3>
 </header>
 {% endblock %}
 
@@ -41,7 +41,9 @@
                 <h4 class="fl">{{product.avg_rating}} / 5 <i class="ion-star"></i></h4>
                 <h4 class="fr">Date:</h4>
             </div>
-            <h3>{{product.prod_name}}</h3>
+            <div>
+                <h3>{{product.prod_name}}</h3>
+            </div>
             <h4>{{product.review_count}} reviews</h4>
         </a>
     </li>

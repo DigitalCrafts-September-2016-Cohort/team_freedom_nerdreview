@@ -328,22 +328,23 @@ ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('project_id_seq'::reg
 --
 
 COPY company (id, name) FROM stdin;
-1	Sony
-2	Apple
-3	Samsung
-4	Nintendo
-5	Microsoft
-6	Nvidia
-7	Huawei
-19	Scwhinn
-31	Google
-32	Ralph Lauren
-33	Giorgio Armani
-34	Bare Minerals
-35	Lush
-36	Carhartt
-37	Columbia
-38	Patagonia
+1	Samsung
+2	Sony
+3	Giant
+4	Calvin Klein
+5	Polaris
+6	Apple
+7	Armani Exchange
+8	Nintendo
+9	Cheverolet
+10	Adidas
+11	Hollister
+12	Ford
+13	Dodge
+14	Google
+15	China
+16	Asus
+17	Air Jordan
 \.
 
 
@@ -351,7 +352,7 @@ COPY company (id, name) FROM stdin;
 -- Name: company_id_seq; Type: SEQUENCE SET; Schema: public; Owner: robertdunn
 --
 
-SELECT pg_catalog.setval('company_id_seq', 33, true);
+SELECT pg_catalog.setval('company_id_seq', 17, true);
 
 
 --
@@ -360,10 +361,9 @@ SELECT pg_catalog.setval('company_id_seq', 33, true);
 
 COPY main_cat (id, name) FROM stdin;
 1	Electronics
-3	Clothes
 2	Outdoors
-5	Health/Beauty
-6	Home
+3	Clothes
+4	Vehicles
 \.
 
 
@@ -371,7 +371,7 @@ COPY main_cat (id, name) FROM stdin;
 -- Name: main_cat_id_seq; Type: SEQUENCE SET; Schema: public; Owner: robertdunn
 --
 
-SELECT pg_catalog.setval('main_cat_id_seq', 5, true);
+SELECT pg_catalog.setval('main_cat_id_seq', 4, true);
 
 
 --
@@ -379,37 +379,32 @@ SELECT pg_catalog.setval('main_cat_id_seq', 5, true);
 --
 
 COPY product (id, name, company_id) FROM stdin;
-13	Neutral bike	19
-26	Classic road bike	19
-27	Burly mountain bike	19
-28	Seductive eye shadow	34
-2	Xbox One	5
-3	Wii U	4
-5	Macbook Pro	2
-6	iMac	2
-8	iPhone 6 Plus	2
-7	iPhone 6	2
-10	Galaxy S7	3
-11	Galaxy Note 7	3
-12	iPad Pro 9.7	2
-9	Nexus 6p	7
-4	Nvidia Shield	6
-22	Pixel XL	31
-23	Ralph Lauren Polo	32
-1	PlayStation 4	1
-24	Armani Code	33
-35	Hipster jeans	36
-36	Hipster sweater with logo	36
-37	Hipster sweater without logo	36
-38	Waterproof jacket	37
-39	Big fluffy parka	38
-40	Hipster shorts	36
-41	Fire-proof pants	37
-42	Turkish soap	35
-43	Foamy soap	35
-44	Bar soap	35
-45	Morning spritz	34
-46	Evening spritz	34
+1	UHD-4K	1
+2	HD-720P	2
+3	Mountain Bike	3
+4	Play Station 4	2
+5	Jean Jacket	4
+6	Sportsman 450	5
+7	MacBook Pro	6
+8	iPhone 7	6
+9	Galaxy Note 7	1
+10	Cashmere Cardigan	7
+11	Wii U	8
+12	Corvette Z06	9
+13	Yeezy 450	10
+14	Fedora	11
+15	Leather	4
+16	F-150	12
+17	Silverado	9
+18	Ram 1500	13
+19	Nexus 6P	14
+20	OnePlus 3	15
+21	iPad Pro 9.7	6
+22	Galaxy Tab S	1
+23	Galaxy Tab S 3	1
+24	G2	16
+25	MacBook Air	6
+26	Jordans	17
 \.
 
 
@@ -427,37 +422,31 @@ SELECT pg_catalog.setval('product_category_id_seq', 14, true);
 COPY product_uses_category (id, product_id, secondary_cat_id) FROM stdin;
 1	1	1
 2	2	1
-3	3	1
-4	4	1
-5	5	5
+3	3	2
+4	4	3
+5	5	4
 6	6	5
-7	7	2
-8	8	2
-9	9	2
-10	10	2
-11	11	2
-12	12	3
-13	13	6
-14	22	2
-15	23	7
-19	24	20
-20	13	6
-21	13	23
-22	26	23
-23	35	15
-24	36	16
-25	37	16
-26	38	11
-27	39	10
-28	40	14
-29	41	15
-30	42	18
-31	43	18
-32	44	18
-33	45	22
-34	46	22
-35	28	21
-36	27	6
+7	7	6
+8	8	7
+9	9	7
+10	10	8
+11	3	3
+12	11	3
+13	12	9
+14	13	10
+15	14	11
+16	15	4
+17	16	12
+18	17	12
+19	18	12
+20	19	7
+21	20	7
+22	21	13
+23	22	13
+24	23	13
+25	24	14
+26	25	14
+27	26	10
 \.
 
 
@@ -465,14 +454,14 @@ COPY product_uses_category (id, product_id, secondary_cat_id) FROM stdin;
 -- Name: product_uses_category_id_seq; Type: SEQUENCE SET; Schema: public; Owner: robertdunn
 --
 
-SELECT pg_catalog.setval('product_uses_category_id_seq', 36, true);
+SELECT pg_catalog.setval('product_uses_category_id_seq', 27, true);
 
 
 --
 -- Name: project_id_seq; Type: SEQUENCE SET; Schema: public; Owner: robertdunn
 --
 
-SELECT pg_catalog.setval('project_id_seq', 13, true);
+SELECT pg_catalog.setval('project_id_seq', 4, true);
 
 
 --
@@ -480,45 +469,35 @@ SELECT pg_catalog.setval('project_id_seq', 13, true);
 --
 
 COPY review (user_id, product_id, rating, review, id, date) FROM stdin;
-6	24	3	Huele bien but it ain't cheap	32	2016-10-04 00:00:00
-5	35	5	Fit snugly with plenty of pocket space	33	2016-09-18 00:00:00
-2	13	3	It's ok, I guess	34	2016-10-02 00:00:00
-3	37	5	Possibly the greatest sweater of all time	35	2016-10-06 00:00:00
-7	36	4	Comfy and soft, but a bit itchy at times	36	2016-10-11 00:00:00
-4	28	1	Way too runny and made my skin burn	37	2016-10-19 00:00:00
-5	40	5	I like shorts! They're comfortable and easy to wear.	38	2016-10-10 00:00:00
-4	38	5	Kept me dry and warm! What more could I ask for?	39	2016-10-15 00:00:00
-6	41	2	They don't work as promised...my leg hair is gone. They look cool, though.	40	2016-10-09 00:00:00
-3	42	5	Every time I use it, the smell brings me right back to Istanbul	41	2016-10-03 00:00:00
-7	43	4	Cleans great, but it could be a tad foamier.	42	2016-10-07 00:00:00
-2	44	5	The finest soap I've ever used	43	2016-10-17 00:00:00
-13	45	5	Leaves me smelling divine and ready to face the day	44	2016-10-14 00:00:00
-13	46	5	Leaves me smelling divine and ready to go to sleep	45	2016-10-14 00:00:00
-3	7	4	Works pretty well, but I don't like the camera.	46	2016-10-11 00:00:00
-4	7	5	A superb purchase. I'd buy it again in a heartbeat.	47	2016-10-01 00:00:00
-2	40	4	Not bad, but the fit is different than I expected.	48	2016-10-01 00:00:00
-6	24	5	The ladies love it!	49	2016-10-19 00:00:00
-2	5	5	My first Mac and I must admit that I'm impressed	50	2016-10-14 00:00:00
-7	5	4	Pretty cool, but a bit slow for gaming	51	2016-09-28 00:00:00
-5	5	5	Love it. Makes learning web development a lot smoother	52	2016-09-29 00:00:00
-2	39	4	Big and fluffy	53	2016-10-02 00:00:00
-1	3	2	Something	6	2016-10-04 00:00:00
-1	1	3	newplaystation	4	2016-08-12 00:00:00
-1	1	4	Best console NA	1	2015-09-23 00:00:00
-1	5	4	Best laptop NA	2	2016-09-28 00:00:00
-1	2	5	Something	5	2016-09-28 00:00:00
-1	6	4	Something	8	2016-09-28 00:00:00
-1	8	2	Something	10	2016-09-28 00:00:00
-1	9	3	Something	11	2016-09-28 00:00:00
-1	10	5	Something	12	2016-09-28 00:00:00
-1	12	4	Something	13	2016-09-28 00:00:00
-1	13	4	Good bike	14	2016-09-28 00:00:00
-1	1	3	Good Stuff	23	2016-09-28 00:00:00
-1	23	3	Polo is average	26	2016-09-28 00:00:00
-1	11	5	Great for warmth in the winter.	3	2016-10-04 00:00:00
-1	4	2	Something	7	2016-10-04 00:00:00
-1	7	4	Something	9	2016-10-04 00:00:00
-1	22	4	Booooo	24	2016-10-04 00:00:00
+2	3	4	Good bike for the mountains.	11	2016-02-28 00:00:00
+3	11	4	Pretty dope and fresh	13	2016-05-12 00:00:00
+3	12	5	Too slow, but overall a good family car	14	2016-10-03 00:00:00
+1	3	4	Wooohooo	12	2015-07-12 00:00:00
+4	13	1	Shit	15	2016-10-18 00:00:00
+1	14	5	Great for tipping	16	2016-08-23 00:00:00
+2	15	4	Good	17	2016-10-21 00:00:00
+1	16	4	Like a rock	18	2016-10-21 00:00:00
+4	17	3	Like a rock	19	2016-10-21 00:00:00
+2	18	3	Built ford tough	20	2016-10-21 00:00:00
+3	19	4	Nexus-y	21	2016-10-21 00:00:00
+2	22	4	Okay tablet	24	2016-10-21 00:00:00
+2	24	3	Good laptop	26	2016-10-21 00:00:00
+1	20	2	Something	22	2016-10-21 00:00:00
+4	25	5	Good laptop	27	2016-10-21 00:00:00
+4	21	3	Good tablet	23	2016-10-21 00:00:00
+1	1	4	Good TV	1	2016-10-12 00:00:00
+1	2	3	Okay TV	2	2016-10-09 00:00:00
+1	3	4	Best Bike NA	3	2015-09-24 00:00:00
+1	4	5	Way better than XBone	4	2015-07-15 00:00:00
+1	5	5	I love my jacket stiff	5	2016-10-09 00:00:00
+1	6	4	Do not drive on the highway	6	2016-02-28 00:00:00
+1	7	4	Pretty professional	7	2016-10-09 00:00:00
+1	8	5	I've already forgotten what headphones are!!!	8	2016-10-09 00:00:00
+1	9	2	Don't breathe in the smoke.	9	2016-10-09 00:00:00
+2	10	5	Super soft, and only $15,000!!!	10	2016-10-09 00:00:00
+3	23	4	Okay tablet	25	2016-10-21 00:00:00
+1	26	4	Good for walking in	28	2016-10-21 00:00:00
+3	8	3	Threw it in ocean, it sunk to the bottom	29	2016-10-21 00:00:00
 \.
 
 
@@ -526,7 +505,7 @@ COPY review (user_id, product_id, rating, review, id, date) FROM stdin;
 -- Name: review_id_seq; Type: SEQUENCE SET; Schema: public; Owner: robertdunn
 --
 
-SELECT pg_catalog.setval('review_id_seq', 53, true);
+SELECT pg_catalog.setval('review_id_seq', 29, true);
 
 
 --
@@ -534,28 +513,20 @@ SELECT pg_catalog.setval('review_id_seq', 53, true);
 --
 
 COPY secondary_cat (id, name, main_cat_id) FROM stdin;
-2	Phones	1
-3	Tablets	1
-4	Cameras	1
-5	Computers	1
-8	Furniture	6
-12	Shirts	3
-13	T-shirts	3
-14	Shorts	3
-15	Pants	3
-7	Polos	3
-17	Shaving	5
-18	Soap	5
-19	Shampoo	5
-20	Cologne	5
-21	Make-up	5
-22	Perfume	5
-6	Mountain bikes	2
-1	Gaming consoles	1
-23	Road bikes	2
-16	Sweaters	3
-11	Jackets	3
-10	Coats	3
+1	TV	1
+2	Bikes	2
+3	Gaming Consoles	1
+4	Jackets	3
+5	ATV	2
+6	Computers	1
+7	Phones	1
+8	Cardigans	3
+9	Sports Cars	4
+10	Shoes	3
+11	Hats	3
+12	Trucks	4
+13	Tablet	1
+14	Laptop	1
 \.
 
 
@@ -563,7 +534,7 @@ COPY secondary_cat (id, name, main_cat_id) FROM stdin;
 -- Name: tech_id_seq; Type: SEQUENCE SET; Schema: public; Owner: robertdunn
 --
 
-SELECT pg_catalog.setval('tech_id_seq', 27, true);
+SELECT pg_catalog.setval('tech_id_seq', 26, true);
 
 
 --
@@ -571,14 +542,10 @@ SELECT pg_catalog.setval('tech_id_seq', 27, true);
 --
 
 COPY users (id, name, user_name, password) FROM stdin;
-1	Rob	robdunn220	GoBolts27
-2	John	johnnycopes	BooBolts28
-3	Che	che_all_day	japan4life
-4	Jesslyn	call_me_jess	gatech123
-5	Eli	Redbeard_the_Honorable	eightbits
-6	Juan	DonJuan_PR	mellamojuan
-7	Kevin	KevDog	bowworldofwarcraft
-13	Trista	southern_peach	peachypeaches
+1	Robert Dunn	robdunn220	GoBolts27
+2	John	john_or_juan	Spain2016
+3	Jesslyn	go_dawgs420	WoofWoof
+4	Marissa Cioffi	mcioffi86	GoMichigan5
 \.
 
 

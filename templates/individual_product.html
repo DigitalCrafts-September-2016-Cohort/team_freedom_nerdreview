@@ -43,9 +43,9 @@
             {% for review in reviews_list %}
             <li class="tile">
                 <a href="/reviews/{{review.review_id}}">
-                    <h4>Date: {{review.date}}</h4>
-                    <h3>Rating: {{review.rating}}</h3>
-                    <h4>Reviewer Name: {{review.user_name}}</h4>
+                    <h4>{{review.review_date}}</h4>
+                    <h3>{{review.rating}} / 5 <i class="ion-star"></i></h3>
+                    <h4>{{review.user_name}}</h4>
                 </a>
             </li>
             {% endfor %}
