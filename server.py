@@ -113,7 +113,8 @@ def disp_individual_product(product_id):
 
     #Gets the individual product
     product_query = db.query('select * from product where product.id = %s' % product_id)
-
+    company = product_query.namedresult()[0]
+    company_id=company.company_id
     #Gets the summary stats (count, avg rating) for all the product (see above) reviews
     product_reviews_summary_query = db.query('select count(review.id) as review_count, round(avg(review.rating), 2) as avg_rating from product inner join review on review.product_id = product.id and product.id = %s' % product_id)
 
@@ -125,6 +126,7 @@ def disp_individual_product(product_id):
         cat_id = main_cat,
         parent_categories = parent_categories_list.namedresult(),
         product = product_query.namedresult()[0],
+        company_id=company_id,
         product_summary = product_reviews_summary_query.namedresult()[0],
         reviews_list = reviews_query.namedresult()
     )
@@ -176,6 +178,7 @@ def icon():
 @app.route('/reviews/<review_id>')
 def render_individual_review(review_id):
     review_query = db.query("select product.name as prod_name, review.rating, review.date, users.name as user_name, review.id, review.review from review, product, users where review.product_id = product.id and review.user_id = users.id and review.id = '%s'" % review_id)
+
     return render_template(
       '/individual_review.html',
       review = review_query.namedresult()[0]
@@ -259,11 +262,7 @@ def render_brand_prod(brand_id):
         sort_method = 'avg_rating'
         direction = 'desc'
 
-<<<<<<< HEAD
-    brand_prod_query = db.query("select product.id as prod_id, product.name as prod_name, product.msrp as prod_msrp, product.date as prod_date, avg(review.rating) as avg_rating, count(review.id) as review_count from company inner join product on company.id = product.company_id inner join review on product.id = review.product_id where company.id = %s group by prod_id, prod_name order by %s %s" % (brand_id, sort_method, direction))
-=======
     brand_prod_query = db.query("select product.id as prod_id, product.name as prod_name, round(avg(review.rating), 2) as avg_rating, count(review.id) as review_count from company inner join product on company.id = product.company_id inner join review on product.id = review.product_id where company.id = %s group by prod_id, prod_name order by %s %s" % (brand_id, sort_method, direction))
->>>>>>> master
 
     # brand_prod_query = db.query('select product.name as prod_name, product.id as prod_id from product inner join company on product.company_id = %s group by product.name, product.id' % brand_id)
 
@@ -305,13 +304,14 @@ def render_review():
 @app.route('/add_product_review', methods=['POST'])
 def add_review():
     # Reqests the needed information from the form in /product_review
+    print request.form
     main_cat_name = request.form.get('main_cat_name')
     second_cat_name = request.form.get('second_cat_name')
     product_name = request.form.get('product_name')
     rating = request.form.get('rating')
     review = request.form.get('review')
     company_name = request.form.get('company_name')
-
+    print ('rating', rating)
     # Checks the input against values in the main_cat table. If the query doesn't find a match, a new entry is added.
     main_cat_check = db.query("select name, id from main_cat where main_cat.name = '%s'" % main_cat_name).namedresult()
     if main_cat_check:
