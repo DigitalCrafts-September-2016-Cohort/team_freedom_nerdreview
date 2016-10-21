@@ -137,8 +137,18 @@ def disp_individual_product(product_id):
 @app.route('/reviews', methods=['POST', 'GET'])
 def render_reviews():
     #Defines 2 iterable lists for sort choices: one for the value attributes from form and one for the names to display
-    sort_choice_list = ['rating_high', 'rating_low']
-    sort_choice_list_names = ['Rating (Highest to Lowest)', 'Rating (Lowest to Highest)']
+    sort_choice_list = ['rating_high',
+                        'rating_low',
+                        'prod_name_az',
+                        'prod_name_za',
+                        'date_asc',
+                        'date_desc']
+    sort_choice_list_names = ['Rating (Highest to Lowest)',
+                              'Rating (Lowest to Highest)',
+                              'Product Name (A-Z)',
+                              'Product Name (Z-A)',
+                              'Date (new to old)',
+                              'Date (old to new)']
     #Zips the two lists together so that we can iterate over the corresponding pairs
     sort_choices = zip(sort_choice_list, sort_choice_list_names)
 
@@ -151,6 +161,18 @@ def render_reviews():
     elif sort_choice == 'rating_low':
         sort_method = 'review.rating'
         direction = ''
+    elif sort_choice == 'prod_name_az':
+        sort_method = 'prod_name'
+        direction = 'desc'
+    elif sort_choice == 'prod_name_za':
+        sort_method = 'prod_name'
+        direction = ''
+    elif sort_choice == 'date_asc':
+        sort_method = 'prod_name'
+        direction = ''
+    elif sort_choice == 'date_desc':
+        sort_method = 'prod_name'
+        direction = 'desc'
     else:
         #Default or fall back sort method (not dependent on drop-down)
         sort_method = 'prod_name'
