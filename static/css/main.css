@@ -67,7 +67,7 @@ a {
     text-align: center;
     width: 100%;
     position: absolute;
-    top: 5px;
+    top: 21px;
     left: 0;
 }
 
@@ -98,7 +98,7 @@ a {
     .nr-logo p {
         position: relative;
         display: inline-block;
-        vertical-align: bottom;
+        vertical-align: middle;
         left: 7px;
         font-weight: 100;
         letter-spacing: 10px;
@@ -221,7 +221,7 @@ main {
     /*display: flex;
     flex-direction: column;*/
     margin: 0 auto;
-    padding: 10px 40px;
+    padding: 5px 40px;
     position: relative;
     text-align: center;
 }

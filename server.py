@@ -27,7 +27,7 @@ def display_page():
 def submit_login():
    username = request.form.get('username')
    password = request.form.get('password')
-   results = db.query("select * from users where username = $1", username).namedresult()
+   results = db.query("select * from users where user_name = $1", username).namedresult()
    if len(results) > 0:
        user = results[0]
        if user.password == password:
@@ -45,7 +45,7 @@ def submit_signup():
    username = request.form.get('username')
    password = request.form.get('password')
    try:
-       db.insert('users',username=username, password=password)
+       db.insert('users',user_name=username, password=password)
        session['username'] = username
        flash('Sign Up Succesful')
        return redirect('/')
@@ -304,16 +304,18 @@ def render_review():
     )
 
 
-# Route and method for the
+# Route and method for adding a new product review
 @app.route('/add_product_review', methods=['POST'])
 def add_review():
+    # Reqests the needed information from the form in /product_review
     main_cat_name = request.form.get('main_cat_name')
     second_cat_name = request.form.get('second_cat_name')
     product_name = request.form.get('product_name')
     rating = request.form.get('rating')
     review = request.form.get('review')
     company_name = request.form.get('company_name')
-    # Checks the input against the main_cat table
+
+    # Checks the input against values in the main_cat table. If the query doesn't find a match, a new entry is added.
     main_cat_check = db.query("select name, id from main_cat where main_cat.name = '%s'" % main_cat_name).namedresult()
     if main_cat_check:
         main_category_id = main_cat_check[0].id
@@ -322,9 +324,9 @@ def add_review():
             'main_cat',
             name=main_cat_name,
         )
-        main_cat_check = db.query("select * from main_cat where main_cat.name = '%s'" % main_cat_name).namedresult()
         main_category_id = main_cat_check[0].id
-    # Checks the
+
+    # Checks the input against values in the secondary_cat table. If the query doesn't find a match, a new entry is added.
     second_cat_check = db.query("select * from secondary_cat where secondary_cat.name = '%s'" % second_cat_name).namedresult()
     if second_cat_check:
         second_cat_id = second_cat_check[0].id
@@ -334,9 +336,9 @@ def add_review():
             name=second_cat_name,
             main_cat_id=main_category_id
         )
-        second_cat_check = db.query("select * from secondary_cat where secondary_cat.name = '%s'" % second_cat_name).namedresult()
         second_cat_id = second_cat_check[0].id
 
+    # Checks the input against values in the company table. If the query doesn't find a match, a new entry is added.
     company_check = db.query("select * from company where company.name = '%s'" % company_name).namedresult()
     if company_check:
         comp_id = company_check[0].id
@@ -345,9 +347,10 @@ def add_review():
             'company',
             name=company_name
         )
-        company_check = db.query("select * from company where company.name = '%s'" % company_name).namedresult()
         comp_id = company_check[0].id
 
+    # Checks the input against values in the product table. If the query doesn't find a match, a new entry is added.
+    # Once the entry is added into product table, that product information and the prior secondary_cat.id are added to the product_uses_category table
     product_check = db.query("select * from product where product.name = '%s'" % product_name).namedresult()
     if product_check:
         prod_id = product_check[0].id
@@ -365,6 +368,8 @@ def add_review():
             secondary_cat_id=second_cat_id
         )
 
+    # Finally, a new review is created based off of the information from the form that has been filtered and inserted through the database
+    # Need to add the user information once login is fixed, and create an auto-timestamp method for date column in review table
     db.insert(
         'review',
         product_id=prod_id,
