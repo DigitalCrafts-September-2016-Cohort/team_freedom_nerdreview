@@ -20,8 +20,8 @@
 
 {% block sort %}
 <div class="sort cf">
-    <form action="/" method="post">
-        <input type="hidden" name="brand_id" value="{{brand_id}}">
+    <form action="/categories/{{cat_id}}" method="post">
+        <input type="hidden" name="brand_id" value="{{cat_id}}">
         <select class="form-control" name="sortby" onchange="this.form.submit()">
             <option selected value="rating_desc">Rating (high to low)</option>
             {% for choice, choice_name in sort_choices %}
