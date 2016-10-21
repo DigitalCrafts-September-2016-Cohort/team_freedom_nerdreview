@@ -1,14 +1,11 @@
 {% extends 'layout.html' %}
 
 {% block nav %}
-<ul>
-    <li><a href="/">Home</a></li>
     {% for category in categories_list %}
     <li>
         <a href="/categories/{{category.id}}">{{category.name}}</a>
     </li>
     {% endfor %}
-</ul>
 {% endblock %}
 
 {% block header %}

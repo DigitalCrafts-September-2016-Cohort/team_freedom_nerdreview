@@ -65,11 +65,10 @@ a {
     margin: 0 auto;
     display: block;
     text-align: center;
+    width: 100%;
     position: absolute;
-    top: 0;
-    width: 120px;
-    margin-left: -60px;
-    left: 50%;
+    top: 5px;
+    left: 0;
 }
 
 .nr-logo:hover,
@@ -77,43 +76,80 @@ a {
     text-decoration: none;
  }
 
-.nr-logo:hover,
-.nr-logo:focus {
+.nr-logo:hover::after {
+    content: " ";
+    margin: 4px auto 0;
     border-bottom: 2px solid rgba(0,0,0,0.87);
+    width: 200px;
 }
 
+/*.nr-logo::after {
+    content: " ";
+    margin: 10px auto 0;
+    border-bottom: 2px solid rgba(0,0,0,0.87);
+    width: 200px;
+}*/
+
     .nr-logo img {
-        padding: 10px 0;
-        width: 80px;
+        width: 60px;
+        display: inline-block;
     }
 
     .nr-logo p {
+        position: relative;
+        display: inline-block;
+        vertical-align: bottom;
+        left: 7px;
         font-weight: 100;
         letter-spacing: 10px;
-        font-size: 16px;
-        position: relative;
-        left: 5.5px;
+        font-size: 22px;
     }
 
-/* Top level list in navbar */
-.super-categories,
 .nav-menu-list {
-    margin-top: 20px;
     font-size: 20px;
     text-align: center;
 }
 
-    .super-categories a,
     .nav-menu-list a {
         display: block;
-        padding: 10px 0;
+        padding: 7px 0;
     }
 
-    .super-categories a:hover,
     .nav-menu-list a:hover {
         text-decoration: underline;
     }
 
+.account-btns {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+}
+
+.account-btns button {
+    float: left;
+    width: 50%;
+    padding: 10px;
+    font-size: 20px;
+    background: #fff;
+    border-radius: 0;
+}
+
+    .account-btns button:hover {
+        text-decoration: underline;
+    }
+
+    .account-btns button:active {
+        outline: 0;
+    }
+
+    .login-btn {
+        border-right: 1px solid #F4CF6F;
+    }
+
+    .signup-btn {
+        border-left: 1px solid #F4CF6F;
+    }
 
 /* ------ MAIN SECTION ----- */
 
@@ -139,9 +175,9 @@ header {
 .back-btn {
     font-size: 2em;
     float: left;
-    padding: 10px;
-    height: 67px;
-    width: 67px;
+    padding: 7px;
+    height: 60px;
+    width: 60px;
     text-align: center;
 }
 
@@ -178,7 +214,6 @@ main {
     float: right;
     width: 75%;
     align-items: center;
-    padding: 30px;
 }
 
 .main-wrapper {
@@ -186,6 +221,8 @@ main {
     /*display: flex;
     flex-direction: column;*/
     margin: 0 auto;
+    padding: 10px 40px;
+    position: relative;
     text-align: center;
 }
 
