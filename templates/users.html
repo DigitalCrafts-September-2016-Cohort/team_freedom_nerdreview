@@ -22,12 +22,12 @@
 <ul>
     {% for user in user_list %}
     <li class="tile">
-        <a href="/users/{{user.id}}">
+        <a href="/users/{{user.user_id}}">
             <h4>&nbsp;</h4>
             <div>
                 <h3>{{user.user_name}}</h3>
             </div>
-            <h4>reviews count</h4>
+            <h4>{{user.review_count}} review{% if user.review_count > 1 %}s{% endif %}</h4>
         </a>
     </li>
     {% endfor %}

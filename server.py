@@ -286,7 +286,7 @@ def icon():
 
 @app.route('/reviews/<review_id>')
 def render_individual_review(review_id):
-    review_query = db.query("select product.name as prod_name, review.rating, date(review.date) as review_date, users.name as user_name, review.id, review.review from review, product, users where review.product_id = product.id and review.user_id = users.id and review.id = '%s'" % review_id)
+    review_query = db.query("select product.id as prod_id, product.name as prod_name, review.rating, date(review.date) as review_date, users.user_name as user_name, review.id, review.review from review, product, users where review.product_id = product.id and review.user_id = users.id and review.id = '%s'" % review_id)
 
     return render_template(
       '/individual_review.html',
@@ -387,7 +387,7 @@ def render_brand_prod(brand_id):
 # Users page
 @app.route('/users')
 def users():
-    user_list = db.query("select * from users").namedresult()
+    user_list = db.query("select users.id as user_id, users.user_name as user_name, count(review.id) as review_count from review inner join users on users.id = review.user_id group by users.id, users.user_name").namedresult()
     return render_template(
         '/users.html',
         user_list = user_list
@@ -395,10 +395,13 @@ def users():
 
 @app.route('/users/<user_id>')
 def render_individual_user(user_id):
+    review_list = db.query("select product.name as prod_name, review.id as review_id, review.rating as review_rate, date(review.date) as review_date, users.id as users_id from product inner join review on product.id = review.product_id inner join users on users.id = review.user_id where users.id = %s order by review.date" % user_id)
+    user = db.query("select users.id as user_id, users.user_name as user_name, count(review.id) as review_count from review inner join users on users.id = review.user_id where users.id = %s group by users.id, users.user_name" % user_id).namedresult()[0]
+    print review_list
     return render_template(
-    # write db query here
-        '/individual_user.html'
-        # send query to Jinja here
+        '/individual_user.html',
+        reviews = review_list.namedresult(),
+        user = user
     )
 
 

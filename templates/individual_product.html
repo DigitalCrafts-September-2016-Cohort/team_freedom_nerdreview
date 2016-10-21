@@ -12,7 +12,7 @@
 <header class="ind-header">
     <div>
         <h1>{{product.name}}</h1>
-        <h3>{{product_summary.review_count}} reviews</h3>
+        <h3>{{product_summary.review_count}} review{% if product_summary.review_count > 1 %}s{% endif %}</h3>
         <h1 class="rating">{{product_summary.avg_rating}} / 5 <i class="ion-star"></i></h1>
     </div>
     <ul class="img-list">
@@ -45,7 +45,7 @@
                 <a href="/reviews/{{review.review_id}}">
                     <h4>{{review.review_date}}</h4>
                     <div>
-                        <h3>{{review.rating}} / 5 <i class="ion-star"></i></h3>                        
+                        <h3>{{review.rating}} / 5 <i class="ion-star"></i></h3>
                     </div>
                     <h4>{{review.user_name}}</h4>
                 </a>

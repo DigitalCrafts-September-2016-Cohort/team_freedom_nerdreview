@@ -10,9 +10,8 @@
 {% block header %}
 <header class="ind-header">
     <div>
-        <h1>Username</h1>
-        <h3>Number of reviews</h3>
-        <h3>Join date</h3>
+        <h1>{{user.user_name}}</h1>
+        <h3>{{user.review_count}} review{% if user.review_count > 1 %}s{% endif %}</h3>
     </div>
     <ul class="img-list">
     <!-- Include for loop to render images here -->
@@ -34,22 +33,14 @@
     <div class="content">
         <ul>
             <!-- Model tile -->
-            <li class="tile">
-                <a href="#">
-                    <h4>x / 5 <i class="ion-star"></i></h4>
-                    <div>
-                        <h3>Product name</h3>
-                    </div>
-                    <h4>Date written</h4>
-                </a>
-            </li>
-            {% for review in reviews_list %}
-            <h1>hey</h1>
+            {% for review in reviews %}
             <li class="tile">
                 <a href="/reviews/{{review.review_id}}">
-                    <h4>Date: {{review.date}}</h4>
-                    <h3>Rating: {{review.rating}}</h3>
-                    <h4>Reviewer Name: {{review.user_name}}</h4>
+                    <h4>{{review.review_rate}} / 5 <i class="ion-star"></i></h4>
+                    <div>
+                        <h3>{{review.prod_name}}</h3>
+                    </div>
+                    <h4>{{review.review_date}}</h4>
                 </a>
             </li>
             {% endfor %}
