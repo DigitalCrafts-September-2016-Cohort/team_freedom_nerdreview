@@ -81,6 +81,7 @@ a {
     margin: 4px auto 0;
     border-bottom: 2px solid rgba(0,0,0,0.87);
     width: 200px;
+    transition: 175ms all ease-in-out;
 }
 
 /*.nr-logo::after {
@@ -113,10 +114,18 @@ a {
     .nav-menu-list a {
         display: block;
         padding: 7px 0;
+        transition: 2175ms all ease-in-out;
     }
 
-    .nav-menu-list a:hover {
-        text-decoration: underline;
+    .nav-menu-list a::after {
+        content: " ";
+        border-bottom: 2px solid red;
+    }
+
+    .nav-menu-list a:hover::after {
+        /*text-decoration: underline;*/
+        content: " ";
+        border-bottom: 2px solid red;
     }
 
 .account-btns {
@@ -134,14 +143,10 @@ a {
     background: #fff;
     border-radius: 0;
 }
-
-    .account-btns button:hover {
-        text-decoration: underline;
-    }
-
-    .account-btns button:active {
-        outline: 0;
-    }
+    .account-btns button:hover { text-decoration: underline; }
+    /* overwriting unwanted Bootstrap .btn styles*/
+    .account-btns button:focus { outline: none !important; }
+    .account-btns button:active { box-shadow: none; }
 
     .login-btn {
         border-right: 1px solid #F4CF6F;
@@ -167,18 +172,19 @@ header {
 
 .back-btn-link {
     display: inline-block;
-    border: 5px solid #fff;
-    border-radius: 50%;
     float: left;
 }
 
 .back-btn {
     font-size: 2em;
     float: left;
-    padding: 7px;
-    height: 60px;
-    width: 60px;
+    padding: 6px;
+    height: 68px;
+    width: 68px;
     text-align: center;
+    border: 5px solid #fff;
+    border-radius: 50%;
+    transition: 175ms all ease-in-out;
 }
 
 /* bigger version of back-btn */
@@ -192,8 +198,8 @@ height: 76px;
 width: 76px;
 text-align: center;*/
 
-.back-btn-link:hover,
-.back-btn-link:focus {
+.back-btn-link:hover > .back-btn,
+.back-btn-link:focus > .back-btn {
     border-color: #F4CF6F;
 }
 
@@ -253,6 +259,7 @@ main a:focus {
     flex-direction: column;
     justify-content: space-between;;
     border: 5px solid #fff;
+    transition: 175ms all ease-in-out;
 }
 
 .tile a:hover {

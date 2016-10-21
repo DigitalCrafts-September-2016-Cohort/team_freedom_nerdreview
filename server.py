@@ -249,24 +249,24 @@ def render_brand_prod(brand_id):
     elif sort_choice == 'name_za':
         sort_method = 'prod_name'
         direction = 'desc'
-    elif sort_choice == 'msrp_asc':
-        sort_method = 'prod_msrp'
-        direction = ''
-    elif sort_choice == "msrp_desc":
-        sort_method = 'prod_msrp'
-        direction = 'desc'
-    elif sort_choice == "date_desc":
-        sort_method = 'prod_release_date'
-        direction = 'desc'
-    elif sort_choice == "date_asc":
-            sort_method = 'prod_release_date'
-            direction = ''
+    # elif sort_choice == 'msrp_asc':
+    #     sort_method = 'prod_msrp'
+    #     direction = ''
+    # elif sort_choice == "msrp_desc":
+    #     sort_method = 'prod_msrp'
+    #     direction = 'desc'
+    # elif sort_choice == "date_desc":
+    #     sort_method = 'prod_release_date'
+    #     direction = 'desc'
+    # elif sort_choice == "date_asc":
+    #         sort_method = 'prod_release_date'
+    #         direction = ''
     else:
         #Default or fall back sort method (not dependent on drop-down)
         sort_method = 'avg_rating'
         direction = 'desc'
 
-    brand_prod_query = db.query("select product.id as prod_id, product.name as prod_name, product.msrp as prod_msrp, product.date as prod_date, avg(review.rating) as avg_rating, count(review.id) as review_count from company inner join product on company.id = product.company_id inner join review on product.id = review.product_id where company.id = %s group by prod_id, prod_name, prod_msrp, prod_date order by %s %s" % (brand_id, sort_method, direction))
+    brand_prod_query = db.query("select product.id as prod_id, product.name as prod_name, round(avg(review.rating), 2) as avg_rating, count(review.id) as review_count from company inner join product on company.id = product.company_id inner join review on product.id = review.product_id where company.id = %s group by prod_id, prod_name order by %s %s" % (brand_id, sort_method, direction))
 
     # brand_prod_query = db.query('select product.name as prod_name, product.id as prod_id from product inner join company on product.company_id = %s group by product.name, product.id' % brand_id)
 
