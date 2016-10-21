@@ -1,13 +1,11 @@
 {% extends 'layout.html' %}
 
 {% block nav %}
-<ul>
     {% for category in parent_categories %}
     <li>
         <a href="/categories/{{cat_id}}/{{category.sub_cat_id}}">{{category.cat_name}}</a>
     </li>
     {% endfor %}
-</ul>
 {% endblock %}
 
 {% block header %}

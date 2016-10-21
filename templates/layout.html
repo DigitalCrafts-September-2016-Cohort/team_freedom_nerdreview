@@ -13,13 +13,13 @@
     <body>
         <nav class="nav-menu">
             <div class="nav-wrapper">
-                <a href="/" class="nr-logo">
+                <a href="/" class="nr-logo cf">
                     <img src="/static/img/nerd_review_logo.png">
                     <p>NERD<br>REVIEW</p>
                 </a>
                 {% if loggedin %}
                     <p>
-                        Hello, {{session['username']}}
+                        Hello, {{session['username']}}!
                     </p>
                     <form class="form" action="/logout" method="post">
                         <div class="form-group">
@@ -27,14 +27,18 @@
                         </div>
                     </form>
                 {% else %}
-                    <button type="button" data-toggle="modal" data-target="#log_in_modal" class="btn btn-outline-primary">Login</button>
-                    <button type="button" data-toggle="modal" data-target="#signup" class="btn btn-outline-success">Sign up</button>
                 {% endif %}
-                {% block nav %}
-                {% endblock %}
+                <ul class="nav-menu-list">
+                    {% block nav %}
+                    {% endblock %}
+                </ul>
+                <div class="account-btns">
+                    <button type="button" data-toggle="modal" data-target="#log_in_modal" class="btn login-btn">Log In</button>
+                    <button type="button" data-toggle="modal" data-target="#signup" class="btn signup-btn">Sign Up</button>
+                </div>
             </div>
         </nav>
-        <main class="main">
+        <main class="main cf">
             <div class="main-wrapper cf">
                 {% block header %}
                 {% endblock %}
@@ -52,7 +56,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" name="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 style="color:black;">Login to Nerd Review</h4>
+                        <h4 style="color:black;">Log in to Nerd Review:</h4>
                     </div>
                     <div class="modal-body">
                         <form class="" action="/log_in" method="post">
@@ -64,7 +68,7 @@
                                 <label for="password"><span class="glyphicon glyphicon-lock"></span> Password</label>
                                 <input type="password" name="password" value="" class="form-control" placeholder="Enter password">
                             </div>
-                            <button type="submit" name="button" class="btn btn-default btn-success">Login</button>
+                            <button type="submit" name="button" class="btn btn-default btn-success">Log In</button>
                         </form>
                     </div>
                     <!-- <div class="modal-footer">
