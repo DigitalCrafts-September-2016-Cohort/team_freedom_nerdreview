@@ -64,24 +64,41 @@ a {
 .nr-logo {
     margin: 0 auto;
     display: block;
+    position: absolute;
     text-align: center;
     width: 100%;
-    position: absolute;
     top: 21px;
     left: 0;
 }
 
-.nr-logo:hover,
-.nr-logo:focus {
+.nr-logo a {
+    display: block;
+    position: relative;
+}
+
+.nr-logo a:hover,
+.nr-logo a:focus {
     text-decoration: none;
  }
 
-.nr-logo:hover::after {
+.nr-logo a::after {
     content: " ";
-    margin: 4px auto 0;
-    border-bottom: 2px solid rgba(0,0,0,0.87);
-    width: 200px;
-    transition: 175ms all ease-in-out;
+    position: absolute;
+    top: 76px;
+    left: 121px;
+    border-bottom: 1px solid rgba(0,0,0,0.87);
+    width: 152px;
+    visibility: hidden;
+    -webkit-transform: scaleX(0);
+    transform: scaleX(0);
+    -webkit-transition: all 175ms ease-in-out;
+    transition: all 175ms ease-in-out;
+}
+
+.nr-logo a:hover::after {
+    visibility: visible;
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
 }
 
 /*.nr-logo::after {
@@ -114,18 +131,32 @@ a {
     .nav-menu-list a {
         display: block;
         padding: 7px 0;
+        position: relative;
         transition: 2175ms all ease-in-out;
     }
 
-    .nav-menu-list a::after {
-        content: " ";
-        border-bottom: 2px solid red;
+    .nav-menu-list a::before {
+        content: "\f30f";
+        font-family: 'Ionicons';
+        position: absolute;;
+        top: 9px;
+        left: -30px;
+        /*visibility: hidden;*/
+        /*-webkit-transform: scaleX(0);
+        transform: scaleX(0);*/
+        -webkit-transition: all 175ms ease-in-out;
+        transition: all 175ms ease-in-out;
     }
 
-    .nav-menu-list a:hover::after {
+    .nav-menu-list a:hover {
         /*text-decoration: underline;*/
-        content: " ";
-        border-bottom: 2px solid red;
+    }
+
+    .nav-menu-list a:hover::before {
+        left: 10px;
+        /*visibility: visible;*/
+        /*-webkit-transform: scaleX(1);
+        transform: scaleX(1);*/
     }
 
 .account-btns {
@@ -142,8 +173,24 @@ a {
     font-size: 20px;
     background: #fff;
     border-radius: 0;
+    position: relative;
 }
-    .account-btns button:hover { text-decoration: underline; }
+
+.account-btns button::after {
+    content: " ";
+    position: absolute;
+    top: 34px;
+    left: 66px;
+    border-bottom: 1px solid rgba(0,0,0,0.87);
+    width: 152px;
+    /*visibility: hidden;*/
+    -webkit-transform: scaleX(0);
+    transform: scaleX(0);
+    -webkit-transition: all 175ms ease-in-out;
+    transition: all 175ms ease-in-out;
+}
+
+    .account-btns button:hover { text-decoration: none; }
     /* overwriting unwanted Bootstrap .btn styles*/
     .account-btns button:focus { outline: none !important; }
     .account-btns button:active { box-shadow: none; }
@@ -265,19 +312,39 @@ main a:focus {
 .tile a:hover {
     color: #F4CF6F;
     border-color: #F4CF6F;
+    text-decoration: none;
+}
+
+/* option A */
+/*.tile a:hover > h3 {
+    text-decoration: underline;
+}*/
+
+/* option B */
+.tile h3 {
+    position: relative;
+    display: inline-block;
+}
+
+.tile h3::after {
+    /*content: "";
+    position: relative;
+    border-bottom: 3px solid #fff;*/
+    /*content: "";
+    top: -20px;
+    display: inline-block;
+    position: relative;
+    border-bottom: 3px solid #fff;
+    color: #fff;
+    width: 100%;*/
 }
 
 .tile h3, .tile h4 {
     margin: 0;
 }
 
-.tile .rating {
-    float: left;
-}
-
-.tile .date {
-    float: right;
-}
+.tile .fl { float: left; }
+.tile .fr { float: right; }
 
 /* --- Header (individual item) --- */
 .ind-header {

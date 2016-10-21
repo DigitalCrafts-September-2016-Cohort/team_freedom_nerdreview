@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, session, flash
 import pg
 from dotenv import load_dotenv, find_dotenv
 import os
+import datetime
 
 db = pg.DB(dbname='project_db')
 
@@ -112,7 +113,8 @@ def disp_individual_product(product_id):
 
     #Gets the individual product
     product_query = db.query('select * from product where product.id = %s' % product_id)
-
+    company = product_query.namedresult()[0]
+    company_id=company.company_id
     #Gets the summary stats (count, avg rating) for all the product (see above) reviews
     product_reviews_summary_query = db.query('select count(review.id) as review_count, round(avg(review.rating), 2) as avg_rating from product inner join review on review.product_id = product.id and product.id = %s' % product_id)
 
@@ -124,6 +126,7 @@ def disp_individual_product(product_id):
         cat_id = main_cat,
         parent_categories = parent_categories_list.namedresult(),
         product = product_query.namedresult()[0],
+        company_id=company_id,
         product_summary = product_reviews_summary_query.namedresult()[0],
         reviews_list = reviews_query.namedresult()
     )
@@ -134,8 +137,18 @@ def disp_individual_product(product_id):
 @app.route('/reviews', methods=['POST', 'GET'])
 def render_reviews():
     #Defines 2 iterable lists for sort choices: one for the value attributes from form and one for the names to display
-    sort_choice_list = ['rating_high', 'rating_low']
-    sort_choice_list_names = ['Rating (Highest to Lowest)', 'Rating (Lowest to Highest)']
+    sort_choice_list = ['rating_high',
+                        'rating_low',
+                        'prod_name_az',
+                        'prod_name_za',
+                        'date_asc',
+                        'date_desc']
+    sort_choice_list_names = ['Rating (Highest to Lowest)',
+                              'Rating (Lowest to Highest)',
+                              'Product Name (A-Z)',
+                              'Product Name (Z-A)',
+                              'Date (new to old)',
+                              'Date (old to new)']
     #Zips the two lists together so that we can iterate over the corresponding pairs
     sort_choices = zip(sort_choice_list, sort_choice_list_names)
 
@@ -148,6 +161,18 @@ def render_reviews():
     elif sort_choice == 'rating_low':
         sort_method = 'review.rating'
         direction = ''
+    elif sort_choice == 'prod_name_az':
+        sort_method = 'prod_name'
+        direction = 'desc'
+    elif sort_choice == 'prod_name_za':
+        sort_method = 'prod_name'
+        direction = ''
+    elif sort_choice == 'date_asc':
+        sort_method = 'prod_name'
+        direction = ''
+    elif sort_choice == 'date_desc':
+        sort_method = 'prod_name'
+        direction = 'desc'
     else:
         #Default or fall back sort method (not dependent on drop-down)
         sort_method = 'prod_name'
@@ -175,6 +200,7 @@ def icon():
 @app.route('/reviews/<review_id>')
 def render_individual_review(review_id):
     review_query = db.query("select product.name as prod_name, review.rating, review.date, users.name as user_name, review.id, review.review from review, product, users where review.product_id = product.id and review.user_id = users.id and review.id = '%s'" % review_id)
+
     return render_template(
       '/individual_review.html',
       review = review_query.namedresult()[0]
@@ -221,19 +247,11 @@ def render_brand_prod(brand_id):
     #Defines 2 iterable lists for sort choices: one for the value attributes from form and one for the names to display
     sort_choice_list = ['rating_asc',
                         'name_az',
-                        'name_za',
-                        'msrp_asc',
-                        'msrp_desc',
-                        'date_desc',
-                        'date_asc']
+                        'name_za']
 
     sort_choice_list_names = ['Rating (low to high)',
                               'Product Name (A-Z)',
-                              'Product Name (Z-A)',
-                              'MSRP (high to low)',
-                              'MSRP (low to high)',
-                              'Release Date (new to old)',
-                              'Release Date (old to new)']
+                              'Product Name (Z-A)']
     #Zips the two lists together so that we can iterate over the corresponding pairs
     sort_choices = zip(sort_choice_list, sort_choice_list_names)
 
@@ -308,13 +326,14 @@ def render_review():
 @app.route('/add_product_review', methods=['POST'])
 def add_review():
     # Reqests the needed information from the form in /product_review
+    print request.form
     main_cat_name = request.form.get('main_cat_name')
     second_cat_name = request.form.get('second_cat_name')
     product_name = request.form.get('product_name')
     rating = request.form.get('rating')
     review = request.form.get('review')
     company_name = request.form.get('company_name')
-
+    print ('rating', rating)
     # Checks the input against values in the main_cat table. If the query doesn't find a match, a new entry is added.
     main_cat_check = db.query("select name, id from main_cat where main_cat.name = '%s'" % main_cat_name).namedresult()
     if main_cat_check:
@@ -324,6 +343,7 @@ def add_review():
             'main_cat',
             name=main_cat_name,
         )
+        main_cat_check = db.query("select name, id from main_cat where main_cat.name = '%s'" % main_cat_name).namedresult()
         main_category_id = main_cat_check[0].id
 
     # Checks the input against values in the secondary_cat table. If the query doesn't find a match, a new entry is added.
@@ -336,6 +356,7 @@ def add_review():
             name=second_cat_name,
             main_cat_id=main_category_id
         )
+        second_cat_check = db.query("select * from secondary_cat where secondary_cat.name = '%s'" % second_cat_name).namedresult()
         second_cat_id = second_cat_check[0].id
 
     # Checks the input against values in the company table. If the query doesn't find a match, a new entry is added.
@@ -347,6 +368,7 @@ def add_review():
             'company',
             name=company_name
         )
+        company_check = db.query("select * from company where company.name = '%s'" % company_name).namedresult()
         comp_id = company_check[0].id
 
     # Checks the input against values in the product table. If the query doesn't find a match, a new entry is added.
@@ -370,11 +392,13 @@ def add_review():
 
     # Finally, a new review is created based off of the information from the form that has been filtered and inserted through the database
     # Need to add the user information once login is fixed, and create an auto-timestamp method for date column in review table
+    now = datetime.datetime.now()
     db.insert(
         'review',
         product_id=prod_id,
         rating=rating,
-        review=review
+        review=review,
+        date=now.strftime("%Y-%m-%d")
     )
     return redirect('/')
 

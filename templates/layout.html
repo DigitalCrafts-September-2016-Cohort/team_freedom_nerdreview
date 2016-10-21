@@ -12,11 +12,13 @@
     </head>
     <body>
         <nav class="nav-menu">
-            <div class="nav-wrapper">
-                <a href="/" class="nr-logo cf">
-                    <img src="/static/img/nerd_review_logo.png">
-                    <p>NERD<br>REVIEW</p>
-                </a>
+            <div class="nav-wrapper cf">
+                <div class="nr-logo">
+                    <a href="/">
+                        <img src="/static/img/nerd_review_logo.png">
+                        <p>NERD<br>REVIEW</p>
+                    </a>
+                </div>
                 {% if loggedin %}
                     <p>
                         Hello, {{session['username']}}!

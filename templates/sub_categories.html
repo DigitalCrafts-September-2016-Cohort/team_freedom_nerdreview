@@ -20,13 +20,15 @@
 
 {% block sort %}
 <div class="sort cf">
-    <select class="form-control" name="Sort by">
-        <option>Highest rating</option>
-        <option>Lowest rating</option>
-        <option>Alphabetical (by product name)</option>
-        <option>MSRP (descending)</option>
-        <option>MSRP (ascending)</option>
-    </select>
+    <form action="/" method="post">
+        <input type="hidden" name="brand_id" value="{{brand_id}}">
+        <select class="form-control" name="sortby" onchange="this.form.submit()">
+            <option selected value="rating_desc">Rating (high to low)</option>
+            {% for choice, choice_name in sort_choices %}
+                <option {% if choice == current_sort %} selected {% endif %} value="{{choice}}">{{choice_name}}</option>
+            {% endfor %}
+        </select>
+    </form>
 </div>
 {% endblock %}
 
@@ -36,11 +38,11 @@
     <li class="tile">
         <a href="/products/{{product.prod_id}}">
             <div class="cf">
-                <h4 class="rating">{{product.avg_rating}} / 5 <i class="ion-star"></i></h4>
-                <h4 class="date">Date:</h4>
+                <h4 class="fl">{{product.avg_rating}} / 5 <i class="ion-star"></i></h4>
+                <h4 class="fr">Date:</h4>
             </div>
-            <h3 class="product">{{product.prod_name}}</h3>
-            <h4 class="review-count">{{product.review_count}} reviews</h4>
+            <h3>{{product.prod_name}}</h3>
+            <h4>{{product.review_count}} reviews</h4>
         </a>
     </li>
     {% endfor %}
