@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, session, flash
 import pg
 from dotenv import load_dotenv, find_dotenv
 import os
+import datetime
 
 db = pg.DB(dbname='project_db')
 
@@ -221,19 +222,11 @@ def render_brand_prod(brand_id):
     #Defines 2 iterable lists for sort choices: one for the value attributes from form and one for the names to display
     sort_choice_list = ['rating_asc',
                         'name_az',
-                        'name_za',
-                        'msrp_asc',
-                        'msrp_desc',
-                        'date_desc',
-                        'date_asc']
+                        'name_za']
 
     sort_choice_list_names = ['Rating (low to high)',
                               'Product Name (A-Z)',
-                              'Product Name (Z-A)',
-                              'MSRP (high to low)',
-                              'MSRP (low to high)',
-                              'Release Date (new to old)',
-                              'Release Date (old to new)']
+                              'Product Name (Z-A)']
     #Zips the two lists together so that we can iterate over the corresponding pairs
     sort_choices = zip(sort_choice_list, sort_choice_list_names)
 
@@ -249,24 +242,24 @@ def render_brand_prod(brand_id):
     elif sort_choice == 'name_za':
         sort_method = 'prod_name'
         direction = 'desc'
-    elif sort_choice == 'msrp_asc':
-        sort_method = 'prod_msrp'
-        direction = ''
-    elif sort_choice == "msrp_desc":
-        sort_method = 'prod_msrp'
-        direction = 'desc'
-    elif sort_choice == "date_desc":
-        sort_method = 'prod_release_date'
-        direction = 'desc'
-    elif sort_choice == "date_asc":
-            sort_method = 'prod_release_date'
-            direction = ''
+    # elif sort_choice == 'msrp_asc':
+    #     sort_method = 'prod_msrp'
+    #     direction = ''
+    # elif sort_choice == "msrp_desc":
+    #     sort_method = 'prod_msrp'
+    #     direction = 'desc'
+    # elif sort_choice == "date_desc":
+    #     sort_method = 'prod_release_date'
+    #     direction = 'desc'
+    # elif sort_choice == "date_asc":
+    #         sort_method = 'prod_release_date'
+    #         direction = ''
     else:
         #Default or fall back sort method (not dependent on drop-down)
         sort_method = 'avg_rating'
         direction = 'desc'
 
-    brand_prod_query = db.query("select product.id as prod_id, product.name as prod_name, product.msrp as prod_msrp, product.date as prod_date, avg(review.rating) as avg_rating, count(review.id) as review_count from company inner join product on company.id = product.company_id inner join review on product.id = review.product_id where company.id = %s group by prod_id, prod_name, prod_msrp, prod_date order by %s %s" % (brand_id, sort_method, direction))
+    brand_prod_query = db.query("select product.id as prod_id, product.name as prod_name, product.msrp as prod_msrp, product.date as prod_date, avg(review.rating) as avg_rating, count(review.id) as review_count from company inner join product on company.id = product.company_id inner join review on product.id = review.product_id where company.id = %s group by prod_id, prod_name order by %s %s" % (brand_id, sort_method, direction))
 
     # brand_prod_query = db.query('select product.name as prod_name, product.id as prod_id from product inner join company on product.company_id = %s group by product.name, product.id' % brand_id)
 
@@ -324,6 +317,7 @@ def add_review():
             'main_cat',
             name=main_cat_name,
         )
+        main_cat_check = db.query("select name, id from main_cat where main_cat.name = '%s'" % main_cat_name).namedresult()
         main_category_id = main_cat_check[0].id
 
     # Checks the input against values in the secondary_cat table. If the query doesn't find a match, a new entry is added.
@@ -336,6 +330,7 @@ def add_review():
             name=second_cat_name,
             main_cat_id=main_category_id
         )
+        second_cat_check = db.query("select * from secondary_cat where secondary_cat.name = '%s'" % second_cat_name).namedresult()
         second_cat_id = second_cat_check[0].id
 
     # Checks the input against values in the company table. If the query doesn't find a match, a new entry is added.
@@ -347,6 +342,7 @@ def add_review():
             'company',
             name=company_name
         )
+        company_check = db.query("select * from company where company.name = '%s'" % company_name).namedresult()
         comp_id = company_check[0].id
 
     # Checks the input against values in the product table. If the query doesn't find a match, a new entry is added.
@@ -370,11 +366,13 @@ def add_review():
 
     # Finally, a new review is created based off of the information from the form that has been filtered and inserted through the database
     # Need to add the user information once login is fixed, and create an auto-timestamp method for date column in review table
+    now = datetime.datetime.now()
     db.insert(
         'review',
         product_id=prod_id,
         rating=rating,
-        review=review
+        review=review,
+        date=now.strftime("%Y-%m-%d")
     )
     return redirect('/')
 
