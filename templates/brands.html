@@ -1,44 +1,45 @@
 {% extends 'layout.html' %}
 
 {% block nav %}
-<ul>
     <li><a href="/categories">Categories</a></li>
     <li><a href="/brands">Brands</a></li>
     <li><a href="/reviews">Reviews</a></li>
     <li><a href="/users">Users</a></li>
-</ul>
 {% endblock %}
 
 {% block header %}
 <header>
+    <a class="back-btn-link cf" href="/">
+        <i class="back-btn ion-arrow-left-a"></i>
+    </a>
     <h1>Brands</h1>
     <h3>Look at all these killer brands!</h3>
 </header>
 {% endblock %}
 
 {% block sort %}
-    <div class="sort cf">
-      <form class="" action="/brands" method="post">
+<div class="sort cf">
+    <form class="" action="/brands" method="post">
         <select class="form-control" name="sortby" onchange="this.form.submit()">
             <option selected value="name_az">Product Name (A-Z)</option>
             {% for choice, choice_name in sort_choices %}
-              <option {% if choice == current_sort %} selected {% endif %} value="{{choice}}">{{choice_name}}</option>
+            <option {% if choice == current_sort %} selected {% endif %} value="{{choice}}">{{choice_name}}</option>
             {% endfor %}
         </select>
-      </form>
-    </div>
+    </form>
+</div>
 {% endblock %}
 
 {% block body %}
-    <ul>
-      {% for brand in brand_list %}
-        <li class="tile">
-            <a href="/brands/{{brand.brand_id}}">
-                <h4 class="spacer"></h4>
-                <h3 class="brand">{{brand.brand_name}}</h3>
-                <h4 class="spacer">{{brand.prod_count}} product{% if brand.prod_count > 1 %}s{% endif %}</h4>
-            </a>
-        </li>
-        {% endfor %}
-    </ul>
+<ul>
+  {% for brand in brand_list %}
+    <li class="tile">
+        <a href="/brands/{{brand.brand_id}}">
+            <h4 class="spacer"></h4>
+            <h3 class="brand">{{brand.brand_name}}</h3>
+            <h4 class="spacer">{{brand.prod_count}} product{% if brand.prod_count > 1 %}s{% endif %}</h4>
+        </a>
+    </li>
+    {% endfor %}
+</ul>
 {% endblock %}

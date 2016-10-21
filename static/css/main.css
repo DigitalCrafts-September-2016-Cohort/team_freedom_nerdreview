@@ -65,11 +65,10 @@ a {
     margin: 0 auto;
     display: block;
     text-align: center;
+    width: 100%;
     position: absolute;
-    top: 0;
-    width: 120px;
-    margin-left: -60px;
-    left: 50%;
+    top: 5px;
+    left: 0;
 }
 
 .nr-logo:hover,
@@ -77,40 +76,80 @@ a {
     text-decoration: none;
  }
 
-.nr-logo:hover,
-.nr-logo:focus {
+.nr-logo:hover::after {
+    content: " ";
+    margin: 4px auto 0;
     border-bottom: 2px solid rgba(0,0,0,0.87);
+    width: 200px;
 }
 
+/*.nr-logo::after {
+    content: " ";
+    margin: 10px auto 0;
+    border-bottom: 2px solid rgba(0,0,0,0.87);
+    width: 200px;
+}*/
+
     .nr-logo img {
-        padding: 10px 0;
-        width: 80px;
+        width: 60px;
+        display: inline-block;
     }
 
     .nr-logo p {
+        position: relative;
+        display: inline-block;
+        vertical-align: bottom;
+        left: 7px;
         font-weight: 100;
         letter-spacing: 10px;
-        font-size: 16px;
-        position: relative;
-        left: 5.5px;
+        font-size: 22px;
     }
 
-/* Top level list in navbar */
-.super-categories {
-    margin-top: 20px;
+.nav-menu-list {
     font-size: 20px;
     text-align: center;
 }
 
-    .super-categories a {
+    .nav-menu-list a {
         display: block;
-        padding: 10px 0;
+        padding: 7px 0;
     }
 
-    .super-categories a:hover {
+    .nav-menu-list a:hover {
         text-decoration: underline;
     }
 
+.account-btns {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+}
+
+.account-btns button {
+    float: left;
+    width: 50%;
+    padding: 10px;
+    font-size: 20px;
+    background: #fff;
+    border-radius: 0;
+}
+
+    .account-btns button:hover {
+        text-decoration: underline;
+    }
+
+    .account-btns button:active {
+        outline: 0;
+    }
+
+    .login-btn {
+        border-right: 1px solid #F4CF6F;
+    }
+
+    .signup-btn {
+        border-left: 1px solid #F4CF6F;
+    }
 
 /* ------ MAIN SECTION ----- */
 
@@ -122,7 +161,44 @@ header {
 }
 
 .welcome {
-    font-size: 4em;
+    font-size: 3em;
+    text-align: center;
+}
+
+.back-btn-link {
+    display: inline-block;
+    border: 5px solid #fff;
+    border-radius: 50%;
+    float: left;
+}
+
+.back-btn {
+    font-size: 2em;
+    float: left;
+    padding: 7px;
+    height: 60px;
+    width: 60px;
+    text-align: center;
+}
+
+/* bigger version of back-btn */
+
+/*font-size: 2em;
+border-radius: 50%;
+float: left;
+border: 5px solid white;
+padding: 10px;
+height: 76px;
+width: 76px;
+text-align: center;*/
+
+.back-btn-link:hover,
+.back-btn-link:focus {
+    border-color: #F4CF6F;
+}
+
+.sort {
+    margin-bottom: 20px;
 }
 
 .sort select {
@@ -138,7 +214,6 @@ main {
     float: right;
     width: 75%;
     align-items: center;
-    padding: 30px;
 }
 
 .main-wrapper {
@@ -146,6 +221,8 @@ main {
     /*display: flex;
     flex-direction: column;*/
     margin: 0 auto;
+    padding: 10px 40px;
+    position: relative;
     text-align: center;
 }
 
@@ -204,15 +281,20 @@ main a:focus {
 
 /* --- Body (individual item) --- */
 .ind-body {
-    margin-top: 20px;
-    width: 65%;
+    margin-top: 21px;
+    width: 70%;
     display: inline-block;
     /*text-align: center;*/
     float: left;
 }
 
+    .ind-body .content {
+        margin-top: 96px;
+    }
+
     .ind-body .review {
         text-align: left;
+        font-size: 16px;
     }
 
 .img-list {
@@ -223,10 +305,15 @@ main a:focus {
     margin-top: 20px;
     height: 250px;
     width: 250px;
-    border: 5px solid #fff;
+    border: 1px solid #fff;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.img-user {
+    width: 150px;
+    height: 150px;
 }
 
 .img-tile i {

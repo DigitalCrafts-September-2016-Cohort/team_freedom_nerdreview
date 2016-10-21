@@ -1,18 +1,18 @@
 {% extends 'layout.html' %}
 
 {% block nav %}
-<ul>
-    <li><a href="/">Home</a></li>
     {% for category in categories_list %}
     <li>
         <a href="/categories/{{category.id}}">{{category.name}}</a>
     </li>
     {% endfor %}
-</ul>
 {% endblock %}
 
 {% block header %}
 <header>
+    <a class="back-btn-link cf" href="/">
+        <i class="back-btn ion-arrow-left-a"></i>
+    </a>
     <h1>Categories</h1>
 </header>
 {% endblock %}

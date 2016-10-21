@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 {% extends 'layout.html' %}
+
 {% block nav %}
-<ul>
     <li><a href="/categories">Categories</a></li>
     <li><a href="/brands">Brands</a></li>
     <li><a href="/reviews">Reviews</a></li>
     <li><a href="/users">Users</a></li>
-</ul>
 {% endblock %}
 
 {% block header %}
 <header>
+    <a class="back-btn-link cf" href="/">
+        <i class="back-btn ion-arrow-left-a"></i>
+    </a>
     <h1>Users</h1>
-    <h3>Look at these fine members!</h3>
+    <h3>Look at these classy members!</h3>
 </header>
 {% endblock %}
 
@@ -20,10 +22,10 @@
 <ul>
     {% for user in user_list %}
     <li class="tile">
-        <a href="#">
+        <a href="/users/{{user.id}}">
             <h4 class="spacer">
             <h3 class="user">{{user.user_name}}</h3>
-            <h4 class="spacer"></h4>
+            <h4 class="reviews_count">reviews count</h4>
         </a>
     </li>
     {% endfor %}
