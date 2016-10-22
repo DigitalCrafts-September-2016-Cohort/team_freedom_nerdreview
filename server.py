@@ -197,6 +197,45 @@ def render_sub_cat_products(cat_id, sub_cat_id):
 #Displays a page for a single product, navbar menu stays the same
 @app.route('/products/<product_id>')
 def disp_individual_product(product_id):
+    #Defines 2 iterable lists for sort choices: one for the value attributes from form and one for the names to display
+    sort_choice_list = ['rating_low',
+                        'prod_name_az',
+                        'prod_name_za',
+                        'date_desc',
+                        'date_asc']
+
+    sort_choice_list_names = ['Rating (low to high)',
+                              'Product Name (A-Z)',
+                              'Product Name (Z-A)',
+                              'Date (new to old)',
+                              'Date (old to new)']
+    #Zips the two lists together so that we can iterate over the corresponding pairs
+    sort_choices = zip(sort_choice_list, sort_choice_list_names)
+
+    # Get the selected sort choice, 'prod_name' if none is selected
+    # Two string variables are assigned for each possible choice, they will be substitued into the SQL query below
+    sort_choice = request.form.get('sortby')
+    if sort_choice == 'rating_low':
+        sort_method = 'rating'
+        direction = 'asc'
+    elif sort_choice == 'prod_name_az':
+        sort_method = 'prod_name_upper'
+        direction = 'asc'
+    elif sort_choice == 'prod_name_za':
+        sort_method = 'prod_name_upper'
+        direction = 'desc'
+    elif sort_choice == 'date_desc':
+        sort_method = 'review_date'
+        direction = 'desc'
+    elif sort_choice == 'date_asc':
+        sort_method = 'review_date'
+        direction = 'asc'
+    else:
+        #Default or fall back sort method (not dependent on drop-down)
+        sort_method = 'rating'
+        direction = 'desc'
+
+
     # Gets the main category id number for the product
     main_cat = db.query('select main_cat.id as main_id from product inner join product_uses_category on product.id = product_uses_category.product_id inner join secondary_cat on product_uses_category.secondary_cat_id = secondary_cat.id inner join main_cat on secondary_cat.main_cat_id = main_cat.id where product.id = %s' % product_id).namedresult()[0].main_id
 
@@ -207,6 +246,7 @@ def disp_individual_product(product_id):
     product_query = db.query('select * from product where product.id = %s' % product_id)
     company = product_query.namedresult()[0]
     company_id=company.company_id
+
     #Gets the summary stats (count, avg rating) for all the product (see above) reviews
     product_reviews_summary_query = db.query('select count(review.id) as review_count, round(avg(review.rating), 2) as avg_rating from product inner join review on review.product_id = product.id and product.id = %s' % product_id)
 
@@ -220,7 +260,9 @@ def disp_individual_product(product_id):
         product = product_query.namedresult()[0],
         company_id=company_id,
         product_summary = product_reviews_summary_query.namedresult()[0],
-        reviews_list = reviews_query.namedresult()
+        reviews_list = reviews_query.namedresult(),
+        sort_choices = sort_choices,
+        current_sort = sort_choice
     )
 
 
