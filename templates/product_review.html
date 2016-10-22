@@ -20,30 +20,30 @@
         <div class="form-group">
             <div class="form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" name="customize_main_cat">
+                    <input class="form-check-input" type="checkbox" name="customize_main_cat" onchange="this.form.submit()">
                     Main category
                 </label>
             </div>
             <div class="form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" name="customize_second_cat">
+                    <input class="form-check-input" type="checkbox" name="customize_second_cat" onchange="this.form.submit()">
                     Secondary category
                 </label>
             </div>
             <div class="form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" name="customize_product">
+                    <input class="form-check-input" type="checkbox" name="customize_product" onchange="this.form.submit()">
                     New product
                 </label>
             </div>
             <div class="form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" name="customize_company">
+                    <input class="form-check-input" type="checkbox" name="customize_company" onchange="this.form.submit()">
                     New company
                 </label>
             </div>
         </div>
-        <button class="btn-default" type="submit">Customize these fields</button>
+        <!-- <button class="btn-default" type="submit">Customize these fields</button> -->
     </form>
 
     <form action="/add_product_review" method="POST">
