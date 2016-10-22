@@ -25,7 +25,7 @@
                 </ul>
                 <div class="account">
                     {% if session['username'] %}
-                    <p>Hello {{session['username']}}!</p>
+                    <p>Hello <a href="/loggedin_userpage/{{session['username']}}">{{session['username']}}</a>!</p>
                         <form class="form" action="/log_out" method="post">
                             <div class="form-group">
                                 <button class="nr-btn fl left-btn" type="submit" action="/log_out" name="log_out">Log Out</button>
