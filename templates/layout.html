@@ -28,18 +28,18 @@
                     <p>Hello {{session['username']}}!</p>
                         <form class="form" action="/log_out" method="post">
                             <div class="form-group">
-                                <button class="btn left-btn" type="submit" action="/log_out" name="log_out">Log Out</button>
+                                <button class="nr-btn fl left-btn" type="submit" action="/log_out" name="log_out">Log Out</button>
                             </div>
                         </form>
                         <form class="form" action="/product_review" method="post">
                             <div class="form-group">
-                                <button class="btn right-btn" type="submit" action="/product_review" name="add_product_review">New review</button>
+                                <button class="nr-btn fr right-btn" type="submit" action="/product_review" name="add_product_review">New review</button>
                             </div>
                         </form>
                     {% else %}
                     <p>Hello!</p>
-                        <button type="button" data-toggle="modal" data-target="#log_in_modal" class="btn left-btn">Log In</button>
-                        <button type="button" data-toggle="modal" data-target="#signup" class="btn right-btn">Sign Up</button>
+                        <button type="button" data-toggle="modal" data-target="#log_in_modal" class="nr-btn fl left-btn">Log In</button>
+                        <button type="button" data-toggle="modal" data-target="#signup" class="nr-btn fr right-btn">Sign Up</button>
                     {% endif %}
                 </div>
             </div>
@@ -76,7 +76,7 @@
                                 <label for="password"><span class="glyphicon glyphicon-lock"></span> Password</label>
                                 <input type="password" name="password" value="" class="form-control" placeholder="Enter password">
                             </div>
-                            <button type="submit" name="button" class="btn btn-default btn-success">Log In</button>
+                            <button type="submit" name="button" class="nr-btn nr-success sm-btn btn-rnd">Log In</button>
                         </form>
                     </div>
                     <!-- <div class="modal-footer">
@@ -108,7 +108,7 @@
                                 <label for="password"><span class="glyphicon glyphicon-lock"></span> Password</label>
                                 <input id="password" type="password" name="password" value="" class="form-control" placeholder="Enter password" required>
                             </div>
-                            <button type="submit" name="button" class="btn btn-default btn-success">Sign up</button>
+                            <button type="submit" name="button" class="nr-btn nr-success sm-btn btn-rnd">Sign up</button>
                         </form>
                     </div>
                     <!-- <div class="modal-footer">
