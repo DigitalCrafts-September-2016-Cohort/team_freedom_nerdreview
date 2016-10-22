@@ -10,10 +10,10 @@
 {% block body %}
 <h1>Add a new review</h1>
 <form class="add_main" action="/product_review" method="POST">
-  <input type="checkbox" name="customize_main_cat" value="customize_main_cat">
-  <input type="checkbox" name="customize_second_cat" value="customize_second_cat">
-  <input type="checkbox" name="customize_product" value="customize_product">
-  <input type="checkbox" name="customize_company" value="customize_company">
+  <label for="custom_nav">Main Category<input type="checkbox" name="customize_main_cat" value="customize_main_cat"></label>
+  <label for="custom_nav">Second Category<input type="checkbox" name="customize_second_cat" value="customize_second_cat"></label>
+  <label for="custom_nav">Custom Product<input type="checkbox" name="customize_product" value="customize_product"></label>
+  <label for="custom_nav">Custom Company<input type="checkbox" name="customize_company" value="customize_company"></label>
   <button type="submit">Customize these fields</button>
 </form>
 
