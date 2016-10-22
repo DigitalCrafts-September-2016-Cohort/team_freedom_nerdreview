@@ -212,6 +212,23 @@ a {
         border-left: 1px solid #F4CF6F;
     }
 
+/* Forms */
+form.sign-up input:valid:focus {
+    transition: all 175ms;
+    background-color: rgba(92,184,92,0.4);
+}
+
+form.sign-up input:invalid:focus {
+    transition: all 175ms;
+    background-color: rgba(217,83,79,0.4);
+}
+
+.requirements {
+    content: "Name, username and password must be at least 6 characters each"
+    max-height: 200px;
+    padding: 20px;
+}
+
 /* ------ MAIN SECTION ----- */
 
 /* --- Header --- */
