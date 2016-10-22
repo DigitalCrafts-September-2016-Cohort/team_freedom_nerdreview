@@ -40,6 +40,8 @@
                 </div>
             </div>
         </nav>
+
+        {% block homepage %}
         <main class="main cf">
             <div class="main-wrapper cf">
                 {% block header %}
@@ -52,6 +54,7 @@
                 {% endblock %}
             </div>
         </main>
+        {% endblock %}
 
         <div class="modal" id="log_in_modal" role="dialog">
             <div class="modal-dialog">
@@ -90,7 +93,7 @@
                         <form class="" action="/sign_up" method="post">
                             <div class="form-group">
                                 <label for="name"><span class="glyphicon glyphicon-user"></span> Name</label>
-                                <input type="text" name="name" value="" class="form-control" placeholder="Enter display name">
+                                <input type="text" name="name" value="" class="form-control" placeholder="Enter name">
                             </div>
                             <div class="form-group">
                                 <label for="username"><span class="glyphicon glyphicon-user"></span> Username</label>

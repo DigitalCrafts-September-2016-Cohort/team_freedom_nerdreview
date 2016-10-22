@@ -388,6 +388,42 @@ main a:focus {
     font-size: 100px;
 }
 
+.homepage-main{
+    position: absolute;
+    left: 25%;
+    top: 0;
+    width: 75%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.homepage-welcome {
+    /*border: 4px solid red;*/
+    font-size: 3em;
+}
+
+.homepage-slogan {
+
+}
+
+.homepage-credit {
+    /*border: 4px solid orange;*/
+}
+
+.homepage-team{
+    /*border: 4px solid yellow;*/
+    text-align: center;
+}
+.homepage-copyright{
+    /*border: 4px solid green;*/
+    align-self: flex-end;
+}
+
+
+
 /*------------------------
 MEDIA QUERIES
 -------------------------*

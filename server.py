@@ -92,10 +92,10 @@ def render_sub_cats(cat_id):
         sort_method = 'query.avg_rating'
         direction = 'asc'
     elif sort_choice == 'name_az':
-        sort_method = 'UPPER(query.prod_name)'
+        sort_method = 'prod_name_upper'
         direction = 'asc'
     elif sort_choice == 'name_za':
-        sort_method = 'UPPER(query.prod_name)'
+        sort_method = 'prod_name_upper'
         direction = 'desc'
     # elif sort_choice == 'msrp_asc':
     #     sort_method = 'prod_msrp'
@@ -118,7 +118,7 @@ def render_sub_cats(cat_id):
     # Reduce reduncancy by joining tables and being more specific in our select
     cat_query = db.query('select * from secondary_cat where secondary_cat.main_cat_id = %s' % cat_id)
 
-    sub_cat_query = db.query('select distinct query.prod_id, upper(query.prod_name) as product_name, query.review_count, query.avg_rating from (select product_uses_category.secondary_cat_id as sub_cat_id, count(review.product_id) as review_count, product.name as prod_name, product.id as prod_id, round(avg(review.rating), 2) as avg_rating from review inner join product on product.id = review.product_id inner join product_uses_category on product.id = product_uses_category.product_id inner join secondary_cat on product_uses_category.secondary_cat_id = secondary_cat.id where secondary_cat.main_cat_id = %s group by prod_name, prod_id, product_uses_category.secondary_cat_id) query order by %s %s' % (cat_id, sort_method, direction));
+    sub_cat_query = db.query('select distinct query.prod_id, upper(query.prod_name) as prod_name_upper, query.prod_name as product_name, query.review_count, query.avg_rating from (select product_uses_category.secondary_cat_id as sub_cat_id, count(review.product_id) as review_count, product.name as prod_name, product.id as prod_id, round(avg(review.rating), 2) as avg_rating from review inner join product on product.id = review.product_id inner join product_uses_category on product.id = product_uses_category.product_id inner join secondary_cat on product_uses_category.secondary_cat_id = secondary_cat.id where secondary_cat.main_cat_id = %s group by prod_name, prod_id, product_uses_category.secondary_cat_id) query order by %s %s' % (cat_id, sort_method, direction));
 
     # sub_cat_query = db.query('select distinct query.prod_id, query.prod_name, query.review_count, query.avg_rating from (select product_uses_category.secondary_cat_id as sub_cat_id, count(review.product_id) as review_count, product.name as prod_name, product.id as prod_id, round(avg(review.rating), 2) as avg_rating from review inner join product on product.id = review.product_id inner join product_uses_category on product.id = product_uses_category.product_id inner join secondary_cat on product_uses_category.secondary_cat_id = secondary_cat.id where secondary_cat.main_cat_id = %s group by prod_name, prod_id, product_uses_category.secondary_cat_id) query order by %s %s' % (cat_id,sort_method, direction));
 
@@ -152,10 +152,10 @@ def render_sub_cat_products(cat_id, sub_cat_id):
         sort_method = 'avg_rating'
         direction = 'asc'
     elif sort_choice == 'name_az':
-        sort_method = 'prod_name'
+        sort_method = 'prod_name_upper'
         direction = 'asc'
     elif sort_choice == 'name_za':
-        sort_method = 'prod_name'
+        sort_method = 'prod_name_upper'
         direction = 'desc'
     # elif sort_choice == 'msrp_asc':
     #     sort_method = 'prod_msrp'
@@ -180,7 +180,7 @@ def render_sub_cat_products(cat_id, sub_cat_id):
 
     #Gets all products in the secondary category with id = sub_cat_id
     ## THIS IS THE RIGHT ONE
-    sub_cat_products_query = db.query('select upper(product.name) as prod_name, product.id as prod_id, round(avg(review.rating), 2) as avg_rating, count(review.product_id) as review_count from review inner join product on product.id = review.product_id inner join product_uses_category on product.id = product_uses_category.product_id inner join secondary_cat on product_uses_category.secondary_cat_id = secondary_cat.id where secondary_cat.id = %s group by product.name, product.id order by %s %s' % (sub_cat_id, sort_method, direction))
+    sub_cat_products_query = db.query('select product.name as prod_name, upper(product.name) as prod_name_upper, product.id as prod_id, round(avg(review.rating), 2) as avg_rating, count(review.product_id) as review_count from review inner join product on product.id = review.product_id inner join product_uses_category on product.id = product_uses_category.product_id inner join secondary_cat on product_uses_category.secondary_cat_id = secondary_cat.id where secondary_cat.id = %s group by product.name, product.id order by %s %s' % (sub_cat_id, sort_method, direction))
 
 
     return render_template(
@@ -232,8 +232,8 @@ def render_reviews():
     sort_choice_list = ['rating_low',
                         'prod_name_az',
                         'prod_name_za',
-                        'date_asc',
-                        'date_desc']
+                        'date_desc',
+                        'date_asc']
 
     sort_choice_list_names = ['Rating (low to high)',
                               'Product Name (A-Z)',
@@ -250,24 +250,24 @@ def render_reviews():
         sort_method = 'rating'
         direction = 'asc'
     elif sort_choice == 'prod_name_az':
-        sort_method = 'UPPER(product.name)'
+        sort_method = 'prod_name_upper'
         direction = 'asc'
     elif sort_choice == 'prod_name_za':
-        sort_method = 'UPPER(product.name)'
+        sort_method = 'prod_name_upper'
+        direction = 'desc'
+    elif sort_choice == 'date_desc':
+        sort_method = 'review_date'
         direction = 'desc'
     elif sort_choice == 'date_asc':
-        sort_method = 'prod_name'
+        sort_method = 'review_date'
         direction = 'asc'
-    elif sort_choice == 'date_desc':
-        sort_method = 'prod_name'
-        direction = 'desc'
     else:
         #Default or fall back sort method (not dependent on drop-down)
         sort_method = 'rating'
         direction = 'desc'
 
     #Use string substiution to run a SQL query for the selected sort choice
-    sorted_review_query = db.query("select product.name as prod_name, review.rating, users.user_name as user_name, review.id, date(review.date) as review_date from review, product, users where review.product_id = product.id and review.user_id = users.id order by %s %s" % (sort_method, direction))
+    sorted_review_query = db.query("select product.name as prod_name, upper(product.name) as prod_name_upper, review.rating, users.user_name as user_name, review.id, date(review.date) as review_date from review, product, users where review.product_id = product.id and review.user_id = users.id order by %s %s" % (sort_method, direction))
     #Render reviews template again with the chosen sort order, passing through the sort choices zipped list, the current choice, and the reviews list
     return render_template(
         'reviews.html',
@@ -307,7 +307,7 @@ def render_brands():
     # Two string variables are assigned for each possible choice, they will be substitued into the SQL query below
     sort_choice = request.form.get('sortby')
     if sort_choice == 'name_za':
-        sort_method = 'company.name'
+        sort_method = 'brand_name_upper'
         direction = 'desc'
     elif sort_choice == 'num_prod_desc':
         sort_method = 'prod_count'
@@ -317,10 +317,10 @@ def render_brands():
         direction = 'asc'
     else:
         #Default or fall back sort method (not dependent on drop-down)
-        sort_method = 'company.name'
+        sort_method = 'brand_name_upper'
         direction = 'asc'
 
-    brand_query = db.query("select company.name as brand_name, company.id as brand_id, count(product.id) as prod_count from company inner join product on company.id = product.company_id group by brand_name, brand_id order by %s %s" % (sort_method, direction))
+    brand_query = db.query("select company.name as brand_name, upper(company.name) as brand_name_upper, company.id as brand_id, count(product.id) as prod_count from company inner join product on company.id = product.company_id group by brand_name, brand_id order by %s %s" % (sort_method, direction))
 
     return render_template(
         '/brands.html',
@@ -349,10 +349,10 @@ def render_brand_prod(brand_id):
         sort_method = 'avg_rating'
         direction = 'asc'
     elif sort_choice == 'name_az':
-        sort_method = 'prod_name'
+        sort_method = 'prod_name_upper'
         direction = 'asc'
     elif sort_choice == 'name_za':
-        sort_method = 'prod_name'
+        sort_method = 'prod_name_upper'
         direction = 'desc'
     # elif sort_choice == 'msrp_asc':
     #     sort_method = 'prod_msrp'
@@ -371,7 +371,7 @@ def render_brand_prod(brand_id):
         sort_method = 'avg_rating'
         direction = 'desc'
 
-    brand_prod_query = db.query("select product.id as prod_id, product.name as prod_name, round(avg(review.rating), 2) as avg_rating, count(review.id) as review_count from company inner join product on company.id = product.company_id inner join review on product.id = review.product_id where company.id = %s group by prod_id, prod_name order by %s %s" % (brand_id, sort_method, direction))
+    brand_prod_query = db.query("select product.id as prod_id, upper(product.name) as prod_name_upper, product.name as prod_name, round(avg(review.rating), 2) as avg_rating, count(review.id) as review_count from company inner join product on company.id = product.company_id inner join review on product.id = review.product_id where company.id = %s group by prod_id, prod_name order by %s %s" % (brand_id, sort_method, direction))
 
     # brand_prod_query = db.query('select product.name as prod_name, product.id as prod_id from product inner join company on product.company_id = %s group by product.name, product.id' % brand_id)
 
@@ -385,16 +385,47 @@ def render_brand_prod(brand_id):
 
 
 # Users page
-@app.route('/users')
+@app.route('/users', methods = ['POST','GET'])
 def users():
-    user_list = db.query("select users.id as user_id, users.user_name as user_name, count(review.id) as review_count from review inner join users on users.id = review.user_id group by users.id, users.user_name").namedresult()
+    #Defines 2 iterable lists for sort choices: one for the value attributes from form and one for the names to display
+    sort_choice_list = ['name_za',
+                        'num_reviews_desc',
+                        'num_reviews_asc']
+
+    sort_choice_list_names = ['User Name (Z-A)',
+                              'Num of Reviews (high to low)',
+                              'Num of Reviews (low to high)']
+    #Zips the two lists together so that we can iterate over the corresponding pairs
+    sort_choices = zip(sort_choice_list, sort_choice_list_names)
+
+    # Get the selected sort choice, 'prod_name' if none is selected
+    # Two string variables are assigned for each possible choice, they will be substitued into the SQL query below
+    sort_choice = request.form.get('sortby')
+    if sort_choice == 'name_za':
+        sort_method = 'user_name_upper'
+        direction = 'desc'
+    elif sort_choice == 'num_reviews_desc':
+        sort_method = 'review_count'
+        direction = 'desc'
+    elif sort_choice == 'num_reviews_asc':
+        sort_method = 'review_count'
+        direction = 'asc'
+    else:
+        #Fall back sort method
+        sort_method = 'user_name_upper'
+        direction = 'asc'
+
+    user_list = db.query("select users.id as user_id, upper(users.user_name) as user_name_upper, users.user_name as user_name, count(review.id) as review_count from review inner join users on users.id = review.user_id group by users.id, users.user_name order by %s %s" % (sort_method,direction)).namedresult()
     return render_template(
         '/users.html',
+        sort_choices = sort_choices,
+        current_sort = sort_choice,
         user_list = user_list
     )
 
 @app.route('/users/<user_id>')
 def render_individual_user(user_id):
+
     review_list = db.query("select product.name as prod_name, review.id as review_id, review.rating as review_rate, date(review.date) as review_date, users.id as users_id from product inner join review on product.id = review.product_id inner join users on users.id = review.user_id where users.id = %s order by review.date" % user_id)
     user = db.query("select users.id as user_id, users.user_name as user_name, count(review.id) as review_count from review inner join users on users.id = review.user_id where users.id = %s group by users.id, users.user_name" % user_id).namedresult()[0]
     print review_list

@@ -18,6 +18,19 @@
 </header>
 {% endblock %}
 
+{% block sort %}
+<div class="sort cf">
+    <form action="/users" method="post">
+        <select class="form-control" name="sortby" onchange="this.form.submit()">
+            <option selected value="name_az">User Name (A-Z)</option>
+            {% for choice, choice_name in sort_choices %}
+                <option {% if choice == current_sort %} selected {% endif %} value="{{choice}}">{{choice_name}}</option>
+            {% endfor %}
+        </select>
+    </form>
+</div>
+{% endblock %}
+
 {% block body %}
 <ul>
     {% for user in user_list %}
