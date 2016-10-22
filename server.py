@@ -526,13 +526,18 @@ def add_review():
 
     # Finally, a new review is created based off of the information from the form that has been filtered and inserted through the database
     # Need to add the user information once login is fixed, and create an auto-timestamp method for date column in review table
+    if session['username']:
+        session_un = session['username']
+        userid_query = db.query("select * from users where users.user_name = '%s'" % session_un).namedresult()
+    user_id=userid_query[0].id
     now = datetime.datetime.now()
     db.insert(
         'review',
         product_id=prod_id,
         rating=rating,
         review=review,
-        date=now.strftime("%Y-%m-%d")
+        date=now.strftime("%Y-%m-%d"),
+        user_id=user_id
     )
     return redirect('/')
 
