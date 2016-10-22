@@ -22,6 +22,8 @@ Nerd Review is a centralized platform that brings together product lovers of the
 ####Click on each member's name to see their github profile
 All team members are students in the [Digital Crafts](https://digitalcrafts.com) September 2016 cohort. This project was initially completed as the first full-stack project for that curriculum.
 
+####Team Freedom
+######The best of DC USA and DC Japan - together.
 * [Che Blankenship](https://github.com/cheblankenship/):
 *Primary team role:* UI/UX evaluation, quality control
 *Contributions:*
