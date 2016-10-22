@@ -44,20 +44,20 @@
                 </div>
             </div>
         </nav>
-        {% block homepage %}
         <main class="main cf">
-            <div class="main-wrapper cf">
-                {% block header %}
-                {% endblock %}
+            {% block homepage %}
+                <div class="main-wrapper cf">
+                    {% block header %}
+                    {% endblock %}
 
-                {% block sort %}
-                {% endblock %}
+                    {% block sort %}
+                    {% endblock %}
 
-                {% block body %}
-                {% endblock %}
-            </div>
+                    {% block body %}
+                    {% endblock %}
+                </div>
+            {% endblock %}
         </main>
-        {% endblock %}
 
         <div class="modal" id="log_in_modal" role="dialog">
             <div class="modal-dialog">

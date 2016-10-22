@@ -231,6 +231,43 @@ form.sign-up input:invalid:focus {
 
 /* ------ MAIN SECTION ----- */
 
+/* --- Homepage --- */
+.homepage {
+    position: absolute;
+    top: 0;
+    left: 25%;
+    width: 75%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.homepage h1 {
+    /*border: 4px solid red;*/
+    margin: 40px 0 0 0;
+    font-size: 3em;
+}
+
+.homepage h2 {
+    /*border: 4px solid orange;*/
+    margin: 0 0 60px 0;
+}
+
+.homepage .credit {
+    margin: 0 0 10px 0;
+}
+
+.credit .team{
+    /*border: 4px solid yellow;*/
+    text-align: center;
+}
+.credit .copyright{
+    /*border: 4px solid green;*/
+    align-self: flex-end;
+}
+
 /* --- Header --- */
 header {
   /*border: 4px solid purple;*/
@@ -413,41 +450,6 @@ main a:focus {
     display: inline-block;
     font-size: 100px;
 }
-
-.homepage-main{
-    position: absolute;
-    left: 25%;
-    top: 0;
-    width: 75%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-}
-
-.homepage-welcome {
-    /*border: 4px solid red;*/
-    font-size: 3em;
-}
-
-.homepage-slogan {
-
-}
-
-.homepage-credit {
-    /*border: 4px solid orange;*/
-}
-
-.homepage-team{
-    /*border: 4px solid yellow;*/
-    text-align: center;
-}
-.homepage-copyright{
-    /*border: 4px solid green;*/
-    align-self: flex-end;
-}
-
 
 
 /*------------------------
