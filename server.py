@@ -447,7 +447,7 @@ def render_review():
     customize_product = request.form.get('customize_product')
     customize_company = request.form.get('customize_company')
     return render_template(
-        '/add_product_review.html',
+        '/product_review.html',
         customize_main_cat=customize_main_cat,
         customize_second_cat=customize_second_cat,
         customize_product=customize_product,

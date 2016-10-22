@@ -452,6 +452,17 @@ main a:focus {
 }
 
 
+/* ------ NEW REViEW PAGE ----- */
+.new-review label {
+    color: #fff;
+    font-weight: 400;
+}
+
+.new-review form {
+    text-align: left;
+    background: coral;
+}
+
 /*------------------------
 MEDIA QUERIES
 -------------------------*

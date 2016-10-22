@@ -1,0 +1,126 @@
+{% extends 'layout.html' %}
+
+{% block nav %}
+    <li><a href="/categories">Categories</a></li>
+    <li><a href="/brands">Brands</a></li>
+    <li><a href="/reviews">Reviews</a></li>
+    <li><a href="/users">Users</a></li>
+{% endblock %}
+
+{% block header %}
+<header>
+    <h1>Add a new review</h1>
+    <h3>Tell the world what you think</h3>
+</header>
+{% endblock %}
+
+{% block body %}
+<div class="new-review">
+    <form action="/product_review" method="POST">
+        <div class="form-group">
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" type="checkbox" name="customize_main_cat">
+                    Main category
+                </label>
+            </div>
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" type="checkbox" name="customize_second_cat">
+                    Secondary category
+                </label>
+            </div>
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" type="checkbox" name="customize_product">
+                    New product
+                </label>
+            </div>
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" type="checkbox" name="customize_company">
+                    New company
+                </label>
+            </div>
+        </div>
+        <button class="btn-default" type="submit">Customize these fields</button>
+    </form>
+
+    <form action="/add_product_review" method="POST">
+        <div class="form-group">
+            <div class="form-group row">
+                <label for="main_cat_name">Main category</label>
+                {% if customize_main_cat %}
+                <input id="main_cat_name" class="custom-select" type="text" name="main_cat_name" value="{{main_cat_name}}">
+                {% else %}
+                <select id="main_cat_name" class="main_cat_name custom-select" name="main_cat_name">
+                    <option value="empty"></option>
+                    {% for main_name in main_cat_list %}
+                    <option value="{{main_name.name}}">{{main_name.name}}</option>
+                    {% endfor %}
+                </select>
+                {% endif %}
+            </div>
+            <div class="form-group row">
+                <label for="second_cat_name">Secondary category</label>
+                {% if customize_second_cat %}
+                <input id="second_cat_name" type="text" name="second_cat_name" value="{{name}}">
+                {% else %}
+                <select id="second_cat_name" class="second_cat_name" name="second_cat_name">
+                    <option value="empty"></option>
+                    {% for second_name in second_cat_list %}
+                    <option value="{{second_name.name}}">{{second_name.name}}</option>
+                    {% endfor %}
+                </select>
+                {% endif %}
+            </div>
+            <div class="form-group row">
+                <label for="company_name">Company name</label>
+                {% if customize_company %}
+                <input type="text" id="company_name" name="company_name" value="{{name}}">
+                {% else %}
+                <select class="company_name" name="company_name">
+                    <option value="empty"></option>
+                    {% for company_name in company_list %}
+                    <option value="{{company_name.name}}">{{company_name.name}}</option>
+                    {% endfor %}
+                </select>
+                {% endif %}
+            </div>
+            <div class="form-group row">
+                <label for="product_name">Product name</label>
+                {% if customize_product %}
+                <input id="product_name" type="text" name="product_name" value="{{name}}">
+                {% else %}
+                <select id="product_name" class="product_name" name="product_name">
+                    <option value="empty"></option>
+                    {% for product_name in product_list %}
+                    <option value="{{product_name.name}}">{{product_name.name}}</option>
+                    {% endfor %}
+                </select>
+                {% endif %}
+            </div>
+            <div class="form-group row">
+                <label for="rating">Rating</label>
+                <select id="rating" class="rating" name="rating">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="form-group row">
+                <label for="review">Review</label>
+                <input id="review" type="text" name="review" value="{{review}}">
+            </div>
+            <button type="submit">Add</button>
+        </div>
+    </form>
+    <ul>
+        <li>
+
+        </li>
+    </ul>
+</div>
+{% endblock %}
