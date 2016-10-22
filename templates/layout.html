@@ -31,9 +31,9 @@
                                 <button class="btn left-btn" type="submit" action="/log_out" name="log_out">Log Out</button>
                             </div>
                         </form>
-                        <form class="form" action="/product_review" method="post">
+                        <form class="form" action="/add_product_review" method="post">
                             <div class="form-group">
-                                <button class="btn right-btn" type="submit" action="/product_review" name="add_product_review">New review</button>
+                                <button class="btn right-btn" type="submit" action="/add_product_review" name="add_product_review">New review</button>
                             </div>
                         </form>
                     {% else %}
@@ -44,7 +44,6 @@
                 </div>
             </div>
         </nav>
-
         {% block homepage %}
         <main class="main cf">
             <div class="main-wrapper cf">
@@ -97,6 +96,9 @@
                         <form class="sign-up" action="/sign_up" method="post">
                             <div class="form-group">
                                 <label for="name"><span class="glyphicon glyphicon-user"></span> Name</label>
+                                <div class="alert alert-warning">
+
+                                </div>
                                 <input id="name" type="text" name="name" value="" class="form-control" placeholder="Enter your name" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}">
                             </div>
                             <div class="form-group">
