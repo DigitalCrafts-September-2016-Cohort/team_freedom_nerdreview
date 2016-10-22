@@ -55,8 +55,8 @@ def submit_signup():
        return redirect('/')
 
 # Log out
-@app.route('/logout', methods=['POST'])
-def logout():
+@app.route('/log_out', methods=['POST'])
+def log_out():
    del session['username']
    flash("Successfully Logged Out")
    return redirect('/')
