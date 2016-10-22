@@ -15,45 +15,16 @@
 {% endblock %}
 
 {% block body %}
-<div class="new-review">
-    <form action="/product_review" method="POST">
-        <div class="form-group">
-            <div class="form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" name="customize_main_cat" onchange="this.form.submit()">
-                    Main category
-                </label>
-            </div>
-            <div class="form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" name="customize_second_cat" onchange="this.form.submit()">
-                    Secondary category
-                </label>
-            </div>
-            <div class="form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" name="customize_product" onchange="this.form.submit()">
-                    New product
-                </label>
-            </div>
-            <div class="form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" name="customize_company" onchange="this.form.submit()">
-                    New company
-                </label>
-            </div>
-        </div>
-        <!-- <button class="btn-default" type="submit">Customize these fields</button> -->
-    </form>
-
-    <form action="/add_product_review" method="POST">
-        <div class="form-group">
-            <div class="form-group row">
+<div class="new-review row">
+    <div class="inputs container-fluid col-xs-9">
+        <h3>Select a pre-existing category...</h3>
+        <form action="/add_product_review" method="POST">
+            <div class="form-group">
                 <label for="main_cat_name">Main category</label>
                 {% if customize_main_cat %}
-                <input id="main_cat_name" class="custom-select" type="text" name="main_cat_name" value="{{main_cat_name}}">
+                <input id="main_cat_name" class="form-control" type="text" name="main_cat_name" value="{{main_cat_name}}">
                 {% else %}
-                <select id="main_cat_name" class="main_cat_name custom-select" name="main_cat_name">
+                <select id="main_cat_name" class="main_cat_name form-control" name="main_cat_name">
                     <option value="empty"></option>
                     {% for main_name in main_cat_list %}
                     <option value="{{main_name.name}}">{{main_name.name}}</option>
@@ -61,12 +32,12 @@
                 </select>
                 {% endif %}
             </div>
-            <div class="form-group row">
+            <div class="form-group">
                 <label for="second_cat_name">Secondary category</label>
                 {% if customize_second_cat %}
-                <input id="second_cat_name" type="text" name="second_cat_name" value="{{name}}">
+                <input id="second_cat_name" class="form-control" type="text" name="second_cat_name" value="{{name}}">
                 {% else %}
-                <select id="second_cat_name" class="second_cat_name" name="second_cat_name">
+                <select id="second_cat_name" class="form-control" class="second_cat_name" name="second_cat_name">
                     <option value="empty"></option>
                     {% for second_name in second_cat_list %}
                     <option value="{{second_name.name}}">{{second_name.name}}</option>
@@ -74,12 +45,12 @@
                 </select>
                 {% endif %}
             </div>
-            <div class="form-group row">
+            <div class="form-group">
                 <label for="company_name">Company name</label>
                 {% if customize_company %}
-                <input type="text" id="company_name" name="company_name" value="{{name}}">
+                <input type="text" id="company_name" class="form-control"name="company_name form-control" value="{{name}}">
                 {% else %}
-                <select class="company_name" name="company_name">
+                <select class="company_name form-control" name="company_name">
                     <option value="empty"></option>
                     {% for company_name in company_list %}
                     <option value="{{company_name.name}}">{{company_name.name}}</option>
@@ -87,12 +58,12 @@
                 </select>
                 {% endif %}
             </div>
-            <div class="form-group row">
+            <div class="form-group">
                 <label for="product_name">Product name</label>
                 {% if customize_product %}
-                <input id="product_name" type="text" name="product_name" value="{{name}}">
+                <input id="product_name" class="form-control" type="text" name="product_name" value="{{name}}">
                 {% else %}
-                <select id="product_name" class="product_name" name="product_name">
+                <select id="product_name" class="product_name form-control" name="product_name">
                     <option value="empty"></option>
                     {% for product_name in product_list %}
                     <option value="{{product_name.name}}">{{product_name.name}}</option>
@@ -100,9 +71,10 @@
                 </select>
                 {% endif %}
             </div>
-            <div class="form-group row">
+            <div class="form-group">
                 <label for="rating">Rating</label>
-                <select id="rating" class="rating" name="rating">
+                <select id="rating" class="rating form-control" name="rating">
+                    <option value="empty"></option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -110,17 +82,35 @@
                     <option value="5">5</option>
                 </select>
             </div>
-            <div class="form-group row">
+            <div class="form-group">
                 <label for="review">Review</label>
-                <input id="review" type="text" name="review" value="{{review}}">
+                <input id="review" class="form-control" type="text" name="review" value="{{review}}">
             </div>
             <button type="submit">Add</button>
-        </div>
-    </form>
-    <ul>
-        <li>
-
-        </li>
-    </ul>
+        </form>
+    </div>
+    <div class="customize col-xs-3">
+        <h3>...or add your own</h3>
+        <form action="/product_review" method="POST">
+            <div class="height-equalizer">
+                <label for="customize_main_cat" class="form-check-label">Add new</label>
+                <input id="customize_main_cat" type="checkbox" name="customize_main_cat">
+            </div>
+            <div class="height-equalizer">
+                <label for="customize_second_cat" class="form-check-label">Add new</label>
+                <input id="customize_second_cat" type="checkbox" name="customize_second_cat">
+            </div>
+            <div class="height-equalizer">
+                <label for="customize_product" class="form-check-label">Add new</label>
+                <input id="customize_product" type="checkbox" name="customize_product">
+            </div>
+            <div class="height-equalizer">
+                <label for="customize_company" class="form-check-label">Add new</label>
+                <input id="customize_company" type="checkbox" name="customize_company">
+            </div>
+            <button class="btn-default" type="submit">Customize these fields</button>
+        </form>
+    </div>
 </div>
+
 {% endblock %}

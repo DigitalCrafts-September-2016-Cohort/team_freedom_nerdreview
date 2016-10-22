@@ -453,14 +453,27 @@ main a:focus {
 
 
 /* ------ NEW REViEW PAGE ----- */
+.new-review h3 {
+    display: inline-block;
+}
+
 .new-review label {
     color: #fff;
     font-weight: 400;
+    width: 100%;
 }
 
 .new-review form {
     text-align: left;
     background: coral;
+}
+
+.new-review .customize label {
+    margin-bottom: 0;
+}
+
+.new-review .height-equalizer {
+    height: 77px;
 }
 
 /*------------------------
