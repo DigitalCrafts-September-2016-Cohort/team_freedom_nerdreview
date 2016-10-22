@@ -24,7 +24,7 @@
                     {% endblock %}
                 </ul>
                 <div class="account">
-                    {% if loggedin %}
+                    {% if session['username'] %}
                     <p>Hello {{session['username']}}!</p>
                         <form class="form" action="/log_out" method="post">
                             <div class="form-group">

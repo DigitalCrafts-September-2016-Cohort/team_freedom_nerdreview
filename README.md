@@ -34,8 +34,9 @@ All team members are students in the [Digital Crafts](https://digitalcrafts.com)
 
 * [Robert Dunn](https://github.com/robdunn220/):
 *Primary team role:* Back-end ninja
-*Contributions:*
-*Key code portions:*
+*Contributions:* Database design and implementation. Route handlers and queries.
+Just making sure the manipulation and display of the data in the database was working well with the design concept.
+*Key code portions:* server.py, jinja in some of the HTML
 
 * [Jesslyn Landgren](https://github.com/jesslynlandgren/):
 *Primary team role:* Organize all the things, back-end backup
