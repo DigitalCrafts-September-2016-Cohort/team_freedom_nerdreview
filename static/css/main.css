@@ -42,6 +42,9 @@ a {
     clear: both;
 }
 
+.fl { float: left; }
+.fr { float: right; }
+
 
 /* ------ NAVBAR ------ */
 
@@ -81,13 +84,13 @@ a {
     text-decoration: none;
  }
 
-.nr-logo a::after {
+.nr-logo p::after {
     content: " ";
-    position: absolute;
-    top: 76px;
-    left: 121px;
+    position: absolute;;
+    top: 65px;
+    left: 0;
     border-bottom: 1px solid rgba(0,0,0,0.87);
-    width: 152px;
+    width: 130px;
     visibility: hidden;
     -webkit-transform: scaleX(0);
     transform: scaleX(0);
@@ -95,7 +98,7 @@ a {
     transition: all 175ms ease-in-out;
 }
 
-.nr-logo a:hover::after {
+.nr-logo a:hover p::after {
     visibility: visible;
     -webkit-transform: scaleX(1);
     transform: scaleX(1);
@@ -132,7 +135,7 @@ a {
         display: block;
         padding: 7px 0;
         position: relative;
-        transition: 2175ms all ease-in-out;
+        transition: 175ms all ease-in-out;
     }
 
     .nav-menu-list a::before {
@@ -140,8 +143,8 @@ a {
         font-family: 'Ionicons';
         position: absolute;;
         top: 9px;
-        left: -30px;
-        /*visibility: hidden;*/
+        left: -100px;
+        visibility: hidden;
         /*-webkit-transform: scaleX(0);
         transform: scaleX(0);*/
         -webkit-transition: all 175ms ease-in-out;
@@ -154,19 +157,24 @@ a {
 
     .nav-menu-list a:hover::before {
         left: 10px;
-        /*visibility: visible;*/
+        visibility: visible;
         /*-webkit-transform: scaleX(1);
         transform: scaleX(1);*/
     }
 
-.account-btns {
+.account {
     position: absolute;
+    text-align: center;
     width: 100%;
     bottom: 0;
     left: 0;
 }
 
-.account-btns button {
+.account p {
+    margin-bottom: 15px;
+}
+
+.account button {
     float: left;
     width: 50%;
     padding: 10px;
@@ -177,7 +185,7 @@ a {
     font-family: 'Roboto Mono', Courier, monospace;
 }
 
-.account-btns button::after {
+.account button::after {
     content: " ";
     position: absolute;
     top: 34px;
@@ -191,18 +199,35 @@ a {
     transition: all 175ms ease-in-out;
 }
 
-    .account-btns button:hover { text-decoration: underline; }
+    .account button:hover { text-decoration: underline; }
     /* overwriting unwanted Bootstrap .btn styles*/
-    .account-btns button:focus { outline: none !important; }
-    .account-btns button:active { box-shadow: none; }
+    .account button:focus { outline: none !important; }
+    .account button:active { box-shadow: none; }
 
-    .login-btn {
+    .left-btn {
         border-right: 1px solid #F4CF6F;
     }
 
-    .signup-btn {
+    .right-btn {
         border-left: 1px solid #F4CF6F;
     }
+
+/* Forms */
+form.sign-up input:valid:focus {
+    transition: all 175ms;
+    background-color: rgba(92,184,92,0.4);
+}
+
+form.sign-up input:invalid:focus {
+    transition: all 175ms;
+    background-color: rgba(217,83,79,0.4);
+}
+
+.requirements {
+    content: "Name, username and password must be at least 6 characters each"
+    max-height: 200px;
+    padding: 20px;
+}
 
 /* ------ MAIN SECTION ----- */
 
@@ -336,9 +361,6 @@ main a:focus {
     margin: 0;
 }
 
-.tile .fl { float: left; }
-.tile .fr { float: right; }
-
 /* --- Header (individual item) --- */
 .ind-header {
     width: 30%;
@@ -354,6 +376,10 @@ main a:focus {
     /*text-align: center;*/
     float: left;
 }
+
+    .ind-body .cf h1 {
+        margin: 0;
+    }
 
     .ind-body .content {
         margin-top: 96px;
@@ -387,6 +413,42 @@ main a:focus {
     display: inline-block;
     font-size: 100px;
 }
+
+.homepage-main{
+    position: absolute;
+    left: 25%;
+    top: 0;
+    width: 75%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.homepage-welcome {
+    /*border: 4px solid red;*/
+    font-size: 3em;
+}
+
+.homepage-slogan {
+
+}
+
+.homepage-credit {
+    /*border: 4px solid orange;*/
+}
+
+.homepage-team{
+    /*border: 4px solid yellow;*/
+    text-align: center;
+}
+.homepage-copyright{
+    /*border: 4px solid green;*/
+    align-self: flex-end;
+}
+
+
 
 /*------------------------
 MEDIA QUERIES

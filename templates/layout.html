@@ -19,27 +19,33 @@
                         <p>NERD<br>REVIEW</p>
                     </a>
                 </div>
-                {% if loggedin %}
-                    <p>
-                        Hello, {{session['username']}}!
-                    </p>
-                    <form class="form" action="/logout" method="post">
-                        <div class="form-group">
-                            <button class="btn btn-warning" type="submit" action="/logout" name="logout">Log Out</button>
-                        </div>
-                    </form>
-                {% else %}
-                {% endif %}
                 <ul class="nav-menu-list">
                     {% block nav %}
                     {% endblock %}
                 </ul>
-                <div class="account-btns">
-                    <button type="button" data-toggle="modal" data-target="#log_in_modal" class="btn login-btn">Log In</button>
-                    <button type="button" data-toggle="modal" data-target="#signup" class="btn signup-btn">Sign Up</button>
+                <div class="account">
+                    {% if loggedin %}
+                    <p>Hello {{session['username']}}!</p>
+                        <form class="form" action="/log_out" method="post">
+                            <div class="form-group">
+                                <button class="btn left-btn" type="submit" action="/log_out" name="log_out">Log Out</button>
+                            </div>
+                        </form>
+                        <form class="form" action="/add_product_review" method="post">
+                            <div class="form-group">
+                                <button class="btn right-btn" type="submit" action="/add_product_review" name="add_product_review">New review</button>
+                            </div>
+                        </form>
+                    {% else %}
+                    <p>Hello!</p>
+                        <button type="button" data-toggle="modal" data-target="#log_in_modal" class="btn left-btn">Log In</button>
+                        <button type="button" data-toggle="modal" data-target="#signup" class="btn right-btn">Sign Up</button>
+                    {% endif %}
                 </div>
             </div>
         </nav>
+
+        {% block homepage %}
         <main class="main cf">
             <div class="main-wrapper cf">
                 {% block header %}
@@ -52,6 +58,7 @@
                 {% endblock %}
             </div>
         </main>
+        {% endblock %}
 
         <div class="modal" id="log_in_modal" role="dialog">
             <div class="modal-dialog">
@@ -61,7 +68,7 @@
                         <h4 style="color:black;">Log in to Nerd Review:</h4>
                     </div>
                     <div class="modal-body">
-                        <form class="" action="/log_in" method="post">
+                        <form class="log-in" action="/log_in" method="post">
                             <div class="form-group">
                                 <label for="username"><span class="glyphicon glyphicon-user"></span> Username</label>
                                 <input type="text" name="username" value="" class="form-control" placeholder="Enter username">
@@ -87,18 +94,18 @@
                         <h4 style="color:black;">Sign Up</h4>
                     </div>
                     <div class="modal-body">
-                        <form class="" action="/sign_up" method="post">
+                        <form class="sign-up" action="/sign_up" method="post">
                             <div class="form-group">
                                 <label for="name"><span class="glyphicon glyphicon-user"></span> Name</label>
-                                <input type="text" name="name" value="" class="form-control" placeholder="Enter display name">
+                                <input id="name" type="text" name="name" value="" class="form-control" placeholder="Enter your name" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}">
                             </div>
                             <div class="form-group">
                                 <label for="username"><span class="glyphicon glyphicon-user"></span> Username</label>
-                                <input type="text" name="username" value="" class="form-control" placeholder="Enter username">
+                                <input id="username" type="text" name="username" value="" class="form-control" placeholder="Enter username" size="6" maxlength="18" required>
                             </div>
                             <div class="form-group">
                                 <label for="password"><span class="glyphicon glyphicon-lock"></span> Password</label>
-                                <input type="password" name="password" value="" class="form-control" placeholder="Enter password">
+                                <input id="password" type="password" name="password" value="" class="form-control" placeholder="Enter password" required>
                             </div>
                             <button type="submit" name="button" class="btn btn-default btn-success">Sign up</button>
                         </form>
