@@ -1,7 +1,6 @@
 /*------------------------
 STYLES/LAYOUT
 -------------------------*
-
 /* ------ GLOBAL ------ */
 
 * {
@@ -45,6 +44,40 @@ a {
 .fl { float: left; }
 .fr { float: right; }
 
+.nr-btn {
+    width: 50%;
+    padding: 10px;
+    font-size: 20px;
+    outline: none;
+    border: 0;
+    background: #fff;
+    border-radius: 0;
+    position: relative;
+    font-family: 'Roboto Mono', Courier, monospace;
+}
+
+.btn-rnd {
+    border-radius: 4px;
+}
+
+.sm-btn {
+    width: 100px;
+    font-size: 16px;
+}
+
+.std-btn {
+    width: 200px;
+}
+
+.nr-success {
+    background: #479c47;
+    color: #fff;
+}
+
+    .nr-btn:hover { text-decoration: underline; }
+    /* overwriting unwanted Bootstrap .btn styles*/
+    .nr-btn:focus { outline: none !important; }
+    .nr-btn:active { box-shadow: none; }
 
 /* ------ NAVBAR ------ */
 
@@ -104,13 +137,6 @@ a {
     transform: scaleX(1);
 }
 
-/*.nr-logo::after {
-    content: " ";
-    margin: 10px auto 0;
-    border-bottom: 2px solid rgba(0,0,0,0.87);
-    width: 200px;
-}*/
-
     .nr-logo img {
         width: 60px;
         display: inline-block;
@@ -145,21 +171,13 @@ a {
         top: 9px;
         left: -100px;
         visibility: hidden;
-        /*-webkit-transform: scaleX(0);
-        transform: scaleX(0);*/
         -webkit-transition: all 175ms ease-in-out;
         transition: all 175ms ease-in-out;
-    }
-
-    .nav-menu-list a:hover {
-        /*text-decoration: underline;*/
     }
 
     .nav-menu-list a:hover::before {
         left: 10px;
         visibility: visible;
-        /*-webkit-transform: scaleX(1);
-        transform: scaleX(1);*/
     }
 
 .account {
@@ -173,36 +191,6 @@ a {
 .account p {
     margin-bottom: 15px;
 }
-
-.account button {
-    float: left;
-    width: 50%;
-    padding: 10px;
-    font-size: 20px;
-    background: #fff;
-    border-radius: 0;
-    position: relative;
-    font-family: 'Roboto Mono', Courier, monospace;
-}
-
-.account button::after {
-    content: " ";
-    position: absolute;
-    top: 34px;
-    left: 66px;
-    border-bottom: 1px solid rgba(0,0,0,0.87);
-    width: 152px;
-    /*visibility: hidden;*/
-    -webkit-transform: scaleX(0);
-    transform: scaleX(0);
-    -webkit-transition: all 175ms ease-in-out;
-    transition: all 175ms ease-in-out;
-}
-
-    .account button:hover { text-decoration: underline; }
-    /* overwriting unwanted Bootstrap .btn styles*/
-    .account button:focus { outline: none !important; }
-    .account button:active { box-shadow: none; }
 
     .left-btn {
         border-right: 1px solid #F4CF6F;
@@ -303,7 +291,7 @@ header {
 }
 
 .sort {
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 
 .sort select {
@@ -342,7 +330,7 @@ main a:focus {
 
 /* --- Body (tiles) --- */
 .tile {
-    margin: 20px;
+    margin: 0 20px 30px 0;
     width: 300px;
     height: 300px;
     text-align: center;
@@ -419,7 +407,7 @@ main a:focus {
     }
 
     .ind-body .content {
-        margin-top: 96px;
+        position: relative;
     }
 
     .ind-body .review {
@@ -453,14 +441,39 @@ main a:focus {
 
 
 /* ------ NEW REViEW PAGE ----- */
+.new-review h3 {
+    display: inline-block;
+}
+
 .new-review label {
     color: #fff;
     font-weight: 400;
+    width: 100%;
 }
 
 .new-review form {
     text-align: left;
-    background: coral;
+}
+
+.new-review .customize {
+    text-align: left;
+}
+
+.customize label {
+    margin-bottom: 0;
+}
+
+.customize i {
+    transform: rotate(45deg);
+    display: inline-block;
+}
+
+.set-height {
+    height: 77px;
+}
+
+.customize .nr-btn {
+    background: #F4CF6F;
 }
 
 /*------------------------

@@ -25,21 +25,21 @@
                 </ul>
                 <div class="account">
                     {% if session['username'] %}
-                    <p>Hello {{session['username']}}!</p>
+                    <p>Hello <a href="/loggedin_userpage/{{session['username']}}">{{session['username']}}</a>!</p>
                         <form class="form" action="/log_out" method="post">
                             <div class="form-group">
-                                <button class="btn left-btn" type="submit" action="/log_out" name="log_out">Log Out</button>
+                                <button class="nr-btn fl left-btn" type="submit" action="/log_out" name="log_out">Log Out</button>
                             </div>
                         </form>
                         <form class="form" action="/product_review" method="post">
                             <div class="form-group">
-                                <button class="btn right-btn" type="submit" action="/product_review" name="add_product_review">New review</button>
+                                <button class="nr-btn fr right-btn" type="submit" action="/product_review" name="add_product_review">New review</button>
                             </div>
                         </form>
                     {% else %}
                     <p>Hello!</p>
-                        <button type="button" data-toggle="modal" data-target="#log_in_modal" class="btn left-btn">Log In</button>
-                        <button type="button" data-toggle="modal" data-target="#signup" class="btn right-btn">Sign Up</button>
+                        <button type="button" data-toggle="modal" data-target="#log_in_modal" class="nr-btn fl left-btn">Log In</button>
+                        <button type="button" data-toggle="modal" data-target="#signup" class="nr-btn fr right-btn">Sign Up</button>
                     {% endif %}
                 </div>
             </div>
@@ -76,7 +76,7 @@
                                 <label for="password"><span class="glyphicon glyphicon-lock"></span> Password</label>
                                 <input type="password" name="password" value="" class="form-control" placeholder="Enter password">
                             </div>
-                            <button type="submit" name="button" class="btn btn-default btn-success">Log In</button>
+                            <button type="submit" name="button" class="nr-btn nr-success sm-btn btn-rnd">Log In</button>
                         </form>
                     </div>
                     <!-- <div class="modal-footer">
@@ -95,27 +95,20 @@
                     <div class="modal-body">
                         <form class="sign-up" action="/sign_up" method="post">
                             <div class="form-group">
-                                <label for="name"><span class="glyphicon glyphicon-user"></span> First Name</label>
+                                <label for="name"><span class="glyphicon glyphicon-user"></span> Name</label>
                                 <!-- <div class="alert alert-warning">
                                 </div> -->
-                                <!-- <input required type="text" id="first_name" name="first_name"> -->
-                                <input id="first_name" name="name" value="" class="form-control" placeholder="First name" required type="first_name">
+                                <input id="name" type="text" name="name" value="" class="form-control" placeholder="Enter your name" required autofocus pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}">
                             </div>
                             <div class="form-group">
-                                <label for="name"><span class="glyphicon glyphicon-user"></span> Last Name</label>
-                                <!-- <div class="alert alert-warning">
-                                </div> -->
-                                <input id="last_name" name="name" value="" class="form-control" placeholder="Last name" required type="last_name">
-                            </div>
-                            <div class="form-group">
-                                <label for="username"><span class="glyphicon glyphicon-user"></span> Username</label>
+                                <label for="username"><span class="glyphicon glyphicon-globe"></span> Username</label>
                                 <input id="username" type="text" name="username" value="" class="form-control" placeholder="Enter username" size="6" maxlength="18" required>
                             </div>
                             <div class="form-group">
                                 <label for="password"><span class="glyphicon glyphicon-lock"></span> Password</label>
                                 <input id="password" type="password" name="password" value="" class="form-control" placeholder="Enter password" required>
                             </div>
-                            <button type="submit" name="button" class="btn btn-default btn-success">Sign up</button>
+                            <button type="submit" name="button" class="nr-btn nr-success sm-btn btn-rnd">Sign up</button>
                         </form>
                     </div>
                     <!-- <div class="modal-footer">

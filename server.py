@@ -435,6 +435,16 @@ def render_individual_user(user_id):
         user = user
     )
 
+@app.route('/loggedin_userpage/<user_name>')
+def render_user_from_login(user_name):
+
+    user = db.query("select users.id as user_id, users.user_name as user_name from users where users.user_name = '%s'" % user_name).namedresult()[0]
+
+    user_id=user.user_id
+
+    return redirect(
+        '/users/%s' % user_id
+    )
 
 @app.route('/product_review', methods=['POST', 'GET'])
 def render_review():
