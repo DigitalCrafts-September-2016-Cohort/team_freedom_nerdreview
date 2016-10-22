@@ -402,20 +402,27 @@ def render_individual_user(user_id):
     )
 
 
-@app.route('/product_review')
+@app.route('/product_review', methods=['POST', 'GET'])
 def render_review():
     main_cat_query = db.query('select name from main_cat').namedresult()
     second_cat_query = db.query('select name from secondary_cat').namedresult()
     product_query = db.query('select name from product').namedresult()
     company_query = db.query('select name from company').namedresult()
+    customize_main_cat = request.form.get('customize_main_cat')
+    customize_second_cat = request.form.get('customize_second_cat')
+    customize_product = request.form.get('customize_product')
+    customize_company = request.form.get('customize_company')
     return render_template(
         '/add_product_review.html',
+        customize_main_cat=customize_main_cat,
+        customize_second_cat=customize_second_cat,
+        customize_product=customize_product,
+        customize_company=customize_company,
         main_cat_list=main_cat_query,
         second_cat_list=second_cat_query,
         product_list=product_query,
         company_list=company_query
     )
-
 
 # Route and method for adding a new product review
 @app.route('/add_product_review', methods=['POST'])
@@ -494,7 +501,6 @@ def add_review():
         date=now.strftime("%Y-%m-%d")
     )
     return redirect('/')
-
 
 if __name__ == '__main__':
     app.run(debug=True)
