@@ -23,14 +23,14 @@ Nerd Review is a centralized platform that brings together product lovers of the
 All team members are students in the [Digital Crafts](https://digitalcrafts.com) September 2016 cohort. This project was initially completed as the first full-stack project for that curriculum.
 
 * [Che Blankenship](https://github.com/cheblankenship/):
-*Primary team role:* UI/UX evaluation, Quality control
+*Primary team role:* UI/UX evaluation, quality control
 *Contributions:*
 *Key code portions:*
 
 * [John Coppola](https://github.com/johnnycopes/):
-*Primary team role:* Front-end dreamer
-*Contributions:*
-*Key code portions:*
+*Primary team role:* Front-end warrior
+*Contributions:* Led the charge on all things visual/client-facing. Built a custom layout with focus on clean, robust design. Wrote and refactored HTML/CSS with an emphasis on simplicity, clarity, and flexibility. Organized site navigation. Made sure that we were pulling the right information from the database in the right places.
+*Key code portions:* The majority of the HTML and CSS. Made tweaks to route handlers on the back end.
 
 * [Robert Dunn](https://github.com/robdunn220/):
 *Primary team role:* Back-end ninja
@@ -39,7 +39,7 @@ All team members are students in the [Digital Crafts](https://digitalcrafts.com)
 
 * [Jesslyn Landgren](https://github.com/jesslynlandgren/):
 *Primary team role:* Organize all the things, back-end backup
-*Contributions:* Scrum master. Led daily stand up meetings and maintained virtual scrum board.  Provided initial project concept.  Helped Rob build out initial back-end, including route handlers, SQL queries, and place holder HTML/Jinja for pages.  Helped troubleshoot and tweak SQL queries throughout project.  Developed and implemented drop-down sort throughout site.
+*Contributions:* Scrum master. Led daily stand up meetings and maintained virtual scrum board.  Provided initial project concept.  Helped Rob build out initial back-end, including route handlers, SQL queries, and placeholder HTML/Jinja for pages.  Helped troubleshoot and tweak SQL queries throughout project.  Developed and implemented drop-down sort throughout site.
 *Key code portions:* Front-end and back-end for drop-down sort elements for tile-grid pages.  Co-wrote user login & signup route handlers, HTML.
 
 During this project we utilized the Scrum development process and philosophy.  Paired and mob programming were the focus in the initial and final stages, while mid and late stage work was primarily completed through individual but coordinated and co-located programming.  
@@ -64,7 +64,7 @@ During this project we utilized the Scrum development process and philosophy.  P
 * dotenv
 - HTML5
 - CSS
-- Javascript
+- JavaScript
 
 ##MVP:
 * The following pages:
@@ -73,9 +73,9 @@ During this project we utilized the Scrum development process and philosophy.  P
 - list all reviews
 - list all brands
 - list all users
-* Organize reviews into at least 3 category levels
+* Organize reviews into at least three category levels
 * User login and site membership
-* Site navigation through a fixed-right vertical nav bar with hierarchy links
+* Site navigation through a fixed-left vertical nav bar with hierarchical links
 * Sort list pages
 
 ## Challenges:
