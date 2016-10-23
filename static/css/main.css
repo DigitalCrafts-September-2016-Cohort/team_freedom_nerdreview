@@ -46,6 +46,11 @@ a {
 .fl { float: left; }
 .fr { float: right; }
 
+/* used to override JS rule that sets width */
+.width100 {
+    width: 100% !important;
+}
+
 .nr-btn {
     width: 50%;
     padding: 10px;
@@ -283,7 +288,7 @@ form.sign-up input:invalid:focus {
 /* --- Header --- */
 header {
   /*border: 4px solid purple;*/
-    padding: 0 10px 20px;
+    /*padding: 0 10px 20px;*/
     text-align: right;
 }
 
@@ -291,14 +296,19 @@ header h3 {
     margin-top: 50px;
 }
 
+.ind-header h3 {
+    margin-top: 21px;
+}
+
 .welcome {
     font-size: 3em;
     text-align: center;
 }
 
-.back-btn-link {
-    display: inline-block;
-    float: left;
+
+/* Back button (changes location depending on screen size) */
+.ind-body .back-btn-div {
+    display: none
 }
 
 .back-btn {
@@ -313,6 +323,10 @@ header h3 {
     transition: 175ms all ease-in-out;
 }
 
+.back-btn-link {
+    float: left;
+}
+
 .back-btn-link:hover > .back-btn,
 .back-btn-link:focus > .back-btn {
     border-color: #F4CF6F;
@@ -320,13 +334,15 @@ header h3 {
 
 .sort {
     margin-bottom: 40px;
-    padding-right: 10px;
+}
+
+.sort form {
+    float: right;
 }
 
 .sort select {
     /*border: 4px solid red;*/
     width: 230px;
-    float: right;
 }
 
 /* --- Body --- */
@@ -340,8 +356,7 @@ main {
 .main-wrapper {
     /*border: 4px solid green;*/
     margin: 0 auto;
-    padding: 5px 0;
-    max-width: 1720px;
+    padding: 5px 10px;
     position: relative;
     text-align: center;
 }
@@ -415,18 +430,21 @@ main a:focus {
 
 /* --- Header (individual item) --- */
 .ind-header {
-    width: 30%;
-    float: right;
-    max-width: 400px;
+    width: 100%;
+}
+
+.ind-header .rating {
+    white-space: nowrap;
+}
+
+.ind-header .img-list {
+    display: none;
 }
 
 /* --- Body (individual item) --- */
 .ind-body {
-    margin-top: 21px;
-    width: 70%;
-    display: inline-block;
-    /*text-align: center;*/
-    float: left;
+    text-align: left;
+    /*display: inline-block;*/
 }
 
     .ind-body .cf h1 {
@@ -434,7 +452,12 @@ main a:focus {
     }
 
     .ind-body .content {
+        text-align: center;
         position: relative;
+    }
+
+    .ind-body .img-list {
+        display: inline-block;
     }
 
     .ind-body .review {
@@ -442,14 +465,10 @@ main a:focus {
         font-size: 16px;
     }
 
-.img-list {
-    display: inline-block;
-}
-
 .img-tile {
-    margin-top: 20px;
-    height: 250px;
-    width: 250px;
+    margin-bottom: 20px;
+    height: 230px;
+    width: 230px;
     border: 1px solid #fff;
     display: flex;
     align-items: center;
@@ -507,6 +526,12 @@ main a:focus {
 MEDIA QUERIES
 ------------------------*/
 
+@media screen and (min-width: 380px) {
+    .content {
+        padding: 0 20px;
+    }
+}
+
 @media screen and (min-width: 480px) {
 
     html {
@@ -526,19 +551,14 @@ MEDIA QUERIES
         font-size: 30px;
     }
 
-    header,
-    .sort {
-        padding-left: 0;
-        padding-right: 0;
-    }
-
     header h3 {
         margin-top: 20px;
+        margin-bottom: 21px;
     }
 
 }
 
-@media screen and (min-width: 900px) {
+@media screen and (min-width: 1000px) {
 
     .homepage {
         width: 80%;
@@ -566,7 +586,34 @@ MEDIA QUERIES
 
     .main-wrapper {
         /*border: 4px solid green;*/
-        padding: 5px 40px;
+        padding: 5px 30px;
+        max-width: 1720px;
+    }
+
+    .ind-header {
+        float: right;
+        width: 300px;
+    }
+
+    .ind-header .back-btn-div {
+        display: none;
+    }
+
+    .ind-header .img-list {
+        display: inline-block;
+    }
+
+    .ind-body {
+        margin-top: 21px;
+        margin-left: 20px;
+    }
+
+    .ind-body .back-btn-div {
+        display: inline-block;;
+    }
+
+    .ind-body .img-list {
+        display: none;
     }
 
 }

@@ -8,7 +8,12 @@
 {% endblock %}
 
 {% block header %}
-<header class="ind-header">
+<header class="ind-header cf">
+    <div class="back-btn-div fl cf">
+        <a class="back-btn-link js-back cf" href="#0">
+            <i class="back-btn ion-arrow-left-a"></i>
+        </a>
+    </div>
     <div>
         <h1><a href="/products/{{review.prod_id}}">{{review.prod_name}}</a></h1>
         <h3>{{review.user_name}}</h3>
@@ -33,7 +38,7 @@
 
 {% block body %}
 <div class="ind-body">
-    <div class="cf">
+    <div class="back-btn-div cf">
         <a class="back-btn-link js-back cf" href="/reviews">
             <i class="back-btn ion-arrow-left-a"></i>
         </a>
