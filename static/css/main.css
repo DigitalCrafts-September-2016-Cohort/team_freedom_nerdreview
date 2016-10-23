@@ -56,6 +56,15 @@ a {
     font-family: 'Roboto Mono', Courier, monospace;
 }
 
+.nr-btn[disabled] {
+    background-color: lightgray;
+    color: gray;
+}
+
+.nr-btn[disabled]:hover {
+    text-decoration: none;
+}
+
 .btn-rnd {
     border-radius: 4px;
 }
@@ -91,7 +100,7 @@ a {
     color: rgba(0,0,0,0.87);
     position: fixed;
     height: 100%;
-    max-width: 400px;
+    max-width: 350px;
     width: 25%;
     display: flex;
     align-items: center;
@@ -330,7 +339,7 @@ main a:focus {
 
 /* --- Body (tiles) --- */
 .tile {
-    margin: 0 20px 30px 0;
+    margin: 0 10px 30px;
     width: 300px;
     height: 300px;
     text-align: center;
