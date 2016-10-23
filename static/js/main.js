@@ -1,17 +1,34 @@
 $(document).ready(function(){
 
     // SLIDE NAVBAR MENU
+    // Store slider position in JS local storage and set its position and the color of the mobile menu button accordingly
+    function markSliderPosition(position){
+        localStorage.setItem('sliderPosition', position);
+    }
+    if (localStorage.getItem('sliderPosition') === 'open') {
+        $('.nav-menu').css('left', '0');
+        $('.js-slide').css('color', '#fff');
+    } else {
+        $('.nav-menu').css('left', '-320');
+        $('.js-slide').css('color', '#F4CF6F');
+    }
+    // Change the slider position and mobile menu button on click
     $('.js-slide').on('click', function(){
         if ($('.nav-menu').position().left === 0) {
             $('.nav-menu').animate({left: -320});
+            $(this).css('color', '#F4CF6F');
+            markSliderPosition('closed');
         } else {
             $('.nav-menu').animate({left: 0});
+            $(this).css('color', '#fff');
+            markSliderPosition('open');
         }
     });
 
     $(window).resize(function() {
         if ($(window).width() > 1000) {
             $('.nav-menu').css('left', '0');
+            markSliderPosition('open');
         }
     });
 
