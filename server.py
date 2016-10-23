@@ -446,10 +446,11 @@ def render_user_from_login(user_name):
         '/users/%s' % user_id
     )
 
+# New review
 @app.route('/product_review', methods=['POST', 'GET'])
 def render_review():
     main_cat_query = db.query('select name from main_cat').namedresult()
-    second_cat_query = db.query('select name from secondary_cat').namedresult()
+    second_cat_query = db.query('prselect name from secondary_cat').namedresult()
     product_query = db.query('select name from product').namedresult()
     company_query = db.query('select name from company').namedresult()
     customize_main_cat = request.form.get('customize_main_cat')
@@ -467,6 +468,35 @@ def render_review():
         product_list=product_query,
         company_list=company_query
     )
+
+# # Sort the SUB CATEGORIES ##############################
+# @app.route('/product_review', methods=['POST'])
+# def sort_the_category():
+#     cat_query = db.query('select name from main_cat where id = %s' % cat_id)
+#     show_sub = db.query("select secondary_cat.id as secondary_cat_id, secondary_cat.name as secondary_cat_name, company.id as company_id, company.name as company_name, product.id as product_id, product.name as product_name from main_cat inner join secondary_cat on main_cat.id = secondary_cat.main_cat_id secondary_cat inner join sec_and_com on secondary_cat.id = sec_and_com.secondary_cat_id inner join company on company.id = sec_and_com.company_id inner join product on company.id = product.company_id where secondary_cat.main_cat_id = %s" % sec_cat_id)
+#     print show_sub
+#     return render_template(
+#         '/check.html',
+#         cat_id = cat_id,
+#         cat_query=cat_query,
+#         show_sub = show_sub.namedresult()
+#     )
+
+############################################################################################################
+select main_cat.id as main_cat_id, main_cat.name as main_cat_name, secondary_cat.id as secondary_cat_id, secondary_cat.name as secondary_cat_name, company.id as company_id, company.name as company_name, product.id as product_id, product.name as product_name
+from main_cat
+		inner join
+	secondary_cat on main_cat.id = secondary_cat.main_cat_id
+		inner join
+	sec_and_com on secondary_cat.id = sec_and_com.secondary_cat_id
+		inner join
+	company on company.id = sec_and_com.company_id
+		inner join
+	product on company.id = product.company_id
+		where
+	secondary_cat.main_cat_id = 1;
+############################################################################################################
+
 
 # Route and method for adding a new product review
 @app.route('/add_product_review', methods=['POST'])
