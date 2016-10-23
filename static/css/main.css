@@ -9,7 +9,6 @@ STYLES/LAYOUT
 
 html {
     font-size: 75%;
-    height: 100%;
 }
 
 body {
@@ -226,6 +225,43 @@ a {
     }
 
 /* ------ MAIN SECTION ----- */
+
+main {
+    -webkit-animation: fadein 300ms; /* Safari, Chrome and Opera > 12.1 */
+       -moz-animation: fadein 300ms; /* Firefox < 16 */
+        -ms-animation: fadein 300ms; /* Internet Explorer */
+         -o-animation: fadein 300ms; /* Opera < 12.1 */
+            animation: fadein 300ms;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Opera < 12.1 */
+@-o-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
 
 .js-slide {
     position: fixed;
@@ -603,16 +639,8 @@ MEDIA QUERIES
         width: 80%;
     }
 
-    .nav-menu {
-        background: #F4CF6F;
-        color: rgba(0,0,0,0.87);
-        position: fixed;
-        height: 100%;
-        top: 0;
-        left: 0px;
-        width: 320px;
-        display: flex;
-        align-items: center;
+    .nav-menu-list {
+        max-height: none;
     }
 
     .js-slide {
