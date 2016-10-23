@@ -9,42 +9,44 @@
 
 {% block header %}
 <header class="ind-header cf">
-    <div class="back-btn-div fl cf">
-        <a class="back-btn-link js-back cf" href="#0">
-            <i class="back-btn ion-arrow-left-a"></i>
-        </a>
-    </div>
+    <a class="back-btn-link js-back cf" href="#0">
+        <i class="back-btn ion-arrow-left-a"></i>
+    </a>
     <div>
         <h1><a href="/products/{{review.prod_id}}">{{review.prod_name}}</a></h1>
-        <h3>{{review.user_name}}</h3>
+        <h3><a href="/users/{{review.user_id}}">{{review.user_name}}</a></h3>
         <h1 class="rating">{{review.rating}} / 5 <i class="ion-star"></i></h1>
         <h1 class="date">{{review.review_date}}</h1>
     </div>
-    <ul class="img-list">
-    <!-- Include for loop to render images here -->
-        <li class="img-tile">
-            <i class="ion-image"></i>
-        </li>
-        <li class="img-tile">
-            <i class="ion-image"></i>
-        </li>
-        <li class="img-tile">
-            <i class="ion-image"></i>
-        </li>
-    <!-- /end for loop -->
-    </ul>
 </header>
 {% endblock %}
 
 {% block body %}
-<div class="ind-body">
-    <div class="back-btn-div cf">
-        <a class="back-btn-link js-back cf" href="/reviews">
-            <i class="back-btn ion-arrow-left-a"></i>
-        </a>
+<div class="ind-body cf">
+    <div class="btn-div">
+        <button class="nr-btn std-btn btn-rnd nr-color js-images-btn" href="#">
+            <h4>Hide images</h4>
+        </button>
     </div>
-    <div class="content review">
-        <p>{{review.review}}<p>
+    <div class="img-list">
+        <ul class="fr">
+        <!-- Include for loop to render images here -->
+            <li class="img-tile">
+                <i class="ion-image"></i>
+            </li>
+            <li class="img-tile">
+                <i class="ion-image"></i>
+            </li>
+            <li class="img-tile">
+                <i class="ion-image"></i>
+            </li>
+        <!-- /end for loop -->
+        </ul>
+    </div>
+    <div class="review">
+        <div class="wrapper">
+            <p>{{review.review}}<p>
+        </div>
     </div>
 </div>
 {% endblock %}

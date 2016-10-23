@@ -9,12 +9,10 @@
 {% endblock %}
 
 {% block header %}
-<header class="ind-header cf">
-    <div class="back-btn-div fl cf">
-        <a class="back-btn-link js-back cf" href="#0">
-            <i class="back-btn ion-arrow-left-a"></i>
-        </a>
-    </div>
+<header>
+    <a class="back-btn-link js-back cf" href="#0">
+        <i class="back-btn ion-arrow-left-a"></i>
+    </a>
     <div>
         <h1>{{product.name}}</h1>
         <h3>{{product_summary.review_count}} review{% if product_summary.review_count > 1 %}s{% endif %}</h3>
@@ -30,31 +28,18 @@
             </select>
         </form>
     </div>
-    <ul class="img-list">
-    <!-- Include for loop to render images here -->
-        <li class="img-tile">
-            <i class="ion-image"></i>
-        </li>
-        <li class="img-tile">
-            <i class="ion-image"></i>
-        </li>
-        <li class="img-tile">
-            <i class="ion-image"></i>
-        </li>
-    <!-- /end for loop -->
-    </ul>
 </header>
 {% endblock %}
 
 {% block body %}
-<div class="ind-body">
-    <div class="back-btn-div cf">
-        <a class="back-btn-link js-back cf" href="#0">
-            <i class="back-btn ion-arrow-left-a"></i>
-        </a>
+<div class="ind-body cf">
+    <div class="btn-div">
+        <button class="nr-btn std-btn btn-rnd nr-color js-images-btn" href="#">
+            <h4>Hide images</h4>
+        </button>
     </div>
-    <div class="content">
-        <ul class="img-list">
+    <div class="img-list">
+        <ul>
         <!-- Include for loop to render images here -->
             <li class="img-tile">
                 <i class="ion-image"></i>
@@ -67,6 +52,8 @@
             </li>
         <!-- /end for loop -->
         </ul>
+    </div>
+    <div class="tile-list">
         <ul>
             {% for review in reviews_list %}
             <li class="tile">

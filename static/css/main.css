@@ -58,6 +58,7 @@ a {
     outline: none;
     border: 0;
     background: #fff;
+    color: rgba(0,0,0,.87);
     border-radius: 0;
     position: relative;
     font-family: 'Roboto Mono', Courier, monospace;
@@ -88,6 +89,10 @@ a {
 .nr-success {
     background: #479c47;
     color: #fff;
+}
+
+.nr-color {
+    background: #F4CF6F;
 }
 
     .nr-btn:hover { text-decoration: underline; }
@@ -306,11 +311,7 @@ header h3 {
 }
 
 
-/* Back button (changes location depending on screen size) */
-.ind-body .back-btn-div {
-    display: none
-}
-
+/* Back button */
 .back-btn {
     font-size: 2em;
     float: left;
@@ -332,8 +333,9 @@ header h3 {
     border-color: #F4CF6F;
 }
 
+/* Sort menu */
 .sort {
-    margin-bottom: 40px;
+    margin-bottom: 21px;
 }
 
 .sort form {
@@ -437,32 +439,29 @@ main a:focus {
     white-space: nowrap;
 }
 
-.ind-header .img-list {
-    display: none;
-}
-
 /* --- Body (individual item) --- */
-.ind-body {
-    text-align: left;
-    /*display: inline-block;*/
+.img-list,
+.tile-list,
+.review {
+    display: block;
 }
 
-    .ind-body .cf h1 {
-        margin: 0;
+.btn-div {
+    margin-bottom: 40px;
+    text-align: right;
+}
+
+.img-list {
+    text-align: right;
+    float: right;
+}
+
+    .img-list button {
+        margin-bottom: 40px;
     }
 
-    .ind-body .content {
-        text-align: center;
-        position: relative;
-    }
-
-    .ind-body .img-list {
-        display: inline-block;
-    }
-
-    .ind-body .review {
-        text-align: left;
-        font-size: 16px;
+    .img-list ul {
+        display: block;
     }
 
 .img-tile {
@@ -478,11 +477,21 @@ main a:focus {
 .img-user {
     width: 150px;
     height: 150px;
+    margin-bottom: 40px;
 }
 
 .img-tile i {
     display: inline-block;
     font-size: 100px;
+}
+
+.review {
+    text-align: left;
+}
+
+.review .wrapper {
+    margin: 0 auto;
+    padding: 0 10px;
 }
 
 
@@ -518,19 +527,9 @@ main a:focus {
     height: 77px;
 }
 
-.customize .nr-btn {
-    background: #F4CF6F;
-}
-
 /*------------------------
 MEDIA QUERIES
 ------------------------*/
-
-@media screen and (min-width: 380px) {
-    .content {
-        padding: 0 20px;
-    }
-}
 
 @media screen and (min-width: 480px) {
 
@@ -541,6 +540,11 @@ MEDIA QUERIES
     .main-wrapper {
         /*border: 4px solid green;*/
         padding: 5px 20px;
+    }
+
+    .review .wrapper {
+        padding: 0;
+        width: 90%;
     }
 
     .homepage h1 {
@@ -557,6 +561,15 @@ MEDIA QUERIES
     }
 
 }
+
+@media screen and (min-width: 768px) {
+
+    .review .wrapper {
+        width: 90%;
+    }
+
+}
+
 
 @media screen and (min-width: 1000px) {
 
@@ -590,30 +603,11 @@ MEDIA QUERIES
         max-width: 1720px;
     }
 
-    .ind-header {
-        float: right;
-        width: 300px;
-    }
-
-    .ind-header .back-btn-div {
-        display: none;
-    }
-
-    .ind-header .img-list {
-        display: inline-block;
-    }
+    .
 
     .ind-body {
-        margin-top: 21px;
-        margin-left: 20px;
+        margin: 21 20px 0;
     }
 
-    .ind-body .back-btn-div {
-        display: inline-block;;
-    }
-
-    .ind-body .img-list {
-        display: none;
-    }
 
 }
