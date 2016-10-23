@@ -477,27 +477,80 @@ def render_user_from_login(user_name):
         '/users/%s' % user_id
     )
 
-@app.route('/product_review', methods=['POST', 'GET'])
+@app.route('/product_review_new', methods=['POST', 'GET'])
 def render_review():
-    main_cat_query = db.query('select name from main_cat').namedresult()
-    second_cat_query = db.query('select name from secondary_cat').namedresult()
-    product_query = db.query('select name from product').namedresult()
-    company_query = db.query('select name from company').namedresult()
-    customize_main_cat = request.form.get('customize_main_cat')
-    customize_second_cat = request.form.get('customize_second_cat')
-    customize_product = request.form.get('customize_product')
-    customize_company = request.form.get('customize_company')
+
+    #Taking main category choice and returning list of secondary categories to be displayed in next drop down
+    main_cat_list = db.query('select name from main_cat').namedresult()
+    current_main_cat = request.form.get('main_cat_name')
+    if current_main_cat is None:
+        sec_cat_list = []
+    elif current_main_cat == 'none':
+        sec_cat_list = []
+    else:
+        sec_cat_list = db.query("select secondary_cat.name as sec_cat_name, secondary_cat.id as sec_cat_id, main_cat.name as main_cat_name, main_cat.id as main_cat_id from secondary_cat inner join main_cat on secondary_cat.main_cat_id = main_cat.id where main_cat.name = '%s'" % current_main_cat).namedresult()
+
+    #Taking secondary category choice and returning list of brands to be displayed in next drop down
+    current_secondary_cat = request.form.get('sec_cat_name')
+    if current_secondary_cat is None:
+        brand_list = []
+    elif current_secondary_cat == 'none':
+        brand_list = []
+    else:
+        brand_list = db.query("select distinct company.name as brand_name from company inner join product on product.company_id = company.id inner join product_uses_category on product.id = product_uses_category.product_id inner join secondary_cat on product_uses_category.secondary_cat_id = secondary_cat.id where secondary_cat.name = '%s'" % current_secondary_cat).namedresult()
+
+    #Taking brand choice and returning list of products to be displayed in next drop down
+    current_brand = request.form.get('brand_name')
+    if current_brand is None:
+        product_list = []
+    elif current_brand == 'none':
+        product_list = []
+    else:
+        product_list = db.query("select product.name as product_name from product inner join company on product.company_id = company.id where company.name = '%s'" % current_brand).namedresult()
+
+
     return render_template(
-        '/product_review.html',
-        customize_main_cat=customize_main_cat,
-        customize_second_cat=customize_second_cat,
-        customize_product=customize_product,
-        customize_company=customize_company,
-        main_cat_list=main_cat_query,
-        second_cat_list=second_cat_query,
-        product_list=product_query,
-        company_list=company_query
+        '/product_review_new.html',
+        main_cat_list = main_cat_list,
+        current_main_cat = current_main_cat,
+        sec_cat_list = sec_cat_list,
+        current_secondary_cat = current_secondary_cat,
+        brand_list = brand_list,
+        current_brand = current_brand,
+        product_list = product_list
     )
+
+
+# customize_main_cat=customize_main_cat,
+# customize_second_cat=customize_second_cat,
+# customize_product=customize_product,
+# customize_company=customize_company,
+# main_cat_list=main_cat_query,
+# second_cat_list=second_cat_query,
+# product_list=product_query,
+# company_list=company_query
+
+# @app.route('/product_review', methods=['POST', 'GET'])
+# def render_review():
+#     main_cat_query = db.query('select name from main_cat').namedresult()
+#     second_cat_query = db.query('select name from secondary_cat').namedresult()
+#     product_query = db.query('select name from product').namedresult()
+#     company_query = db.query('select name from company').namedresult()
+#     customize_main_cat = request.form.get('customize_main_cat')
+#     customize_second_cat = request.form.get('customize_second_cat')
+#     customize_product = request.form.get('customize_product')
+#     customize_company = request.form.get('customize_company')
+#     return render_template(
+#         '/product_review.html',
+#         customize_main_cat=customize_main_cat,
+#         customize_second_cat=customize_second_cat,
+#         customize_product=customize_product,
+#         customize_company=customize_company,
+#         main_cat_list=main_cat_query,
+#         second_cat_list=second_cat_query,
+#         product_list=product_query,
+#         company_list=company_query
+#     )
 
 # Route and method for adding a new product review
 @app.route('/add_product_review', methods=['POST'])
