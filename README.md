@@ -27,19 +27,18 @@ All team members are students in the [Digital Crafts](https://digitalcrafts.com)
 During this project we utilized the Scrum development process and philosophy.  Paired and mob programming were the focus in the initial and final stages, while mid and late stage work was primarily completed through individual but coordinated and co-located programming.  
 
 ####Team Freedom
-* [Che Blankenship](https://github.com/cheblankenship/):--
-
-**Primary team role:** UI/UX evaluation, Quality control
-**Contributions:**
+* [Che Blankenship](https://github.com/cheblankenship/):  
+**Primary team role:** UI/UX evaluation, Quality control  
+**Contributions:**  
 **Key code portions:**
 
-* [John Coppola](https://github.com/johnnycopes/):--
-**Primary team role:** Front-end dreamer--
-**Contributions:**
-**Key code portions:**
+* [John Coppola](https://github.com/johnnycopes/):  
+**Primary team role:** Front-end dreamer  
+**Contributions:**  
+**Key code portions:**  
 
-* [Robert Dunn](https://github.com/robdunn220/):--
-**Primary team role:** Back-end ninja--
+* [Robert Dunn](https://github.com/robdunn220/):  
+**Primary team role:** Back-end ninja  
 **Contributions:**
 **Key code portions:**
 
