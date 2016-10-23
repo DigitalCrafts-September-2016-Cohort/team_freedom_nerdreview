@@ -28,6 +28,7 @@ During this project we utilized the Scrum development process and philosophy.  P
 
 ####Team Freedom
 * [Che Blankenship](https://github.com/cheblankenship/):--
+
 **Primary team role:** UI/UX evaluation, Quality control
 **Contributions:**
 **Key code portions:**
