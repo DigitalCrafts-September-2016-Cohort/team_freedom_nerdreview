@@ -1,4 +1,18 @@
 $(document).ready(function(){
+    // SLIDE NAVBAR MENU
+    $('.js-slide').on('click', function(){
+        if ($('.nav-menu').position().left === 0) {
+            $('.nav-menu').animate({left: -320});
+        } else {
+            $('.nav-menu').animate({left: 0});
+        }
+    });
+
+    //function(){
+    //     $('navbar').animate({width: 320});
+    //     $('main').animate({left: 320});
+    // });
+
     // BACK BUTTON
     // Back button goes back one page on click
     // Doesn't work perfectly: if you come from a different website, it'll take you back there instead of down a level
@@ -28,6 +42,6 @@ $(document).ready(function(){
     // INDIVIDUAL CONTENT
     // On individual content pages, set the height of the tiles in the main/header and main/body to be even
     // Script stops running if .img-list isn't on the page, so keep this part at bottom
-    var imgListTop = $('.img-list').position().top;
-    $('.content').css('top', imgListTop - 68);
+    // var imgListTop = $('.img-list').position().top;
+    // $('.content').css('top', imgListTop - 71);
 });
