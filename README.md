@@ -1,7 +1,6 @@
 #Nerd Review
 ######
-[Live Project - http://nerdreview.co](https://nerdreview.co)  | [Overview](https://github.com/DigitalCrafts-September-2016-Cohort/team_freedom_nerdreview#overview)  |  [Team](https://github.com/DigitalCrafts-September-2016-Cohort/team_freedom_nerdreview#team-members&roles)  |  
-[What We Used](https://github.com/DigitalCrafts-September-2016-Cohort/team_freedom_nerdreview#what-we-used)  |  [MVP](https://github.com/DigitalCrafts-September-2016-Cohort/team_freedom_nerdreview#mvp)  |  [Challenges](https://github.com/DigitalCrafts-September-2016-Cohort/team_freedom_nerdreview#challenges-and-solutions) [Contributing](https://github.com/DigitalCrafts-September-2016-Cohort/team_freedom_nerdreview#contribute-to-nerd-review)
+[Live Project - http://nerdreview.co](https://nerdreview.co)  | [Overview](https://github.com/DigitalCrafts-September-2016-Cohort/team_freedom_nerdreview#overview)  |  [Team](https://github.com/DigitalCrafts-September-2016-Cohort/team_freedom_nerdreview#team-members--roles)  |  [What We Used](https://github.com/DigitalCrafts-September-2016-Cohort/team_freedom_nerdreview#what-we-used)  |  [MVP](https://github.com/DigitalCrafts-September-2016-Cohort/team_freedom_nerdreview#mvp-minimum-viable-product)  |  [Challenges](https://github.com/DigitalCrafts-September-2016-Cohort/team_freedom_nerdreview#challenges--solutions) [Contributing](https://github.com/DigitalCrafts-September-2016-Cohort/team_freedom_nerdreview#contribute-to-nerd-review)
 
 ##Overview:
 Nerd Review is a centralized platform that brings together product lovers of the obsessive and methodical variety from their respective corners of the internet.  The audience of the dedicated product review bloggers out there can often be limited to existing members of that community.  If you are a nerdy consumer branching into a new area or just researching every major purchase like a PhD thesis, your progress can be slowed by the fact that if you aren't already aware of that particular niche product review blog.  If you don't already know about it, you can't find it.  This web app provides a functioning framework for such a dedicated review site that bridges the gap between professional product reviewers and average consumers.  
@@ -65,21 +64,25 @@ All team members are students in the [Digital Crafts](https://digitalcrafts.com)
 * Javascript
 
 ##MVP (Minimum Viable Product):
-This was the first full-stack project for all team members, therefore our first experience at deciding on an MVP.  One challenge we faced was a blurry line between our MVP and stretch goals
+This was the first full-stack project for all team members, therefore our first experience at deciding on an MVP.  One challenge we faced was a blurring the line between our MVP and stretch goals due to a desire to make efficient use of our time, dispatching some members to advanced tasks if troubleshooting an MVP issue was a one person job.
 
-###Stretch Goals
+**Initial MVP**
+* The following pages: individual review, individual project (with all reviews), list of all reviews, list of all brands, list of all users
+* Products organized into a category hierarchy at least 3 levels deep
+* Consistent formatting for all pages including a vertical fixed-right nav bar and a main content area displaying items as grid tiles
+* User session tracking (log in, log out, sign up)
+* Drop-down sort menu with auto refresh for all pages displaying grid tiles
+* Back button
 
+We started incorporating stretch goals about 3 days before the project deadline (as soon as we knew that we would be able to reach MVP ahead of the deadline), but before our MVP was officially deployed.
 
-* The following pages:
-  - individual review
-  - individual project (with all reviews)
-  - list all reviews
-  - list all brands
-  - list all users
-* Organize reviews into at least 3 category levels
-* User login and site membership
-* Site navigation through a fixed-right vertical nav bar with hierarchy links
-* Sort list pages
+**Stretch Goals**
+* Site responsiveness
+* User log in and sign up without leaving the current page, instead as modal dialogs
+* Page title acts as a breadcrumb and supplements back button
+* "Add a review" form with select elements showing choices of existing categories, brands, and products.
+* Validate inputs on user log in and sign up forms before submission
+* Search products (from home page)
 
 ## Challenges & Solutions:
 **Some of the biggest challenges we faced with this project build included:**

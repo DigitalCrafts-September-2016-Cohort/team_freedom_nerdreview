@@ -56,4 +56,7 @@ $(document).ready(function(){
         });
     })()
 
+    // MODAL FORM VALIDATION
+    $('#myForm').validator();
+
 });
