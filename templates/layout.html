@@ -45,6 +45,9 @@
             </div>
         </nav>
         <main class="main cf">
+            <a class="js-slide" href="#0">
+                <i class="ion-ios-list"></i>
+            </a>
             {% block homepage %}
                 <div class="main-wrapper cf">
                     {% block header %}
@@ -67,21 +70,22 @@
                         <h4 style="color:black;">Log in to Nerd Review:</h4>
                     </div>
                     <div class="modal-body">
-                        <form class="log-in" action="/log_in" method="post">
-                            <div class="form-group">
-                                <label for="username"><span class="glyphicon glyphicon-user"></span> Username</label>
-                                <input type="text" name="username" value="" class="form-control" placeholder="Enter username">
+                        <form class="log-in" action="/log_in" method="post" data-toggle="validator">
+                            <div class="form-group has-feedback">
+                                <label for="username"><span class="glyphicon glyphicon-globe"></span> Username</label>
+                                <input type="text" name="username" value="" class="form-control" placeholder="Enter username" data-minlength="6" data-error="Usernames are 6+ characters" required>
+                                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                                <div class="help-block with-errors"></div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group has-feedback">
                                 <label for="password"><span class="glyphicon glyphicon-lock"></span> Password</label>
-                                <input type="password" name="password" value="" class="form-control" placeholder="Enter password">
+                                <input type="password" name="password" value="" class="form-control" placeholder="Enter password" data-minlength="6" data-error="Passwords are 6+ characters" required>
+                                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                                <div class="help-block with-errors"></div>
                             </div>
                             <button type="submit" name="button" class="nr-btn nr-success sm-btn btn-rnd">Log In</button>
                         </form>
                     </div>
-                    <!-- <div class="modal-footer">
-
-                    </div> -->
                 </div>
             </div>
         </div>
@@ -90,37 +94,41 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" name="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 style="color:black;">Sign Up</h4>
+                        <h4 style="color:black;">Sign Up with Nerd Review</h4>
                     </div>
                     <div class="modal-body">
-                        <form class="sign-up" action="/sign_up" method="post">
-                            <div class="form-group">
+                        <form class="sign-up" action="/sign_up" method="post" data-toggle="validator">
+                            <div class="form-group has-feedback">
                                 <label for="name"><span class="glyphicon glyphicon-user"></span> Name</label>
-                                <!-- <div class="alert alert-warning">
-                                </div> -->
-                                <input id="name" type="text" name="name" value="" class="form-control" placeholder="Enter your name" required autofocus>
+                                <input id="name" type="text" name="name" value="" class="form-control" placeholder="Enter your name" size="6" maxlength="18" data-minlength="6" data-error="Name must be at least 6 characters long" required>
+                                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                                <div class="help-block with-errors"></div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group has-feedback">
                                 <label for="username"><span class="glyphicon glyphicon-globe"></span> Username</label>
-                                <input id="username" type="text" name="username" value="" class="form-control" placeholder="Enter username" size="6" maxlength="18" required>
+                                <input id="username" type="text" name="username" value="" class="form-control" placeholder="Enter username" size="6" maxlength="18" data-minlength="6" data-error="Username must be at least 6 characters long" required>
+                                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                                <div class="help-block with-errors"></div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group has-feedback">
                                 <label for="password"><span class="glyphicon glyphicon-lock"></span> Password</label>
-                                <input id="password" type="password" name="password" value="" class="form-control" placeholder="Enter password" required>
+                                <input id="password" type="password" name="password" value="" class="form-control" placeholder="Enter password" size="6" maxlength="18" data-minlength="6" data-error="Password must be at least 6 characters long" required>
+                                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                                <div class="help-block with-errors"></div>
                             </div>
                             <button type="submit" name="button" class="nr-btn nr-success sm-btn btn-rnd">Sign up</button>
                         </form>
                     </div>
-                    <!-- <div class="modal-footer">
-                        <button type="button" name="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div> -->
                 </div>
             </div>
         </div>
 
         <!-- JavaScript -->
         <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
+        <script>if (!window.jQuery) { document.write('<script src="/static/js/jquery-3.1.1.min.js"><\/script>'); }</script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-        <script type="text/javascript" src="../static/js/main.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
+        <script type="text/javascript" src="/static/js/main.js"></script>
     </body>
 </html>

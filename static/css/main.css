@@ -7,7 +7,8 @@ STYLES/LAYOUT
     box-sizing: border-box;
 }
 
-html, body {
+html {
+    font-size: 75%;
     height: 100%;
 }
 
@@ -16,6 +17,7 @@ body {
     background: rgba(0,0,0,0.87);
     font-size: 16px;
     color: #fff;
+    height: 100%;
 }
 
 .nav-menu a, form, input[type="text"] {
@@ -56,6 +58,15 @@ a {
     font-family: 'Roboto Mono', Courier, monospace;
 }
 
+.nr-btn[disabled] {
+    background-color: lightgray;
+    color: gray;
+}
+
+.nr-btn[disabled]:hover {
+    text-decoration: none;
+}
+
 .btn-rnd {
     border-radius: 4px;
 }
@@ -90,9 +101,11 @@ a {
     background: #F4CF6F;
     color: rgba(0,0,0,0.87);
     position: fixed;
+    z-index: 2;
     height: 100%;
-    max-width: 400px;
-    width: 25%;
+    top: 0;
+    left: -320px;
+    width: 320px;
     display: flex;
     align-items: center;
 }
@@ -200,47 +213,41 @@ a {
         border-left: 1px solid #F4CF6F;
     }
 
-/* Forms */
-form.sign-up input:valid:focus {
-    transition: all 175ms;
-    background-color: rgba(92,184,92,0.4);
-}
-
-form.sign-up input:invalid:focus {
-    transition: all 175ms;
-    background-color: rgba(217,83,79,0.4);
-}
-
-.requirements {
-    content: "Name, username and password must be at least 6 characters each"
-    max-height: 200px;
-    padding: 20px;
-}
-
 /* ------ MAIN SECTION ----- */
+
+.js-slide {
+    position: fixed;
+    font-size: 80px;
+    margin-left: 62px;
+    color: #fff !important;
+    z-index: 3;
+    bottom: 70px;
+    right: 38px;
+}
 
 /* --- Homepage --- */
 .homepage {
-    position: absolute;
-    top: 0;
-    left: 25%;
-    width: 75%;
-    height: 100%;
+    margin: 0 auto;
+    width: 90%;
+    height: 100vh;
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    flex-flow: column;
     align-items: center;
+    justify-content: space-between;
+    position: relative;
+    text-align: center;
 }
 
 .homepage h1 {
     /*border: 4px solid red;*/
     margin: 40px 0 0 0;
-    font-size: 3em;
+    font-size: 2em;
 }
 
 .homepage h2 {
     /*border: 4px solid orange;*/
     margin: 0 0 60px 0;
+    font-size: 24px;
 }
 
 .homepage .credit {
@@ -259,8 +266,12 @@ form.sign-up input:invalid:focus {
 /* --- Header --- */
 header {
   /*border: 4px solid purple;*/
-    padding-bottom: 20px;
+    padding: 0 10px 20px;
     text-align: right;
+}
+
+header h3 {
+    margin-top: 50px;
 }
 
 .welcome {
@@ -292,6 +303,7 @@ header {
 
 .sort {
     margin-bottom: 40px;
+    padding-right: 10px;
 }
 
 .sort select {
@@ -304,17 +316,15 @@ header {
 main {
     /*border: 4px solid orange;*/
     /*display: flex;*/
-    float: right;
-    width: 75%;
-    align-items: center;
+    min-height: 100%;
+    position: relative;
 }
 
 .main-wrapper {
     /*border: 4px solid green;*/
-    /*display: flex;
-    flex-direction: column;*/
     margin: 0 auto;
-    padding: 5px 40px;
+    padding: 5px 0;
+    max-width: 1720px;
     position: relative;
     text-align: center;
 }
@@ -330,7 +340,7 @@ main a:focus {
 
 /* --- Body (tiles) --- */
 .tile {
-    margin: 0 20px 30px 0;
+    margin: 0 10px 30px;
     width: 300px;
     height: 300px;
     text-align: center;
@@ -478,4 +488,68 @@ main a:focus {
 
 /*------------------------
 MEDIA QUERIES
--------------------------*
+------------------------*/
+
+@media screen and (min-width: 480px) {
+
+    html {
+        font-size: 100%;
+    }
+
+    .main-wrapper {
+        /*border: 4px solid green;*/
+        padding: 5px 20px;
+    }
+
+    .homepage h1 {
+        font-size: 3em;
+    }
+
+    .homepage h2 {
+        font-size: 30px;
+    }
+
+    header,
+    .sort {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    header h3 {
+        margin-top: 20px;
+    }
+
+}
+
+@media screen and (min-width: 900px) {
+
+    .homepage {
+        width: 80%;
+    }
+
+    .nav-menu {
+        background: #F4CF6F;
+        color: rgba(0,0,0,0.87);
+        position: fixed;
+        height: 100%;
+        top: 0;
+        left: 0px;
+        width: 320px;
+        display: flex;
+        align-items: center;
+    }
+
+    .js-slide {
+        display: none;
+    }
+
+    main {
+        margin-left: 320px;
+    }
+
+    .main-wrapper {
+        /*border: 4px solid green;*/
+        padding: 5px 40px;
+    }
+
+}
