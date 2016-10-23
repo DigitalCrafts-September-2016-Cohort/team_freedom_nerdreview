@@ -195,18 +195,14 @@ def render_sub_cat_products(cat_id, sub_cat_id):
 
 
 #Displays a page for a single product, navbar menu stays the same
-@app.route('/products/<product_id>')
+@app.route('/products/<product_id>', methods = ['POST','GET'])
 def disp_individual_product(product_id):
     #Defines 2 iterable lists for sort choices: one for the value attributes from form and one for the names to display
     sort_choice_list = ['rating_low',
-                        'prod_name_az',
-                        'prod_name_za',
                         'date_desc',
                         'date_asc']
 
     sort_choice_list_names = ['Rating (low to high)',
-                              'Product Name (A-Z)',
-                              'Product Name (Z-A)',
                               'Date (new to old)',
                               'Date (old to new)']
     #Zips the two lists together so that we can iterate over the corresponding pairs
@@ -218,12 +214,6 @@ def disp_individual_product(product_id):
     if sort_choice == 'rating_low':
         sort_method = 'rating'
         direction = 'asc'
-    elif sort_choice == 'prod_name_az':
-        sort_method = 'prod_name_upper'
-        direction = 'asc'
-    elif sort_choice == 'prod_name_za':
-        sort_method = 'prod_name_upper'
-        direction = 'desc'
     elif sort_choice == 'date_desc':
         sort_method = 'review_date'
         direction = 'desc'
@@ -234,7 +224,6 @@ def disp_individual_product(product_id):
         #Default or fall back sort method (not dependent on drop-down)
         sort_method = 'rating'
         direction = 'desc'
-
 
     # Gets the main category id number for the product
     main_cat = db.query('select main_cat.id as main_id from product inner join product_uses_category on product.id = product_uses_category.product_id inner join secondary_cat on product_uses_category.secondary_cat_id = secondary_cat.id inner join main_cat on secondary_cat.main_cat_id = main_cat.id where product.id = %s' % product_id).namedresult()[0].main_id
@@ -251,7 +240,7 @@ def disp_individual_product(product_id):
     product_reviews_summary_query = db.query('select count(review.id) as review_count, round(avg(review.rating), 2) as avg_rating from product inner join review on review.product_id = product.id and product.id = %s' % product_id)
 
     #Gets all the reviews for the indiviudal product from above
-    reviews_query = db.query('select review.id as review_id, review.rating as rating, date(review.date) as review_date, users.user_name from product inner join review on product.id = review.product_id inner join users on users.id = review.user_id and product.id = %s' % product_id)
+    reviews_query = db.query('select review.id as review_id, review.rating as rating, date(review.date) as review_date, users.user_name from product inner join review on product.id = review.product_id inner join users on users.id = review.user_id and product.id = %s order by %s %s' % (product_id, sort_method, direction))
 
     return render_template(
         'individual_product.html',

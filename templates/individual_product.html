@@ -31,9 +31,9 @@
 </header>
 {% endblock %}
 
-<!-- {% block sort %}
+{% block sort %}
 <div class="sort cf">
-    <form action="/reviews" method="post">
+    <form action="/products/{{product.id}}" method="post">
         <select class="form-control" name="sortby" onchange="this.form.submit()">
             <option selected value="rating_desc">Rating (high to low)</option>
             {% for choice, choice_name in sort_choices %}
@@ -42,7 +42,7 @@
         </select>
     </form>
 </div>
-{% endblock %} -->
+{% endblock %}
 
 {% block body %}
 <div class="ind-body">
