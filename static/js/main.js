@@ -44,4 +44,7 @@ $(document).ready(function(){
     // Script stops running if .img-list isn't on the page, so keep this part at bottom
     // var imgListTop = $('.img-list').position().top;
     // $('.content').css('top', imgListTop - 71);
+
+    // MODAL FORM VALIDATION
+    $('#myForm').validator()
 });
