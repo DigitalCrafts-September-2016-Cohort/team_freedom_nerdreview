@@ -213,8 +213,9 @@ $(window).resize(function() {
 ![Modal](static/img/modal_dialog_feedback.png)
 ![Cat_SubCat](static/img/categories_subcategories.png)
 ![Individual Product](static/img/individual_product.png)
-![Responsive No Menu](static/img/responsive_nomenu.png)
-![Responsive with Menu](static/img/responsive_menu.png)
+![iPhone6](static/img/iphone6.png)
+![iPhone6 without Menu](static/img/iphone6_nomenu.png)
+![iPad](static/img/ipad.png)
 
 ********
 
