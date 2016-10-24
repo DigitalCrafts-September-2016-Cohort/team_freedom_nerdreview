@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 {% extends 'layout.html' %}
 
 {% block nav %}
@@ -15,7 +16,6 @@
     <h3>Tell the world what you think</h3>
 </header>
 {% endblock %}
-
 {% block body %}
 <div class="new-review row">
     <div class="inputs container-fluid col-xs-7 col-xs-offset-1">
@@ -24,12 +24,13 @@
             <div class="form-group">
                 <label for="main_cat_name">Main category</label>
                 {% if customize_main_cat %}
-                <input id="main_cat_name" class="form-control" type="text" name="main_cat_name" value="{{main_cat_name}}">
+                    <input id="main_cat_name" class="form-control" type="text" name="main_cat_name" value="{{main_cat_name}}">
                 {% else %}
-                <select id="main_cat_name" class="main_cat_name form-control" name="main_cat_name">
-                    <option value=""></option>
+                <select id="main_cat_name" class="main_cat_name form-control" name="main_cat_name" value="">
+                    <option value="empty"></option>
+
                     {% for main_name in main_cat_list %}
-                    <option value="{{main_name.name}}">{{main_name.name}}</option>
+                        <option value="{{main_name.name}}">{{main_name.name}}</option>
                     {% endfor %}
                 </select>
                 {% endif %}
@@ -37,14 +38,16 @@
             <div class="form-group">
                 <label for="second_cat_name">Secondary category</label>
                 {% if customize_second_cat %}
-                <input id="second_cat_name" class="form-control" type="text" name="second_cat_name" value="{{name}}">
+                    <input id="second_cat_name" class="form-control" type="text" name="second_cat_name" value="{{name}}">
                 {% else %}
-                <select id="second_cat_name" class="form-control" class="second_cat_name" name="second_cat_name">
-                    <option value=""></option>
-                    {% for second_name in second_cat_list %}
-                    <option value="{{second_name.name}}">{{second_name.name}}</option>
-                    {% endfor %}
-                </select>
+
+                    <select id="second_cat_name" class="form-control second_cat_name" name="second_cat_name">
+                        <option value="empty"></option>
+                            {% for second_name in second_cat_list %}
+                                <option value="{{second_name.name}}">{{second_name.name}}</option>
+                            {% endfor %}
+                    </select>
+
                 {% endif %}
             </div>
             <div class="form-group">

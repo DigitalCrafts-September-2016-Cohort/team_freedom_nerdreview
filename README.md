@@ -4,7 +4,7 @@
 [Live Project](https://nerdreview.co)   |  [Overview](https://github.com/DigitalCrafts-September-2016-Cohort/team_freedom_nerdreview#overview)   |   [Team](https://github.com/DigitalCrafts-September-2016-Cohort/team_freedom_nerdreview#team-members--roles)   |   [What We Used](https://github.com/DigitalCrafts-September-2016-Cohort/team_freedom_nerdreview#what-we-used)   |   [MVP](https://github.com/DigitalCrafts-September-2016-Cohort/team_freedom_nerdreview#mvp-minimum-viable-product)   |   [Challenges](https://github.com/DigitalCrafts-September-2016-Cohort/team_freedom_nerdreview#challenges--solutions)   |   [Code](https://github.com/DigitalCrafts-September-2016-Cohort/team_freedom_nerdreview#code-snippets)   | [Screenshots](https://github.com/DigitalCrafts-September-2016-Cohort/team_freedom_nerdreview#screenshots)   |   [Contributing](https://github.com/DigitalCrafts-September-2016-Cohort/team_freedom_nerdreview#contribute-to-nerd-review)
 
 ##Overview:
-Nerd Review is a centralized platform that brings together product lovers of the obsessive and methodical variety from their respective corners of the internet.  The audience of the dedicated product review bloggers out there can often be limited to existing members of that community.  If you are a nerdy consumer branching into a new area or just researching every major purchase like a PhD thesis, your progress can be slowed by the fact that if you aren't already aware of that particular niche product review blog.  If you don't already know about it, you can't find it.  This web app provides a functioning framework for such a dedicated review site that bridges the gap between professional product reviewers and average consumers.  
+Nerd Review is a centralized platform that brings together product lovers of the obsessive and methodical variety from their respective corners of the internet.  The audience of the dedicated product review bloggers out there can often be limited to existing members of that community.  If you are a cautious consumer branching into a new area or just researching every major purchase like a PhD thesis, your progress can be slowed by the fact that if you aren't already aware of that particular niche product review blog.  If you don't already know about it, you can't find it.  This web app provides a functioning framework for such a dedicated review site that bridges the gap between professional product reviewers and average consumers.  
 
 **Our conceptual goals for the site:**
 * Eliminate any commerce connection to keep site content impartial
@@ -19,23 +19,23 @@ Nerd Review is a centralized platform that brings together product lovers of the
 
 ##Team Members & Roles:
 **Click on each member's name to see their GitHub profile**
-All team members are students in the [Digital Crafts](https://digitalcrafts.com) September 2016 cohort. This project was initially completed as the first full-stack project for that curriculum and utilized the Scrum development process and philosophy.  Paired and mob programming were the focus in the initial and final stages, while mid and late stage work was primarily completed through individual but coordinated and co-located programming.
+All team members are students in the [Digital Crafts](https://digitalcrafts.com) September 2016 cohort. This project was initially completed as the first full-stack project for that curriculum and utilized the SCRUM development process and philosophy.  Paired and mob programming were the focus in the initial and final stages, while mid- and late-stage work was primarily completed through individual but coordinated and co-located programming.
 
 ####Team Freedom
 * [Che Blankenship](https://github.com/cheblankenship/)  
 **Primary team role:** UI/UX evaluation, Quality control<br />
-**Contributions:**  Regularly studied all code throughout project, particularly SQL queries on the backend (server.py) for redundancies or erroneous returns.  Investigated and fleshed out a possible solution for filtered drop-down select elements on the 'add a review page'.  Led team in continuously evaluating user-interface and user-experience of site, including semantics and critique of supported functionalities.<br />
+**Contributions:**  Regularly studied all code throughout project, particularly SQL queries on the back-end (server.py) for redundancies or erroneous returns.  Investigated and fleshed out a possible solution for filtered drop-down select elements on the 'add a review page'.  Led team in continuously evaluating user-interface and user-experience of site, including semantics and critique of supported functionalities.<br />
 **Key code portions:** Co-wrote user login, sign up, and early iterations of the 'add a review form'.
 
 * [John Coppola](https://github.com/johnnycopes/)  
 **Primary team role:** Front-end warrior<br />
 **Contributions:** Led the charge on all things visual/client-facing. Built a custom, responsive layout from scratch with focus on clean, robust design. Wrote and refactored HTML/CSS with an emphasis on simplicity, clarity, and flexibility. Organized site navigation. Made sure that we were pulling the right information from the database in the right places.<br />
-**Key code portions:** Most of the HTML, CSS and JavaScript. Made tweaks to route handlers on the back end as well.
+**Key code portions:** Most of the HTML, CSS and JavaScript. Made tweaks to route handlers on the back-end as well.
 
 * [Robert Dunn](https://github.com/robdunn220/)  
 **Primary team role:** Back-end ninja<br />
 **Contributions:** Database design and implementation. Route handlers and queries. Just making sure the manipulation and display of the data in the database was working well with the design concept.<br />
-**Key code portions:** server.py, Jinja in some of the HTML
+**Key code portions:** Most of the Python code (server.py) and Jinja tags in the HTML documents
 
 * [Jesslyn Landgren](https://github.com/jesslynlandgren/)  
 **Primary team role:** Organize all the things, Front-end/Back-end backup<br />
@@ -60,7 +60,8 @@ All team members are students in the [Digital Crafts](https://digitalcrafts.com)
   * [Validator - plugin](https://1000hz.github.io/bootstrap-validator/)
 
 **Other:**  
-* PostGresSQL
+* TinyMCE
+* PostgreSQL
 * Amazon Web Services EC2
 * Apache
 
@@ -91,7 +92,7 @@ We started incorporating stretch goals about three days before the project deadl
 
 1.  **Challenge:** Sorting grid pages without implementing a significant amount of JavaScript. Needed to display a list of aliased sort options that would reload the page automatically on selection.  
 
-    **Solution:** We hard coded the sort options for each page.  While this is not ideal, the sort options were customized for each page and this allowed us to more clearly follow the path through the HTML to the backend.  There is a simple ```onchange="this.form.submit()"``` attribute for the form which contains the ```<select>``` tag, so every time the drop-down select menu is used to select a different sort order, a value gets passed to the route handler noting the order.  We run a conditional check on the sort order value and generate two variables corresponding to the relevant SQL 'order by' syntax for that sort order.  The HTML and Jinja for loop to display the tile grid is generalized, but the query generating the loop is then sorted.
+    **Solution:** We hard coded the sort options for each page.  While this is not ideal, the sort options were customized for each page and this allowed us to more clearly follow the path through the HTML to the back-end.  There is a simple ```onchange="this.form.submit()"``` attribute for the form which contains the ```<select>``` tag, so every time the drop-down select menu is used to select a different sort order, a value gets passed to the route handler noting the order.  We run a conditional check on the sort order value and generate two variables corresponding to the relevant SQL 'order by' syntax for that sort order.  The HTML and Jinja for loop to display the tile grid is generalized, but the query generating the loop is then sorted.
 
 ##Code Snippets
 
@@ -124,7 +125,7 @@ def users():
         sort_method = 'review_count'
         direction = 'asc'
     else:
-        #Fall back sort method
+        #Fallback sort method
         sort_method = 'user_name_upper'
         direction = 'asc'
 
@@ -171,7 +172,7 @@ HTML with Jinja template for displaying a tile grid page (products by sub-catego
 ```
 
 
-Show/Hide left-fixed vertical nav bar:
+Show/hide animation for the left-fixed vertical nav bar :
 ```JavaScript
 // NAV MENU SLIDE
 // Store nav menu panel position in JS local storage.
