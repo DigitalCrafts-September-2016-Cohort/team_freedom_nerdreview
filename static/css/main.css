@@ -451,12 +451,11 @@ main a:focus {
 
 
 /* ------ NEW REViEW PAGE ----- */
-.new-review h3 {
-    display: inline-block;
-}
-
+/*.new-review h3 {
+    /*display: inline-block;
+}*/
 .new-review label {
-    color: #fff;
+    color: #000;
     font-weight: 400;
     width: 100%;
 }
@@ -465,7 +464,20 @@ main a:focus {
     text-align: left;
 }
 
-.new-review .customize {
+.line {
+    display: inline;
+}
+
+.formbtn {
+    padding: 7px;
+}
+
+.well{
+    background: #fff;
+}
+
+
+/*.new-review .customize {
     text-align: left;
 }
 
@@ -484,7 +496,7 @@ main a:focus {
 
 .customize .nr-btn {
     background: #F4CF6F;
-}
+}*/
 
 /*------------------------
 MEDIA QUERIES

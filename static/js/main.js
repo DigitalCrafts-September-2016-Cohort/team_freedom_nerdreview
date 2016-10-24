@@ -27,7 +27,7 @@ $(document).ready(function(){
         $('.inputs input, select').keyup(function() {
             var empty = false;
             $('.inputs input, select').each(function() {
-                if ($(this).val() == '') {
+                if ($(this).val() === '') {
                     empty = true;
                 }
             });
