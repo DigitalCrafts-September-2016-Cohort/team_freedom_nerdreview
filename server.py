@@ -99,18 +99,6 @@ def render_sub_cats(cat_id):
     elif sort_choice == 'name_za':
         sort_method = 'prod_name_upper'
         direction = 'desc'
-    # elif sort_choice == 'msrp_asc':
-    #     sort_method = 'prod_msrp'
-    #     direction = ''
-    # elif sort_choice == "msrp_desc":
-    #     sort_method = 'prod_msrp'
-    #     direction = 'desc'
-    # elif sort_choice == "date_desc":
-    #     sort_method = 'prod_release_date'
-    #     direction = 'desc'
-    # elif sort_choice == "date_asc":
-    #         sort_method = 'prod_release_date'
-    #         direction = ''
     else:
         #Default or fall back sort method (not dependent on drop-down)
         sort_method = 'query.avg_rating'
@@ -122,7 +110,7 @@ def render_sub_cats(cat_id):
 
     sub_cat_query = db.query('select distinct query.prod_id, upper(query.prod_name) as prod_name_upper, query.prod_name as product_name, query.review_count, query.avg_rating from (select product_uses_category.secondary_cat_id as sub_cat_id, count(review.product_id) as review_count, product.name as prod_name, product.id as prod_id, round(avg(review.rating), 2) as avg_rating from review inner join product on product.id = review.product_id inner join product_uses_category on product.id = product_uses_category.product_id inner join secondary_cat on product_uses_category.secondary_cat_id = secondary_cat.id where secondary_cat.main_cat_id = %s group by prod_name, prod_id, product_uses_category.secondary_cat_id) query order by %s %s' % (cat_id, sort_method, direction));
 
-    # sub_cat_query = db.query('select distinct query.prod_id, query.prod_name, query.review_count, query.avg_rating from (select product_uses_category.secondary_cat_id as sub_cat_id, count(review.product_id) as review_count, product.name as prod_name, product.id as prod_id, round(avg(review.rating), 2) as avg_rating from review inner join product on product.id = review.product_id inner join product_uses_category on product.id = product_uses_category.product_id inner join secondary_cat on product_uses_category.secondary_cat_id = secondary_cat.id where secondary_cat.main_cat_id = %s group by prod_name, prod_id, product_uses_category.secondary_cat_id) query order by %s %s' % (cat_id,sort_method, direction));
+
 
     return render_template(
         '/sub_categories.html',
@@ -159,18 +147,6 @@ def render_sub_cat_products(cat_id, sub_cat_id):
     elif sort_choice == 'name_za':
         sort_method = 'prod_name_upper'
         direction = 'desc'
-    # elif sort_choice == 'msrp_asc':
-    #     sort_method = 'prod_msrp'
-    #     direction = ''
-    # elif sort_choice == "msrp_desc":
-    #     sort_method = 'prod_msrp'
-    #     direction = 'desc'
-    # elif sort_choice == "date_desc":
-    #     sort_method = 'prod_release_date'
-    #     direction = 'desc'
-    # elif sort_choice == "date_asc":
-    #         sort_method = 'prod_release_date'
-    #         direction = ''
     else:
         #Default or fall back sort method (not dependent on drop-down)
         sort_method = 'avg_rating'
@@ -309,14 +285,14 @@ def render_reviews():
         reviews_list = sorted_review_query.namedresult(),
     )
 
-
+# Click and go back to the homepage
 @app.route('/icon')
 def icon():
     return render_template(
         '/icon.html'
     )
 
-
+# It renders to the individual review page
 @app.route('/reviews/<review_id>')
 def render_individual_review(review_id):
     review_query = db.query("select product.id as prod_id, product.name as prod_name, review.rating, review.user_id as user_id,date(review.date) as review_date, users.user_name as user_name, review.id, review.review from review, product, users where review.product_id = product.id and review.user_id = users.id and review.id = '%s'" % review_id)
@@ -362,6 +338,7 @@ def render_brands():
         brand_list = brand_query.namedresult()
     )
 
+#
 @app.route('/brands/<brand_id>', methods=['POST','GET'])
 def render_brand_prod(brand_id):
     #Defines 2 iterable lists for sort choices: one for the value attributes from form and one for the names to display
@@ -387,18 +364,6 @@ def render_brand_prod(brand_id):
     elif sort_choice == 'name_za':
         sort_method = 'prod_name_upper'
         direction = 'desc'
-    # elif sort_choice == 'msrp_asc':
-    #     sort_method = 'prod_msrp'
-    #     direction = ''
-    # elif sort_choice == "msrp_desc":
-    #     sort_method = 'prod_msrp'
-    #     direction = 'desc'
-    # elif sort_choice == "date_desc":
-    #     sort_method = 'prod_release_date'
-    #     direction = 'desc'
-    # elif sort_choice == "date_asc":
-    #         sort_method = 'prod_release_date'
-    #         direction = ''
     else:
         #Default or fall back sort method (not dependent on drop-down)
         sort_method = 'avg_rating'
@@ -417,7 +382,7 @@ def render_brand_prod(brand_id):
     )
 
 
-# Users page
+# Users page and drop down sort bar.
 @app.route('/users', methods = ['POST','GET'])
 def users():
     #Defines 2 iterable lists for sort choices: one for the value attributes from form and one for the names to display
@@ -455,7 +420,7 @@ def users():
         current_sort = sort_choice,
         user_list = user_list
     )
-
+# It renders to the individual user page
 @app.route('/users/<user_id>')
 def render_individual_user(user_id):
 
@@ -468,6 +433,7 @@ def render_individual_user(user_id):
         user = user
     )
 
+# It redirects to the page where the things that you reviewed
 @app.route('/loggedin_userpage/<user_name>')
 def render_user_from_login(user_name):
 
@@ -479,6 +445,7 @@ def render_user_from_login(user_name):
         '/users/%s' % user_id
     )
 
+# New review
 @app.route('/product_review_new', methods=['POST', 'GET'])
 def render_review_new():
     #Taking main category choice and returning list of secondary categories to be displayed in next drop down
@@ -565,6 +532,7 @@ def render_review_new():
     )
 
 
+
 @app.route('/product_review', methods=['POST', 'GET'])
 def render_review():
     main_cat_query = db.query('select name from main_cat').namedresult()
@@ -586,6 +554,8 @@ def render_review():
         product_list=product_query,
         company_list=company_query
     )
+
+
 
 # Route and method for adding a new product review
 @app.route('/add_product_review', methods=['POST'])
