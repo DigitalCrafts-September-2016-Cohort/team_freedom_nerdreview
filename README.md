@@ -94,6 +94,10 @@ We started incorporating stretch goals about three days before the project deadl
 
     **Solution:** We hard coded the sort options for each page.  While this is not ideal, the sort options were customized for each page and this allowed us to more clearly follow the path through the HTML to the back-end.  There is a simple ```onchange="this.form.submit()"``` attribute for the form which contains the ```<select>``` tag, so every time the drop-down select menu is used to select a different sort order, a value gets passed to the route handler noting the order.  We run a conditional check on the sort order value and generate two variables corresponding to the relevant SQL 'order by' syntax for that sort order.  The HTML and Jinja for loop to display the tile grid is generalized, but the query generating the loop is then sorted.
 
+4.  **Challenge:** Create visual hover effects that were more unique and eye-catching than the standard text underline, but not overwhelming or distracting.
+
+    **Solution:** We thought it would be cool to implement CSS pseudo-elements because a) they're extremely versatile and b) they don't clutter up the HTML files. The lines that appear below the central line of text in the tiles and under the logo name were fairly easy to implement after a bit of research; it just involved using the ```visibility``` and ```scaleX``` properties so that they would appear to come out of nowhere. The little arrows in the nav menu links were a bit more complex: originally, we had them positioned far off-screen but found that because they had to move so far in such a short transition time that we weren't getting the desired visual 'slide in' effect. A combination of the aforementioned visibility trick (making them appear out of nowhere) and positioning them more closely to their respective links resulted in a much smoother visual effect.
+
 ##Code Snippets
 
 Sample page route with drop-down sort functionality:
