@@ -28,7 +28,7 @@ All team members are students in the [Digital Crafts](https://digitalcrafts.com)
 **Key code portions:** Co-wrote user login, sign up, and early iterations of the 'add a review form'.
 
 * [John Coppola](https://github.com/johnnycopes/)  
-**Primary team role:** Front-end warrior<br />  
+**Primary team role:** Front-end warrior<br />
 **Contributions:** Led the charge on all things visual/client-facing. Built a custom, responsive layout from scratch with focus on clean, robust design. Wrote and refactored HTML/CSS with an emphasis on simplicity, clarity, and flexibility. Organized site navigation. Made sure that we were pulling the right information from the database in the right places.<br />
 **Key code portions:** Most of the HTML, CSS and JavaScript. Made tweaks to route handlers on the back end as well.
 
@@ -39,7 +39,7 @@ All team members are students in the [Digital Crafts](https://digitalcrafts.com)
 
 * [Jesslyn Landgren](https://github.com/jesslynlandgren/)  
 **Primary team role:** Organize all the things, Front-end/Back-end backup<br />
-**Contributions:** Scrum master. Led daily stand up meetings and maintained virtual scrum board.  Provided initial project concept.  Helped Rob build out initial back-end, including route handlers, SQL queries, and placeholder HTML/Jinja for pages, then assisted with troubleshooting throughout project.  Developed and implemented drop-down sort throughout site.  Developed 2nd iteration of the 'add a review' form with the drop-down filters and add new field functionalities.<br />  
+**Contributions:** Scrum master. Led daily stand up meetings and maintained virtual scrum board.  Provided initial project concept.  Helped Rob build out initial back-end, including route handlers, SQL queries, and placeholder HTML/Jinja for pages, then assisted with troubleshooting throughout project.  Developed and implemented drop-down sort throughout site.  Developed 2nd iteration of the 'add a review' form with the drop-down filters and add new field functionalities.<br />
 **Key code portions:** Front-end and back-end for drop-down sort elements for tile-grid pages.  Sections of the HTML that are heavy on the Jinja. Co-wrote user login, sign up, and the 'add a review form'.
 
 ##What we used:
