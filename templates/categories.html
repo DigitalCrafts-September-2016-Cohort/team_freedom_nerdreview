@@ -1,11 +1,13 @@
 {% extends 'layout.html' %}
 
 {% block nav %}
+<ul>
     {% for category in categories_list %}
     <li>
         <a href="/categories/{{category.id}}">{{category.name}}</a>
     </li>
     {% endfor %}
+</ul>
 {% endblock %}
 
 {% block header %}
@@ -18,5 +20,6 @@
 </header>
 {% endblock %}
 
+<!-- Main section stays empty on first click; would like to put something here -->
 {% block body %}
 {% endblock %}

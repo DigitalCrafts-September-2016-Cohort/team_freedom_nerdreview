@@ -1,8 +1,8 @@
 /*------------------------
 STYLES/LAYOUT
 -------------------------*
-/* ------ GLOBAL ------ */
 
+/* ------ GLOBAL TAGS/STYLES ------ */
 * {
     box-sizing: border-box;
 }
@@ -17,6 +17,31 @@ body {
     font-size: 16px;
     color: #fff;
     height: 100%;
+}
+
+/* Soft, quick fade-in transition on page load */
+main {
+    -webkit-animation: fadein 300ms;
+            animation: fadein 300ms;
+            min-height: 100%;
+            position: relative;
+}
+@-webkit-keyframes fadein {
+    from { opacity: 0; -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"; }
+    to   { opacity: 1; -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)"; }
+}
+@keyframes fadein {
+    from { opacity: 0; -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"; }
+    to   { opacity: 1; -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)"; }
+}
+
+main a {
+    color: #fff;
+}
+
+main a:hover,
+main a:focus {
+    color: #F4CF6F;
 }
 
 .nav-menu a, form, input[type="text"] {
@@ -45,11 +70,7 @@ a {
 .fl { float: left; }
 .fr { float: right; }
 
-/* used to override JS rule that sets width */
-.width100 {
-    width: 100% !important;
-}
-
+/* Nerd Review custom button styling */
 .nr-btn {
     width: 50%;
     padding: 10px;
@@ -85,6 +106,11 @@ a {
     width: 200px;
 }
 
+.nr-btn:hover { text-decoration: underline; }
+/* overwriting unwanted Bootstrap .btn styles*/
+.nr-btn:focus { outline: none !important; }
+.nr-btn:active { box-shadow: none; }
+
 .nr-success {
     background: #479c47;
     color: #fff;
@@ -94,18 +120,13 @@ a {
     background: #F4CF6F;
 }
 
-    .nr-btn:hover { text-decoration: underline; }
-    /* overwriting unwanted Bootstrap .btn styles*/
-    .nr-btn:focus { outline: none !important; }
-    .nr-btn:active { box-shadow: none; }
-
 /* ------ NAVBAR ------ */
-
 .nav-wrapper {
     margin: 0 auto;
     width: 90%;
 }
 
+/* Fixed left hand menu that slides on and off screen on button click. Starts off screen for small screens */
 .nav-menu {
     background: #F4CF6F;
     color: rgba(0,0,0,0.87);
@@ -119,6 +140,7 @@ a {
     align-items: center;
 }
 
+/* Logo created by splicing two cool icons together with Chrome dev tools. Credit to designers included in comments in <head> tag and on project README */
 .nr-logo {
     margin: 0 auto;
     display: block;
@@ -139,6 +161,7 @@ a {
     text-decoration: none;
  }
 
+/* Underline effect on logo hover */
 .nr-logo p::after {
     content: " ";
     position: absolute;;
@@ -174,6 +197,7 @@ a {
         font-size: 22px;
     }
 
+/* Navbar list items */
 .nav-menu-list {
     font-size: 16px;
     text-align: center;
@@ -188,6 +212,7 @@ a {
         transition: 175ms all ease-in-out;
     }
 
+    /* Arrows that appear and disappear on list items hover */
     .nav-menu-list a::before {
         content: "\f30f";
         font-family: 'Ionicons';
@@ -204,6 +229,7 @@ a {
         visibility: visible;
     }
 
+/* Account buttons section at bottom left of page */
 .account {
     position: absolute;
     text-align: center;
@@ -226,62 +252,6 @@ a {
 
 /* ------ MAIN SECTION ----- */
 
-main {
-    -webkit-animation: fadein 300ms; /* Safari, Chrome and Opera > 12.1 */
-       -moz-animation: fadein 300ms; /* Firefox < 16 */
-        -ms-animation: fadein 300ms; /* Internet Explorer */
-         -o-animation: fadein 300ms; /* Opera < 12.1 */
-            animation: fadein 300ms;
-}
-
-@keyframes fadein {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-}
-
-/* Firefox < 16 */
-@-moz-keyframes fadein {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-}
-
-/* Safari, Chrome and Opera > 12.1 */
-@-webkit-keyframes fadein {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-}
-
-/* Internet Explorer */
-@-ms-keyframes fadein {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-}
-
-/* Opera < 12.1 */
-@-o-keyframes fadein {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-}
-
-.js-slide {
-    position: fixed;
-    font-size: 57px;
-    color: #F4CF6F;
-    text-align: center;
-    z-index: 3;
-    bottom: 90px;
-    left: 18px;
-}
-
-.js-slide p {
-    margin-top: -22px;
-    font-size: 24px;
-}
-
-.js-slide:hover {
-    text-decoration: none;
-}
-
 /* --- Homepage --- */
 .homepage {
     margin: 0 auto;
@@ -296,14 +266,12 @@ main {
 }
 
 .homepage h1 {
-    /*border: 4px solid red;*/
-    margin: 25px 0 0 0;
+    margin: 32px 0 0 0;
     font-size: 2em;
 }
 
 .homepage h2 {
-    /*border: 4px solid orange;*/
-    margin: 0 0 60px 0;
+    margin: 0 0 73px 0;
     font-size: 24px;
 }
 
@@ -312,34 +280,20 @@ main {
 }
 
 .credit .team{
-    /*border: 4px solid yellow;*/
     text-align: center;
 }
 .credit .copyright{
-    /*border: 4px solid green;*/
     align-self: flex-end;
 }
 
-/* --- Header --- */
+/* --- Header (general) --- */
 header {
-  /*border: 4px solid purple;*/
-    /*padding: 0 10px 20px;*/
     text-align: right;
 }
 
 header h3 {
     margin-top: 50px;
 }
-
-.ind-header h3 {
-    margin-top: 21px;
-}
-
-.welcome {
-    font-size: 3em;
-    text-align: center;
-}
-
 
 /* Back button */
 .back-btn {
@@ -373,36 +327,39 @@ header h3 {
 }
 
 .sort select {
-    /*border: 4px solid red;*/
     width: 230px;
 }
 
-/* --- Body --- */
-main {
-    /*border: 4px solid orange;*/
-    /*display: flex;*/
-    min-height: 100%;
-    position: relative;
-}
-
+/* --- Body (general) --- */
 .main-wrapper {
-    /*border: 4px solid green;*/
     margin: 21px auto 0;
     padding: 0 10px;
     position: relative;
     text-align: center;
 }
 
-main a {
-    color: #fff;
-}
-
-main a:hover,
-main a:focus {
+/* Menu button to toggle navbar panel slide in/out */
+.js-slide {
+    position: fixed;
+    font-size: 57px;
     color: #F4CF6F;
+    text-align: center;
+    z-index: 3;
+    bottom: 90px;
+    left: 18px;
 }
 
-/* --- Body (tiles) --- */
+.js-slide p {
+    margin-top: -22px;
+    font-size: 24px;
+}
+
+.js-slide:hover {
+    text-decoration: none;
+}
+
+
+/* --- Body (tiles pages) --- */
 .tile {
     margin: 0 0 30px;
     width: 300px;
@@ -460,27 +417,32 @@ main a:focus {
     margin: 0;
 }
 
-/* --- Header (individual item) --- */
+/* --- Header (individual pages) --- */
 .ind-header {
     width: 100%;
+}
+
+.ind-header h3 {
+    margin-top: 21px;
 }
 
 .ind-header .rating {
     white-space: nowrap;
 }
 
-/* --- Body (individual item) --- */
-.img-list,
-.tile-list,
-.review {
-    display: block;
-}
-
+/* --- Body (individual pages) --- */
 .btn-div {
     margin-bottom: 40px;
     text-align: right;
 }
 
+.tile-list,
+.img-list,
+.review {
+    display: block;
+}
+
+/* Product images list hugs right-hand side. Normally other content sits alongside on the left, but on smaller screens it to take full width in order to push that content down */
 .img-list {
     text-align: right;
     float: right;
@@ -528,7 +490,7 @@ main a:focus {
 }
 
 
-/* ------ NEW REViEW PAGE ----- */
+/* ------ NEW REVIEW PAGE ----- */
 .new-review h3 {
     display: inline-block;
 }
@@ -564,6 +526,7 @@ main a:focus {
 MEDIA QUERIES
 ------------------------*/
 
+/* Height media queries to adjust nav menu items list scroll*/
 @media screen and (min-height: 600px) {
 
     .nav-menu-list {
@@ -580,6 +543,7 @@ MEDIA QUERIES
 
 }
 
+/* Width media queries for everything else */
 @media screen and (min-width: 480px) {
 
     html {
@@ -596,7 +560,6 @@ MEDIA QUERIES
     }
 
     .main-wrapper {
-        /*border: 4px solid green;*/
         padding: 0 20px;
     }
 
@@ -632,12 +595,7 @@ MEDIA QUERIES
 
 }
 
-
 @media screen and (min-width: 1000px) {
-
-    .homepage {
-        width: 80%;
-    }
 
     .nav-menu-list {
         max-height: none;
@@ -651,17 +609,17 @@ MEDIA QUERIES
         margin-left: 320px;
     }
 
+    .homepage {
+        width: 80%;
+    }
+
     .main-wrapper {
-        /*border: 4px solid green;*/
         padding: 0 30px;
         max-width: 1720px;
     }
 
-    .
-
     .ind-body {
         margin: 21 20px 0;
     }
-
 
 }

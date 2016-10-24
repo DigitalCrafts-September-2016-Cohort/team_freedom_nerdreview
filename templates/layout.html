@@ -9,8 +9,13 @@
         <link rel="stylesheet" href="/static/css/normalize.css">
         <link rel="stylesheet" href="/static/css/main.css">
         <title>Nerd Review</title>
+        <!-- Icon art credit to two designers from The Noun Project:
+        NERD: Nicolas Vicent http://www.nicolas-vicent.com/
+        CROWN: Nikita Kozin ya.kozinnikita@ya.ru
+        -->
     </head>
     <body>
+        <!-- Fixed navbar on left-hand side (yellow) -->
         <nav class="nav-menu">
             <div class="nav-wrapper cf">
                 <div class="nr-logo">
@@ -23,6 +28,7 @@
                     {% block nav %}
                     {% endblock %}
                 </ul>
+                <!-- Account section at bottom displays different buttons depending on if user is logged in or not -->
                 <div class="account">
                     {% if session['username'] %}
                     <p>Hello <a href="/loggedin_userpage/{{session['username']}}">{{session['username']}}</a>!</p>
@@ -44,26 +50,30 @@
                 </div>
             </div>
         </nav>
+        <!-- Main content area (black) -->
         <main class="main cf">
             <a class="js-slide" href="#0">
-                <!-- <p>MENU</p> -->
                 <i class="ion-drag"></i>
                 <p>MENU</p>
             </a>
+            <!-- Homepage block is only used for the inital homepage -->
             {% block homepage %}
                 <div class="main-wrapper cf">
+                    <!-- Header block contains a back button and a variety of h tags -->
                     {% block header %}
                     {% endblock %}
 
+                    <!-- Sort block contains the sort menu where needed -->
                     {% block sort %}
                     {% endblock %}
 
+                    <!-- Body block is either structured as a 'tiles page' or 'individual page' -->
                     {% block body %}
                     {% endblock %}
                 </div>
             {% endblock %}
         </main>
-
+        <!-- Modal pop-up windows for signup/login -->
         <div class="modal" id="log_in_modal" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">

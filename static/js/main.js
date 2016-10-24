@@ -1,7 +1,8 @@
+// Kickstart the jQuery with the good 'ol DOC READY
 $(document).ready(function(){
 
     // SLIDE NAVBAR MENU
-    // Store slider position in JS local storage and set its position and the color of the mobile menu button accordingly
+    // Store nav menu panel position in JS local storage. On page refresh, set it to either open or closed and the mobile menu button to the correct color
     function markSliderPosition(position){
         localStorage.setItem('sliderPosition', position);
     }
@@ -24,7 +25,7 @@ $(document).ready(function(){
             markSliderPosition('open');
         }
     });
-
+    // If page width is greater than 1000px, set the nav menu on any kind of page resize
     $(window).resize(function() {
         if ($(window).width() > 1000) {
             $('.nav-menu').css('left', '0');
@@ -44,10 +45,7 @@ $(document).ready(function(){
     // Show/hide images on click for small screens to save space
     $('.js-images-btn').on('click', function(){
         $('.img-list > ul').slideToggle();
-        // var btnText = $('.js-images-btn > h4').html();
-        // if ($('.img-list > ul').is(':visible')) {
-        //     $('.img-list > ul').css('display', 'inline-block');
-        // }
+        // Change the text on the button to either 'show' or 'hide' images
         if ($('.js-images-btn > h4').html() === 'Show images') {
             $('.js-images-btn > h4').html('Hide images');
         } else {
@@ -55,7 +53,7 @@ $(document).ready(function(){
         }
     });
 
-    // ADD NEW REViEW
+    // ADD NEW REVIEW
     // Loops through the input/select tags and enables the Submit button when all fields are filled out
     (function() {
         $('.inputs input, select').keyup(function() {
