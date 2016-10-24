@@ -596,6 +596,10 @@ MEDIA QUERIES
 
 @media screen and (min-width: 1000px) {
 
+    .nav-menu {
+        left: 0;
+    }
+
     .nav-menu-list {
         max-height: none;
     }

@@ -51,7 +51,7 @@ All team members are students in the [Digital Crafts](https://digitalcrafts.com)
   * dotenv
 * HTML5
 * CSS
-* JavaScript
+* JavaScript (jQuery)
 
 **Frameworks:**  
 * Flask
