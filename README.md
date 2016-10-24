@@ -24,17 +24,17 @@ All team members are students in the [Digital Crafts](https://digitalcrafts.com)
 ####Team Freedom
 * [Che Blankenship](https://github.com/cheblankenship/)  
 **Primary team role:** UI/UX evaluation, Quality control  
-**Contributions:**  Regularly studied all code throughout project, particularly SQL queries on the backend (server.py) for redundancies or erroneous returns.  Investigated and fleshed out a possible solution for filtered drop-down select elements on the 'add a review page'.  Led team in continuously evaluating user-interface and user-experience of site, including semantics and critique of supported functionalities.
+**Contributions:**  Regularly studied all code throughout project, particularly SQL queries on the backend (server.py) for redundancies or erroneous returns.  Investigated and fleshed out a possible solution for filtered drop-down select elements on the 'add a review page'.  Led team in continuously evaluating user-interface and user-experience of site, including semantics and critique of supported functionalities.  
 **Key code portions:** Co-wrote user login, sign up, and early iterations of the 'add a review form'.
 
 * [John Coppola](https://github.com/johnnycopes/)  
-**Primary team role:** Front-end warrior
+**Primary team role:** Front-end warrior  
 **Contributions:** Led the charge on all things visual/client-facing. Built a custom, responsive layout from scratch with focus on clean, robust design. Wrote and refactored HTML/CSS with an emphasis on simplicity, clarity, and flexibility. Organized site navigation. Made sure that we were pulling the right information from the database in the right places.  
 **Key code portions:** Most of the HTML, CSS and JavaScript. Made tweaks to route handlers on the back end as well.
 
 * [Robert Dunn](https://github.com/robdunn220/)  
 **Primary team role:** Back-end ninja  
-**Contributions:** Database design and implementation. Route handlers and queries. Just making sure the manipulation and display of the data in the database was working well with the design concept.
+**Contributions:** Database design and implementation. Route handlers and queries. Just making sure the manipulation and display of the data in the database was working well with the design concept.  
 **Key code portions:** server.py, Jinja in some of the HTML
 
 * [Jesslyn Landgren](https://github.com/jesslynlandgren/)  
@@ -174,7 +174,9 @@ HTML with Jinja template for displaying a tile grid page (products by sub-catego
 Show/Hide left-fixed vertical nav bar:
 ```JavaScript
 // NAV MENU SLIDE
-// Store nav menu panel position in JS local storage. On page refresh, set it to either open or closed and the mobile menu button to the correct color
+// Store nav menu panel position in JS local storage.
+//On page refresh, set it to either open or closed
+//and the mobile menu button to the correct color
 function markSliderPosition(position){
     localStorage.setItem('sliderPosition', position);
 }
