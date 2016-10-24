@@ -2,10 +2,12 @@
 {% extends 'layout.html' %}
 
 {% block nav %}
+<ul>
     <li><a href="/categories">Categories</a></li>
     <li><a href="/brands">Brands</a></li>
     <li><a href="/reviews">Reviews</a></li>
     <li><a href="/users">Users</a></li>
+</ul>
 {% endblock %}
 
 {% block header %}
@@ -87,7 +89,8 @@
             </div>
             <div class="form-group set-height">
                 <label for="review">Review</label>
-                <input id="review" class="form-control" type="text" name="review" value="{{review}}">
+                <textarea id="review" class="form-control" type="text" name="review" value="{{review}}">Easy (and free!) You should check out our premium features.</textarea>
+                <!-- <input id="review" class="form-control" type="text" name="review" value="{{review}}"> -->
             </div>
             <button class="nr-btn nr-success std-btn btn-rnd js-submit" type="submit" disabled="true">Submit</button>
         </form>
@@ -111,9 +114,8 @@
                 <label for="customize_product" class="form-check-label">add new</label>
                 <input id="customize_product" type="checkbox" name="customize_product">
             </div>
-            <button class="nr-btn std-btn btn-rnd" type="submit"><i class="ion-arrow-left-a"></i> Customize these fields</button>
+            <button class="nr-btn std-btn btn-rnd nr-color" type="submit"><i class="ion-arrow-left-a"></i> Customize these fields</button>
         </form>
     </div>
 </div>
-
 {% endblock %}

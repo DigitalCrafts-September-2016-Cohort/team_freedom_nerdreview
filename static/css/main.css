@@ -1,15 +1,14 @@
 /*------------------------
 STYLES/LAYOUT
 -------------------------*
-/* ------ GLOBAL ------ */
 
+/* ------ GLOBAL TAGS/STYLES ------ */
 * {
     box-sizing: border-box;
 }
 
 html {
     font-size: 75%;
-    height: 100%;
 }
 
 body {
@@ -18,6 +17,31 @@ body {
     font-size: 16px;
     color: #fff;
     height: 100%;
+}
+
+/* Soft, quick fade-in transition on page load */
+main {
+    -webkit-animation: fadein 300ms;
+            animation: fadein 300ms;
+            min-height: 100%;
+            position: relative;
+}
+@-webkit-keyframes fadein {
+    from { opacity: 0; -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"; }
+    to   { opacity: 1; -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)"; }
+}
+@keyframes fadein {
+    from { opacity: 0; -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"; }
+    to   { opacity: 1; -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)"; }
+}
+
+main a {
+    color: #fff;
+}
+
+main a:hover,
+main a:focus {
+    color: #F4CF6F;
 }
 
 .nav-menu a, form, input[type="text"] {
@@ -46,6 +70,7 @@ a {
 .fl { float: left; }
 .fr { float: right; }
 
+/* Nerd Review custom button styling */
 .nr-btn {
     width: 50%;
     padding: 10px;
@@ -53,6 +78,7 @@ a {
     outline: none;
     border: 0;
     background: #fff;
+    color: rgba(0,0,0,.87);
     border-radius: 0;
     position: relative;
     font-family: 'Roboto Mono', Courier, monospace;
@@ -80,23 +106,27 @@ a {
     width: 200px;
 }
 
+.nr-btn:hover { text-decoration: underline; }
+/* overwriting unwanted Bootstrap .btn styles*/
+.nr-btn:focus { outline: none !important; }
+.nr-btn:active { box-shadow: none; }
+
 .nr-success {
     background: #479c47;
     color: #fff;
 }
 
-    .nr-btn:hover { text-decoration: underline; }
-    /* overwriting unwanted Bootstrap .btn styles*/
-    .nr-btn:focus { outline: none !important; }
-    .nr-btn:active { box-shadow: none; }
+.nr-color {
+    background: #F4CF6F;
+}
 
 /* ------ NAVBAR ------ */
-
 .nav-wrapper {
     margin: 0 auto;
     width: 90%;
 }
 
+/* Fixed left hand menu that slides on and off screen on button click. Starts off screen for small screens */
 .nav-menu {
     background: #F4CF6F;
     color: rgba(0,0,0,0.87);
@@ -110,6 +140,7 @@ a {
     align-items: center;
 }
 
+/* Logo created by splicing two cool icons together with Chrome dev tools. Credit to designers included in comments in <head> tag and on project README */
 .nr-logo {
     margin: 0 auto;
     display: block;
@@ -130,6 +161,7 @@ a {
     text-decoration: none;
  }
 
+/* Underline effect on logo hover */
 .nr-logo p::after {
     content: " ";
     position: absolute;;
@@ -165,9 +197,12 @@ a {
         font-size: 22px;
     }
 
+/* Navbar list items */
 .nav-menu-list {
-    font-size: 20px;
+    font-size: 16px;
     text-align: center;
+    max-height: 250px;
+    overflow: auto;
 }
 
     .nav-menu-list a {
@@ -177,6 +212,7 @@ a {
         transition: 175ms all ease-in-out;
     }
 
+    /* Arrows that appear and disappear on list items hover */
     .nav-menu-list a::before {
         content: "\f30f";
         font-family: 'Ionicons';
@@ -193,6 +229,7 @@ a {
         visibility: visible;
     }
 
+/* Account buttons section at bottom left of page */
 .account {
     position: absolute;
     text-align: center;
@@ -215,16 +252,6 @@ a {
 
 /* ------ MAIN SECTION ----- */
 
-.js-slide {
-    position: fixed;
-    font-size: 80px;
-    margin-left: 62px;
-    color: #fff !important;
-    z-index: 3;
-    bottom: 70px;
-    right: 38px;
-}
-
 /* --- Homepage --- */
 .homepage {
     margin: 0 auto;
@@ -239,14 +266,12 @@ a {
 }
 
 .homepage h1 {
-    /*border: 4px solid red;*/
-    margin: 40px 0 0 0;
+    margin: 32px 0 0 0;
     font-size: 2em;
 }
 
 .homepage h2 {
-    /*border: 4px solid orange;*/
-    margin: 0 0 60px 0;
+    margin: 0 0 73px 0;
     font-size: 24px;
 }
 
@@ -255,18 +280,14 @@ a {
 }
 
 .credit .team{
-    /*border: 4px solid yellow;*/
     text-align: center;
 }
 .credit .copyright{
-    /*border: 4px solid green;*/
     align-self: flex-end;
 }
 
-/* --- Header --- */
+/* --- Header (general) --- */
 header {
-  /*border: 4px solid purple;*/
-    padding: 0 10px 20px;
     text-align: right;
 }
 
@@ -274,16 +295,7 @@ header h3 {
     margin-top: 50px;
 }
 
-.welcome {
-    font-size: 3em;
-    text-align: center;
-}
-
-.back-btn-link {
-    display: inline-block;
-    float: left;
-}
-
+/* Back button */
 .back-btn {
     font-size: 2em;
     float: left;
@@ -296,51 +308,60 @@ header h3 {
     transition: 175ms all ease-in-out;
 }
 
+.back-btn-link {
+    float: left;
+}
+
 .back-btn-link:hover > .back-btn,
 .back-btn-link:focus > .back-btn {
     border-color: #F4CF6F;
 }
 
+/* Sort menu */
 .sort {
-    margin-bottom: 40px;
-    padding-right: 10px;
+    margin-bottom: 21px;
 }
 
-.sort select {
-    /*border: 4px solid red;*/
-    width: 230px;
+.sort form {
     float: right;
 }
 
-/* --- Body --- */
-main {
-    /*border: 4px solid orange;*/
-    /*display: flex;*/
-    min-height: 100%;
-    position: relative;
+.sort select {
+    width: 230px;
 }
 
+/* --- Body (general) --- */
 .main-wrapper {
-    /*border: 4px solid green;*/
-    margin: 0 auto;
-    padding: 5px 0;
-    max-width: 1720px;
+    margin: 21px auto 0;
+    padding: 0 10px;
     position: relative;
     text-align: center;
 }
 
-main a {
-    color: #fff;
-}
-
-main a:hover,
-main a:focus {
+/* Menu button to toggle navbar panel slide in/out */
+.js-slide {
+    position: fixed;
+    font-size: 57px;
     color: #F4CF6F;
+    text-align: center;
+    z-index: 3;
+    bottom: 90px;
+    left: 18px;
 }
 
-/* --- Body (tiles) --- */
+.js-slide p {
+    margin-top: -22px;
+    font-size: 24px;
+}
+
+.js-slide:hover {
+    text-decoration: none;
+}
+
+
+/* --- Body (tiles pages) --- */
 .tile {
-    margin: 0 10px 30px;
+    margin: 0 0 30px;
     width: 300px;
     height: 300px;
     text-align: center;
@@ -396,43 +417,51 @@ main a:focus {
     margin: 0;
 }
 
-/* --- Header (individual item) --- */
+/* --- Header (individual pages) --- */
 .ind-header {
-    width: 30%;
-    float: right;
-    max-width: 400px;
+    width: 100%;
 }
 
-/* --- Body (individual item) --- */
-.ind-body {
+.ind-header h3 {
     margin-top: 21px;
-    width: 70%;
-    display: inline-block;
-    /*text-align: center;*/
-    float: left;
 }
 
-    .ind-body .cf h1 {
-        margin: 0;
-    }
+.ind-header .rating {
+    white-space: nowrap;
+}
 
-    .ind-body .content {
-        position: relative;
-    }
+/* --- Body (individual pages) --- */
+.btn-div {
+    margin-bottom: 40px;
+    text-align: right;
+}
 
-    .ind-body .review {
-        text-align: left;
-        font-size: 16px;
-    }
+.tile-list,
+.img-list,
+.review {
+    display: block;
+}
 
+/* Product images list hugs right-hand side. Normally other content sits alongside on the left, but on smaller screens it to take full width in order to push that content down */
 .img-list {
-    display: inline-block;
+    text-align: right;
+    float: right;
+    width: 100%;
 }
+
+    .img-list button {
+        margin-bottom: 40px;
+    }
+
+    .img-list ul {
+        display: block;
+        float: right;
+    }
 
 .img-tile {
-    margin-top: 20px;
-    height: 250px;
-    width: 250px;
+    margin-bottom: 20px;
+    height: 230px;
+    width: 230px;
     border: 1px solid #fff;
     display: flex;
     align-items: center;
@@ -442,6 +471,7 @@ main a:focus {
 .img-user {
     width: 150px;
     height: 150px;
+    margin-bottom: 40px;
 }
 
 .img-tile i {
@@ -449,14 +479,24 @@ main a:focus {
     font-size: 100px;
 }
 
+.review {
+    padding-bottom: 100px;
+    text-align: left;
+}
 
-/* ------ NEW REViEW PAGE ----- */
+.review .wrapper {
+    margin: 0 auto;
+    padding: 0 10px;
+}
+
+/* ------ NEW REVIEW PAGE ----- */
+
 .new-review h3 {
     display: inline-block;
 }
 
 .new-review label {
-    color: #fff;
+    color: #000;
     font-weight: 400;
     width: 100%;
 }
@@ -465,40 +505,66 @@ main a:focus {
     text-align: left;
 }
 
-.new-review .customize {
-    text-align: left;
+.new-review .line {
+    display: inline;
 }
 
-.customize label {
-    margin-bottom: 0;
+.new-review .formbtn {
+    padding: 7px;
 }
 
-.customize i {
-    transform: rotate(45deg);
-    display: inline-block;
+.new-review .well{
+    background: #fff;
 }
 
-.set-height {
-    height: 77px;
-}
-
-.customize .nr-btn {
-    background: #F4CF6F;
+.new-review a:hover {
+    color: #fff;
 }
 
 /*------------------------
 MEDIA QUERIES
 ------------------------*/
 
+/* Height media queries to adjust nav menu items list scroll*/
+@media screen and (min-height: 600px) {
+
+    .nav-menu-list {
+        max-height: 400px;
+    }
+
+}
+
+@media screen and (min-height: 1000px) {
+
+    .nav-menu-list {
+        max-height: 700px;
+    }
+
+}
+
+/* Width media queries for everything else */
 @media screen and (min-width: 480px) {
 
     html {
         font-size: 100%;
     }
 
+    .nav-menu-list {
+        font-size: 20px;
+    }
+
+    .tile {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
     .main-wrapper {
-        /*border: 4px solid green;*/
-        padding: 5px 20px;
+        padding: 0 20px;
+    }
+
+    .review .wrapper {
+        padding: 0;
+        width: 80%;
     }
 
     .homepage h1 {
@@ -509,34 +575,33 @@ MEDIA QUERIES
         font-size: 30px;
     }
 
-    header,
-    .sort {
-        padding-left: 0;
-        padding-right: 0;
-    }
-
     header h3 {
         margin-top: 20px;
+        margin-bottom: 21px;
     }
 
 }
 
-@media screen and (min-width: 900px) {
+@media screen and (min-width: 768px) {
 
-    .homepage {
-        width: 80%;
+    .img-list {
+        width: auto;
     }
 
+    .review .wrapper {
+        width: 90%;
+    }
+
+}
+
+@media screen and (min-width: 1000px) {
+
     .nav-menu {
-        background: #F4CF6F;
-        color: rgba(0,0,0,0.87);
-        position: fixed;
-        height: 100%;
-        top: 0;
-        left: 0px;
-        width: 320px;
-        display: flex;
-        align-items: center;
+        left: 0;
+    }
+
+    .nav-menu-list {
+        max-height: none;
     }
 
     .js-slide {
@@ -547,9 +612,17 @@ MEDIA QUERIES
         margin-left: 320px;
     }
 
+    .homepage {
+        width: 80%;
+    }
+
     .main-wrapper {
-        /*border: 4px solid green;*/
-        padding: 5px 40px;
+        padding: 0 30px;
+        max-width: 1720px;
+    }
+
+    .ind-body {
+        margin: 21 20px 0;
     }
 
 }

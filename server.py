@@ -32,11 +32,13 @@ def submit_login():
        user = results[0]
        if user.password == password:
            session['username'] = user.user_name
-           flash("Successfully Logged In")
+        #    flash("Successfully Logged In")
            return redirect('/')
        else:
+           flash("Wrong password - try again!")
            return redirect('/')
    else:
+       flash("You don't have an account - sign up instead!")
        return redirect('/')
 
 # Sign up
@@ -48,7 +50,7 @@ def submit_signup():
    try:
        db.insert('users', name=name, user_name=username, password=password)
        session['username'] = username
-       flash('Sign Up Succesful')
+    #    flash('Sign Up Succesful')
        return redirect('/')
    except:
        flash('Sign Up Not Succesful')
@@ -293,7 +295,7 @@ def icon():
 # It renders to the individual review page
 @app.route('/reviews/<review_id>')
 def render_individual_review(review_id):
-    review_query = db.query("select product.id as prod_id, product.name as prod_name, review.rating, date(review.date) as review_date, users.user_name as user_name, review.id, review.review from review, product, users where review.product_id = product.id and review.user_id = users.id and review.id = '%s'" % review_id)
+    review_query = db.query("select product.id as prod_id, product.name as prod_name, review.rating, review.user_id as user_id,date(review.date) as review_date, users.user_name as user_name, review.id, review.review from review, product, users where review.product_id = product.id and review.user_id = users.id and review.id = '%s'" % review_id)
 
     return render_template(
       '/individual_review.html',
@@ -446,10 +448,23 @@ def render_user_from_login(user_name):
 # New review
 @app.route('/product_review_new', methods=['POST', 'GET'])
 def render_review_new():
-
     #Taking main category choice and returning list of secondary categories to be displayed in next drop down
     main_cat_list = db.query('select name from main_cat').namedresult()
     current_main_cat = request.form.get('main_cat_name')
+    new_main_cat = request.form.get('new_main_cat')
+
+    if new_main_cat is not None:
+        current_main_cat = new_main_cat
+    else:
+        current_main_cat = request.form.get('main_cat_name')
+
+    if new_main_cat is None:
+        new_main_cat = current_main_cat
+
+
+    print current_main_cat
+    print new_main_cat
+
     if current_main_cat is None:
         sec_cat_list = []
     elif current_main_cat == 'none':
@@ -458,7 +473,15 @@ def render_review_new():
         sec_cat_list = db.query("select secondary_cat.name as sec_cat_name, secondary_cat.id as sec_cat_id, main_cat.name as main_cat_name, main_cat.id as main_cat_id from secondary_cat inner join main_cat on secondary_cat.main_cat_id = main_cat.id where main_cat.name = '%s'" % current_main_cat).namedresult()
 
     #Taking secondary category choice and returning list of brands to be displayed in next drop down
-    current_secondary_cat = request.form.get('sec_cat_name')
+    new_sec_cat = request.form.get('new_sec_cat')
+    if new_sec_cat is not None:
+        current_secondary_cat = new_sec_cat
+    else:
+        current_secondary_cat = request.form.get('sec_cat_name')
+
+    if new_sec_cat is None:
+        new_sec_cat = current_secondary_cat
+
     if current_secondary_cat is None:
         brand_list = []
     elif current_secondary_cat == 'none':
@@ -467,7 +490,15 @@ def render_review_new():
         brand_list = db.query("select distinct company.name as brand_name from company inner join product on product.company_id = company.id inner join product_uses_category on product.id = product_uses_category.product_id inner join secondary_cat on product_uses_category.secondary_cat_id = secondary_cat.id where secondary_cat.name = '%s'" % current_secondary_cat).namedresult()
 
     #Taking brand choice and returning list of products to be displayed in next drop down
-    current_brand = request.form.get('brand_name')
+    new_brand = request.form.get('new_brand')
+    if new_brand is not None:
+        current_brand = new_brand
+    else:
+        current_brand = request.form.get('company_name')
+
+    if new_brand is None:
+        new_brand = current_brand
+
     if current_brand is None:
         product_list = []
     elif current_brand == 'none':
@@ -475,17 +506,29 @@ def render_review_new():
     else:
         product_list = db.query("select product.name as product_name from product inner join company on product.company_id = company.id where company.name = '%s'" % current_brand).namedresult()
 
+    new_product = request.form.get('new_product')
+    if new_product is not None:
+        current_product = new_product
+    else:
+        current_product = request.form.get('product_name')
+
+    if new_product is None:
+        new_product = current_product
 
     return render_template(
-        '/product_review.html',
-        customize_main_cat=customize_main_cat,
-        customize_second_cat=customize_second_cat,
-        customize_product=customize_product,
-        customize_company=customize_company,
-        main_cat_list=main_cat_query,
-        second_cat_list=second_cat_query,
-        product_list=product_query,
-        company_list=company_query
+        '/product_review_new.html',
+        main_cat_list = main_cat_list,
+        current_main_cat = current_main_cat,
+        sec_cat_list = sec_cat_list,
+        current_secondary_cat = current_secondary_cat,
+        brand_list = brand_list,
+        current_brand = current_brand,
+        product_list = product_list,
+        current_product = current_product,
+        new_main_cat = new_main_cat,
+        new_sec_cat = new_sec_cat,
+        new_brand = new_brand,
+        new_product = new_product
     )
 
 
@@ -524,6 +567,7 @@ def add_review():
     rating = request.form.get('rating')
     review = request.form.get('review')
     company_name = request.form.get('company_name')
+
     # Checks the input against values in the main_cat table. If the query doesn't find a match, a new entry is added.
     main_cat_check = db.query("select name, id from main_cat where main_cat.name = '%s'" % main_cat_name).namedresult()
     if main_cat_check:

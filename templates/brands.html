@@ -1,15 +1,17 @@
 {% extends 'layout.html' %}
 
 {% block nav %}
+<ul>
     <li><a href="/categories">Categories</a></li>
     <li><a href="/brands">Brands</a></li>
     <li><a href="/reviews">Reviews</a></li>
     <li><a href="/users">Users</a></li>
+</ul>
 {% endblock %}
 
 {% block header %}
-<header>
-    <a class="back-btn-link cf" href="/">
+<header class="cf">
+    <a class="back-btn-link fl cf" href="/">
         <i class="back-btn ion-arrow-left-a"></i>
     </a>
     <h1>Brands</h1>
@@ -37,7 +39,7 @@
         <a href="/brands/{{brand.brand_id}}">
             <h4>&nbsp;</h4>
             <div>
-                <h3 class="fill-top">{{brand.brand_name}}</h3>                
+                <h3 class="fill-top">{{brand.brand_name}}</h3>
             </div>
             <h4>{{brand.prod_count}} product{% if brand.prod_count > 1 %}s{% endif %}</h4>
         </a>

@@ -1,11 +1,13 @@
 {% extends 'layout.html' %}
 
 {% block nav %}
+<ul>
     {% for sub_category in sub_categories_list %}
     <li>
         <a href="/categories/{{cat_id}}/{{sub_category.id}}">{{sub_category.name}}</a>
     </li>
     {% endfor %}
+</ul>
 {% endblock %}
 
 {% block header %}
@@ -41,6 +43,7 @@
             <div>
                 <h3>{{product.prod_name}}</h3>
             </div>
+            <!-- Adds an 's' to the word 'review' when more than 1 is displayed -->
             <h4>{{product.review_count}} review{% if product.review_count > 1 %}s{% endif %}</h4>
         </a>
     </li>
