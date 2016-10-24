@@ -23,23 +23,23 @@ All team members are students in the [Digital Crafts](https://digitalcrafts.com)
 
 ####Team Freedom
 * [Che Blankenship](https://github.com/cheblankenship/)  
-**Primary team role:** UI/UX evaluation, Quality control  
-**Contributions:**  Regularly studied all code throughout project, particularly SQL queries on the backend (server.py) for redundancies or erroneous returns.  Investigated and fleshed out a possible solution for filtered drop-down select elements on the 'add a review page'.  Led team in continuously evaluating user-interface and user-experience of site, including semantics and critique of supported functionalities.  
+**Primary team role:** UI/UX evaluation, Quality control<br />
+**Contributions:**  Regularly studied all code throughout project, particularly SQL queries on the backend (server.py) for redundancies or erroneous returns.  Investigated and fleshed out a possible solution for filtered drop-down select elements on the 'add a review page'.  Led team in continuously evaluating user-interface and user-experience of site, including semantics and critique of supported functionalities.<br />
 **Key code portions:** Co-wrote user login, sign up, and early iterations of the 'add a review form'.
 
 * [John Coppola](https://github.com/johnnycopes/)  
-**Primary team role:** Front-end warrior  
-**Contributions:** Led the charge on all things visual/client-facing. Built a custom, responsive layout from scratch with focus on clean, robust design. Wrote and refactored HTML/CSS with an emphasis on simplicity, clarity, and flexibility. Organized site navigation. Made sure that we were pulling the right information from the database in the right places.  
+**Primary team role:** Front-end warrior<br />  
+**Contributions:** Led the charge on all things visual/client-facing. Built a custom, responsive layout from scratch with focus on clean, robust design. Wrote and refactored HTML/CSS with an emphasis on simplicity, clarity, and flexibility. Organized site navigation. Made sure that we were pulling the right information from the database in the right places.<br />
 **Key code portions:** Most of the HTML, CSS and JavaScript. Made tweaks to route handlers on the back end as well.
 
 * [Robert Dunn](https://github.com/robdunn220/)  
-**Primary team role:** Back-end ninja  
-**Contributions:** Database design and implementation. Route handlers and queries. Just making sure the manipulation and display of the data in the database was working well with the design concept.  
+**Primary team role:** Back-end ninja<br />
+**Contributions:** Database design and implementation. Route handlers and queries. Just making sure the manipulation and display of the data in the database was working well with the design concept.<br />
 **Key code portions:** server.py, Jinja in some of the HTML
 
 * [Jesslyn Landgren](https://github.com/jesslynlandgren/)  
-**Primary team role:** Organize all the things, Front-end/Back-end backup  
-**Contributions:** Scrum master. Led daily stand up meetings and maintained virtual scrum board.  Provided initial project concept.  Helped Rob build out initial back-end, including route handlers, SQL queries, and placeholder HTML/Jinja for pages, then assisted with troubleshooting throughout project.  Developed and implemented drop-down sort throughout site.  Developed 2nd iteration of the 'add a review' form with the drop-down filters and add new field functionalities.  
+**Primary team role:** Organize all the things, Front-end/Back-end backup<br />
+**Contributions:** Scrum master. Led daily stand up meetings and maintained virtual scrum board.  Provided initial project concept.  Helped Rob build out initial back-end, including route handlers, SQL queries, and placeholder HTML/Jinja for pages, then assisted with troubleshooting throughout project.  Developed and implemented drop-down sort throughout site.  Developed 2nd iteration of the 'add a review' form with the drop-down filters and add new field functionalities.<br />  
 **Key code portions:** Front-end and back-end for drop-down sort elements for tile-grid pages.  Sections of the HTML that are heavy on the Jinja. Co-wrote user login, sign up, and the 'add a review form'.
 
 ##What we used:
