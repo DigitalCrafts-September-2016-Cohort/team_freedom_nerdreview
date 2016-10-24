@@ -592,11 +592,12 @@ def render_review():
 def add_review():
     # Reqests the needed information from the form in /product_review
     main_cat_name = request.form.get('main_cat_name')
-    second_cat_name = request.form.get('second_cat_name')
+    second_cat_name = request.form.get("sec_cat_name")
     product_name = request.form.get('product_name')
     rating = request.form.get('rating')
     review = request.form.get('review')
     company_name = request.form.get('company_name')
+    print second_cat_name
 
     # Checks the input against values in the main_cat table. If the query doesn't find a match, a new entry is added.
     main_cat_check = db.query("select name, id from main_cat where main_cat.name = '%s'" % main_cat_name).namedresult()
@@ -609,7 +610,7 @@ def add_review():
         )
         main_cat_check = db.query("select name, id from main_cat where main_cat.name = '%s'" % main_cat_name).namedresult()
         main_category_id = main_cat_check[0].id
-
+    print main_category_id
     # Checks the input against values in the secondary_cat table. If the query doesn't find a match, a new entry is added.
     second_cat_check = db.query("select * from secondary_cat where secondary_cat.name = '%s'" % second_cat_name).namedresult()
     if second_cat_check:

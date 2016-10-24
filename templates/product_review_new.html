@@ -70,7 +70,7 @@
                                             <option {% if secondary_cat.sec_cat_name == current_secondary_cat %} selected {% endif %} value="{{secondary_cat.sec_cat_name}}">{{secondary_cat.sec_cat_name}}</option>
                                         {% endfor %}
                                         {% if new_sec_cat is not none %}
-                                            <option selected value="{{new_sec_cat}}">{{new_sec_cat}}</option>
+                                            <option selected value="{{sec_cat_name}}">{{new_sec_cat}}</option>
                                         {% endif %}
                                     {% else %}
                                         <option value="addnew">ADD NEW</option>
