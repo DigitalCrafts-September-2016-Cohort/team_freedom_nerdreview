@@ -517,6 +517,10 @@ header h3 {
     background: #fff;
 }
 
+.new-review a:hover {
+    color: #fff;
+}
+
 /*------------------------
 MEDIA QUERIES
 ------------------------*/

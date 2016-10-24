@@ -510,6 +510,9 @@ def render_review_new():
     else:
         current_secondary_cat = request.form.get('sec_cat_name')
 
+    if new_sec_cat is None:
+        new_sec_cat = current_secondary_cat
+
     if current_secondary_cat is None:
         brand_list = []
     elif current_secondary_cat == 'none':
@@ -522,7 +525,10 @@ def render_review_new():
     if new_brand is not None:
         current_brand = new_brand
     else:
-        current_brand = request.form.get('brand_name')
+        current_brand = request.form.get('company_name')
+
+    if new_brand is None:
+        new_brand = current_brand
 
     if current_brand is None:
         product_list = []
@@ -536,6 +542,9 @@ def render_review_new():
         current_product = new_product
     else:
         current_product = request.form.get('product_name')
+
+    if new_product is None:
+        new_product = current_product
 
     return render_template(
         '/product_review_new.html',
@@ -586,6 +595,7 @@ def add_review():
     rating = request.form.get('rating')
     review = request.form.get('review')
     company_name = request.form.get('company_name')
+
     # Checks the input against values in the main_cat table. If the query doesn't find a match, a new entry is added.
     main_cat_check = db.query("select name, id from main_cat where main_cat.name = '%s'" % main_cat_name).namedresult()
     if main_cat_check:

@@ -70,7 +70,7 @@
                                             <option {% if secondary_cat.sec_cat_name == current_secondary_cat %} selected {% endif %} value="{{secondary_cat.sec_cat_name}}">{{secondary_cat.sec_cat_name}}</option>
                                         {% endfor %}
                                         {% if new_sec_cat is not none %}
-                                            <option selected value="new_sec_cat">{{new_sec_cat}}</option>
+                                            <option selected value="{{new_sec_cat}}">{{new_sec_cat}}</option>
                                         {% endif %}
                                     {% else %}
                                         <option value="addnew">ADD NEW</option>
@@ -78,7 +78,7 @@
                                             <option {% if secondary_cat.sec_cat_name == current_secondary_cat %} selected {% endif %} value="{{secondary_cat.sec_cat_name}}">{{secondary_cat.sec_cat_name}}</option>
                                         {% endfor %}
                                         {% if new_sec_cat is not none %}
-                                            <option selected value="new_sec_cat">{{new_sec_cat}}</option>
+                                            <option selected value="{{new_sec_cat}}">{{new_sec_cat}}</option>
                                         {% endif %}
                                     {% endif %}
                                 {% endif %}
@@ -98,8 +98,8 @@
                     {% endif %}
 
                     <div class="form-group">
-                        <label for="brand_name">Company/Brand name</label>
-                        <select id="brand_name" class="brand_name form-control" name="brand_name" onchange="this.form.submit()">
+                        <label for="company_name">Company/Brand name</label>
+                        <select id="company_name" class="brand_name form-control" name="company_name" onchange="this.form.submit()">
                             <option selected disabled value="">Select a company</option>
                             {% if current_secondary_cat is not none %}
                                 {% if current_secondary_cat != "addnew" %}
@@ -109,15 +109,15 @@
                                             <option {% if brand.brand_name == current_brand %} selected {% endif %} value="{{brand.brand_name}}">{{brand.brand_name}}</option>
                                         {% endfor %}
                                         {% if new_brand is not none %}
-                                            <option selected value="new_brand">{{new_brand}}</option>
+                                            <option selected value="{{new_brand}}">{{new_brand}}</option>
                                         {% endif %}
                                     {% else %}
                                         <option value="addnew">ADD NEW</option>
                                         {% for brand in brand_list %}
                                             <option {% if brand.brand_name == current_brand %} selected {% endif %} value="{{brand.brand_name}}">{{brand.brand_name}}</option>
                                         {% endfor %}
-                                        {% if new_sec_cat is not none %}
-                                            <option selected value="new_sec_cat">{{new_sec_cat}}</option>
+                                        {% if new_brand is not none %}
+                                            <option selected value="{{new_brand}}">{{new_brand}}</option>
                                         {% endif %}
                                     {% endif %}
                                 {% endif %}
@@ -147,11 +147,17 @@
                                         {% for product in product_list %}
                                             <option {% if product.product_name == current_product %} selected {% endif %} value="{{product.product_name}}">{{product.product_name}}</option>
                                         {% endfor %}
+                                        {% if new_product is not none %}
+                                            <option selected value="{{new_product}}">{{new_product}}</option>
+                                        {% endif %}
                                     {% else %}
                                         <option value="addnew">ADD NEW</option>
                                         {% for product in product_list %}
                                             <option {% if product.product_name == current_product %} selected {% endif %} value="{{product.product_name}}">{{product.product_name}}</option>
                                         {% endfor %}
+                                        {% if new_product is not none %}
+                                            <option selected value="{{new_product}}">{{new_product}}</option>
+                                        {% endif %}
                                     {% endif %}
                                 {% endif %}
                             {% endif %}
@@ -187,10 +193,10 @@
 
                     <div class="form-group set-height">
                         <label for="review">Review</label>
-                        <input id="review" class="form-control" type="text" name="review" value="{{review}}">
+                        <input id="review" class="form-control" type="text" name="review" value="" required>
                     </div>
 
-                    <button class="nr-btn nr-success std-btn btn-rnd js-submit" type="submit">Submit</button>
+                    <button class="nr-btn nr-success std-btn btn-rnd js-submit" type="submit" formaction="/add_product_review">Submit</button>
                 </form>
             </div>
         </div>
