@@ -8,16 +8,17 @@
 {% endblock %}
 
 {% block header %}
-<header class="ind-header">
+<header class="ind-header cf">
+    <a class="back-btn-link cf" href="/users">
+        <i class="back-btn ion-arrow-left-a"></i>
+    </a>
     <div>
         <h1>{{user.user_name}}</h1>
         <h3>{{user.review_count}} review{% if user.review_count > 1 %}s{% endif %}</h3>
     </div>
-    <ul class="img-list">
-    <!-- Include for loop to render images here -->
-        <li class="img-tile img-user">
-            <i class="ion-image"></i>
-        </li>
+    <div class="img-tile img-user fr">
+        <i class="ion-image"></i>
+    </div>
     <!-- /end for loop -->
     </ul>
 </header>
@@ -25,12 +26,7 @@
 
 {% block body %}
 <div class="ind-body">
-    <div class="cf">
-        <a class="back-btn-link cf" href="/users">
-            <i class="back-btn ion-arrow-left-a"></i>
-        </a>
-    </div>
-    <div class="content">
+    <div class="tile-list">
         <ul>
             <!-- Model tile -->
             {% for review in reviews %}

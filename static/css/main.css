@@ -46,6 +46,11 @@ a {
 .fl { float: left; }
 .fr { float: right; }
 
+/* used to override JS rule that sets width */
+.width100 {
+    width: 100% !important;
+}
+
 .nr-btn {
     width: 50%;
     padding: 10px;
@@ -53,6 +58,7 @@ a {
     outline: none;
     border: 0;
     background: #fff;
+    color: rgba(0,0,0,.87);
     border-radius: 0;
     position: relative;
     font-family: 'Roboto Mono', Courier, monospace;
@@ -83,6 +89,10 @@ a {
 .nr-success {
     background: #479c47;
     color: #fff;
+}
+
+.nr-color {
+    background: #F4CF6F;
 }
 
     .nr-btn:hover { text-decoration: underline; }
@@ -166,8 +176,10 @@ a {
     }
 
 .nav-menu-list {
-    font-size: 20px;
+    font-size: 16px;
     text-align: center;
+    max-height: 250px;
+    overflow: auto;
 }
 
     .nav-menu-list a {
@@ -217,12 +229,21 @@ a {
 
 .js-slide {
     position: fixed;
-    font-size: 80px;
-    margin-left: 62px;
-    color: #fff !important;
+    font-size: 57px;
+    color: #F4CF6F;
+    text-align: center;
     z-index: 3;
-    bottom: 70px;
-    right: 38px;
+    bottom: 90px;
+    left: 18px;
+}
+
+.js-slide p {
+    margin-top: -22px;
+    font-size: 24px;
+}
+
+.js-slide:hover {
+    text-decoration: none;
 }
 
 /* --- Homepage --- */
@@ -240,7 +261,7 @@ a {
 
 .homepage h1 {
     /*border: 4px solid red;*/
-    margin: 40px 0 0 0;
+    margin: 25px 0 0 0;
     font-size: 2em;
 }
 
@@ -266,7 +287,7 @@ a {
 /* --- Header --- */
 header {
   /*border: 4px solid purple;*/
-    padding: 0 10px 20px;
+    /*padding: 0 10px 20px;*/
     text-align: right;
 }
 
@@ -274,16 +295,17 @@ header h3 {
     margin-top: 50px;
 }
 
+.ind-header h3 {
+    margin-top: 21px;
+}
+
 .welcome {
     font-size: 3em;
     text-align: center;
 }
 
-.back-btn-link {
-    display: inline-block;
-    float: left;
-}
 
+/* Back button */
 .back-btn {
     font-size: 2em;
     float: left;
@@ -296,20 +318,27 @@ header h3 {
     transition: 175ms all ease-in-out;
 }
 
+.back-btn-link {
+    float: left;
+}
+
 .back-btn-link:hover > .back-btn,
 .back-btn-link:focus > .back-btn {
     border-color: #F4CF6F;
 }
 
+/* Sort menu */
 .sort {
-    margin-bottom: 40px;
-    padding-right: 10px;
+    margin-bottom: 21px;
+}
+
+.sort form {
+    float: right;
 }
 
 .sort select {
     /*border: 4px solid red;*/
     width: 230px;
-    float: right;
 }
 
 /* --- Body --- */
@@ -322,9 +351,8 @@ main {
 
 .main-wrapper {
     /*border: 4px solid green;*/
-    margin: 0 auto;
-    padding: 5px 0;
-    max-width: 1720px;
+    margin: 21px auto 0;
+    padding: 0 10px;
     position: relative;
     text-align: center;
 }
@@ -340,7 +368,7 @@ main a:focus {
 
 /* --- Body (tiles) --- */
 .tile {
-    margin: 0 10px 30px;
+    margin: 0 0 30px;
     width: 300px;
     height: 300px;
     text-align: center;
@@ -398,41 +426,44 @@ main a:focus {
 
 /* --- Header (individual item) --- */
 .ind-header {
-    width: 30%;
-    float: right;
-    max-width: 400px;
+    width: 100%;
+}
+
+.ind-header .rating {
+    white-space: nowrap;
 }
 
 /* --- Body (individual item) --- */
-.ind-body {
-    margin-top: 21px;
-    width: 70%;
-    display: inline-block;
-    /*text-align: center;*/
-    float: left;
+.img-list,
+.tile-list,
+.review {
+    display: block;
 }
 
-    .ind-body .cf h1 {
-        margin: 0;
-    }
-
-    .ind-body .content {
-        position: relative;
-    }
-
-    .ind-body .review {
-        text-align: left;
-        font-size: 16px;
-    }
+.btn-div {
+    margin-bottom: 40px;
+    text-align: right;
+}
 
 .img-list {
-    display: inline-block;
+    text-align: right;
+    float: right;
+    width: 100%;
 }
 
+    .img-list button {
+        margin-bottom: 40px;
+    }
+
+    .img-list ul {
+        display: block;
+        float: right;
+    }
+
 .img-tile {
-    margin-top: 20px;
-    height: 250px;
-    width: 250px;
+    margin-bottom: 20px;
+    height: 230px;
+    width: 230px;
     border: 1px solid #fff;
     display: flex;
     align-items: center;
@@ -442,11 +473,22 @@ main a:focus {
 .img-user {
     width: 150px;
     height: 150px;
+    margin-bottom: 40px;
 }
 
 .img-tile i {
     display: inline-block;
     font-size: 100px;
+}
+
+.review {
+    padding-bottom: 100px;
+    text-align: left;
+}
+
+.review .wrapper {
+    margin: 0 auto;
+    padding: 0 10px;
 }
 
 
@@ -502,15 +544,45 @@ main a:focus {
 MEDIA QUERIES
 ------------------------*/
 
+@media screen and (min-height: 600px) {
+
+    .nav-menu-list {
+        max-height: 400px;
+    }
+
+}
+
+@media screen and (min-height: 1000px) {
+
+    .nav-menu-list {
+        max-height: 700px;
+    }
+
+}
+
 @media screen and (min-width: 480px) {
 
     html {
         font-size: 100%;
     }
 
+    .nav-menu-list {
+        font-size: 20px;
+    }
+
+    .tile {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
     .main-wrapper {
         /*border: 4px solid green;*/
-        padding: 5px 20px;
+        padding: 0 20px;
+    }
+
+    .review .wrapper {
+        padding: 0;
+        width: 80%;
     }
 
     .homepage h1 {
@@ -521,19 +593,27 @@ MEDIA QUERIES
         font-size: 30px;
     }
 
-    header,
-    .sort {
-        padding-left: 0;
-        padding-right: 0;
-    }
-
     header h3 {
         margin-top: 20px;
+        margin-bottom: 21px;
     }
 
 }
 
-@media screen and (min-width: 900px) {
+@media screen and (min-width: 768px) {
+
+    .img-list {
+        width: auto;
+    }
+
+    .review .wrapper {
+        width: 90%;
+    }
+
+}
+
+
+@media screen and (min-width: 1000px) {
 
     .homepage {
         width: 80%;
@@ -561,7 +641,15 @@ MEDIA QUERIES
 
     .main-wrapper {
         /*border: 4px solid green;*/
-        padding: 5px 40px;
+        padding: 0 30px;
+        max-width: 1720px;
     }
+
+    .
+
+    .ind-body {
+        margin: 21 20px 0;
+    }
+
 
 }

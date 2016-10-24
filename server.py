@@ -317,7 +317,7 @@ def icon():
 
 @app.route('/reviews/<review_id>')
 def render_individual_review(review_id):
-    review_query = db.query("select product.id as prod_id, product.name as prod_name, review.rating, date(review.date) as review_date, users.user_name as user_name, review.id, review.review from review, product, users where review.product_id = product.id and review.user_id = users.id and review.id = '%s'" % review_id)
+    review_query = db.query("select product.id as prod_id, product.name as prod_name, review.rating, review.user_id as user_id,date(review.date) as review_date, users.user_name as user_name, review.id, review.review from review, product, users where review.product_id = product.id and review.user_id = users.id and review.id = '%s'" % review_id)
 
     return render_template(
       '/individual_review.html',

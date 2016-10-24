@@ -1,17 +1,36 @@
 $(document).ready(function(){
+
     // SLIDE NAVBAR MENU
+    // Store slider position in JS local storage and set its position and the color of the mobile menu button accordingly
+    function markSliderPosition(position){
+        localStorage.setItem('sliderPosition', position);
+    }
+    if (localStorage.getItem('sliderPosition') === 'open') {
+        $('.nav-menu').css('left', '0');
+        $('.js-slide').css('color', '#fff');
+    } else {
+        $('.nav-menu').css('left', '-320');
+        $('.js-slide').css('color', '#F4CF6F');
+    }
+    // Change the slider position and mobile menu button on click
     $('.js-slide').on('click', function(){
         if ($('.nav-menu').position().left === 0) {
             $('.nav-menu').animate({left: -320});
+            $(this).css('color', '#F4CF6F');
+            markSliderPosition('closed');
         } else {
             $('.nav-menu').animate({left: 0});
+            $(this).css('color', '#fff');
+            markSliderPosition('open');
         }
     });
 
-    //function(){
-    //     $('navbar').animate({width: 320});
-    //     $('main').animate({left: 320});
-    // });
+    $(window).resize(function() {
+        if ($(window).width() > 1000) {
+            $('.nav-menu').css('left', '0');
+            markSliderPosition('open');
+        }
+    });
 
     // BACK BUTTON
     // Back button goes back one page on click
@@ -19,6 +38,21 @@ $(document).ready(function(){
     $('.js-back').on('click', function(){
         history.go(-1);
         return false;
+    });
+
+    // SEE IMAGES BUTTON
+    // Show/hide images on click for small screens to save space
+    $('.js-images-btn').on('click', function(){
+        $('.img-list > ul').slideToggle();
+        // var btnText = $('.js-images-btn > h4').html();
+        // if ($('.img-list > ul').is(':visible')) {
+        //     $('.img-list > ul').css('display', 'inline-block');
+        // }
+        if ($('.js-images-btn > h4').html() === 'Show images') {
+            $('.js-images-btn > h4').html('Hide images');
+        } else {
+            $('.js-images-btn > h4').html('Show images');
+        }
     });
 
     // ADD NEW REViEW
@@ -39,12 +73,7 @@ $(document).ready(function(){
         });
     })()
 
-    // INDIVIDUAL CONTENT
-    // On individual content pages, set the height of the tiles in the main/header and main/body to be even
-    // Script stops running if .img-list isn't on the page, so keep this part at bottom
-    // var imgListTop = $('.img-list').position().top;
-    // $('.content').css('top', imgListTop - 71);
-
     // MODAL FORM VALIDATION
-    $('#myForm').validator()
+    $('#myForm').validator();
+
 });
