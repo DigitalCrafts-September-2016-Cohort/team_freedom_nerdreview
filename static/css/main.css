@@ -489,14 +489,14 @@ header h3 {
     padding: 0 10px;
 }
 
-
 /* ------ NEW REVIEW PAGE ----- */
+
 .new-review h3 {
     display: inline-block;
 }
 
 .new-review label {
-    color: #fff;
+    color: #000;
     font-weight: 400;
     width: 100%;
 }
@@ -505,21 +505,16 @@ header h3 {
     text-align: left;
 }
 
-.new-review .customize {
-    text-align: left;
+.new-review .line {
+    display: inline;
 }
 
-.customize label {
-    margin-bottom: 0;
+.new-review .formbtn {
+    padding: 7px;
 }
 
-.customize i {
-    transform: rotate(45deg);
-    display: inline-block;
-}
-
-.set-height {
-    height: 77px;
+.new-review .well{
+    background: #fff;
 }
 
 /*------------------------
