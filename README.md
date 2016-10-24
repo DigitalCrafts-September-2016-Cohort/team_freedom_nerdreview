@@ -1,7 +1,8 @@
 #Nerd Review
 <img src="static/img/logo_with_title.png" alt="Logo" width="150px"/>
 ######
-[Live Project - http://nerdreview.co](https://nerdreview.co)   |  [Overview](https://github.com/DigitalCrafts-September-2016-Cohort/team_freedom_nerdreview#overview)   |   [Team](https://github.com/DigitalCrafts-September-2016-Cohort/team_freedom_nerdreview#team-members--roles)   |   [What We Used](https://github.com/DigitalCrafts-September-2016-Cohort/team_freedom_nerdreview#what-we-used)   |   [MVP](https://github.com/DigitalCrafts-September-2016-Cohort/team_freedom_nerdreview#mvp-minimum-viable-product)   |   [Challenges](https://github.com/DigitalCrafts-September-2016-Cohort/team_freedom_nerdreview#challenges--solutions)   |   [Contributing](https://github.com/DigitalCrafts-September-2016-Cohort/team_freedom_nerdreview#contribute-to-nerd-review)
+[Live Project - http://nerdreview.co](https://nerdreview.co)   |  [Overview](https://github.com/DigitalCrafts-September-2016-Cohort/team_freedom_nerdreview#overview)   |   [Team](https://github.com/DigitalCrafts-September-2016-Cohort/team_freedom_nerdreview#team-members--roles)   |   [What We Used](https://github.com/DigitalCrafts-September-2016-Cohort/team_freedom_nerdreview#what-we-used)   |   [MVP](https://github.com/DigitalCrafts-September-2016-Cohort/team_freedom_nerdreview#mvp-minimum-viable-product)   |   [Challenges](https://github.com/DigitalCrafts-September-2016-Cohort/team_freedom_nerdreview#code-snippets)   |  
+[Code & Screenshots](https://github.com/DigitalCrafts-September-2016-Cohort/team_freedom_nerdreview#challenges--solutions)   |  [Contributing](https://github.com/DigitalCrafts-September-2016-Cohort/team_freedom_nerdreview#contribute-to-nerd-review)
 
 ##Overview:
 Nerd Review is a centralized platform that brings together product lovers of the obsessive and methodical variety from their respective corners of the internet.  The audience of the dedicated product review bloggers out there can often be limited to existing members of that community.  If you are a nerdy consumer branching into a new area or just researching every major purchase like a PhD thesis, your progress can be slowed by the fact that if you aren't already aware of that particular niche product review blog.  If you don't already know about it, you can't find it.  This web app provides a functioning framework for such a dedicated review site that bridges the gap between professional product reviewers and average consumers.  
@@ -22,22 +23,22 @@ Nerd Review is a centralized platform that brings together product lovers of the
 All team members are students in the [Digital Crafts](https://digitalcrafts.com) September 2016 cohort. This project was initially completed as the first full-stack project for that curriculum and utilized the Scrum development process and philosophy.  Paired and mob programming were the focus in the initial and final stages, while mid and late stage work was primarily completed through individual but coordinated and co-located programming.
 
 ####Team Freedom
-* [Che Blankenship](https://github.com/cheblankenship/):  
+* [Che Blankenship](https://github.com/cheblankenship/)  
 **Primary team role:** UI/UX evaluation, Quality control  
 **Contributions:**  Regularly studied all code throughout project, particularly SQL queries on the backend (server.py) for redundancies or erroneous returns.  Investigated and fleshed out a possible solution for filtered drop-down select elements on the 'add a review page'.  Led team in continuously evaluating user-interface and user-experience of site, including semantics and critique of supported functionalities.
 **Key code portions:** Co-wrote user login, sign up, and early iterations of the 'add a review form'.
 
-* [John Coppola](https://github.com/johnnycopes/):  
+* [John Coppola](https://github.com/johnnycopes/)  
 **Primary team role:** Front-end warrior
-**Contributions:** Led the charge on all things visual/client-facing. Built a custom, responsive layout from scratch with focus on clean, robust design. Wrote and refactored HTML/CSS with an emphasis on simplicity, clarity, and flexibility. Organized site navigation. Made sure that we were pulling the right information from the database in the right places.
+**Contributions:** Led the charge on all things visual/client-facing. Built a custom, responsive layout from scratch with focus on clean, robust design. Wrote and refactored HTML/CSS with an emphasis on simplicity, clarity, and flexibility. Organized site navigation. Made sure that we were pulling the right information from the database in the right places.  
 **Key code portions:** Most of the HTML, CSS and JavaScript. Made tweaks to route handlers on the back end as well.
 
-* [Robert Dunn](https://github.com/robdunn220/):  
+* [Robert Dunn](https://github.com/robdunn220/)  
 **Primary team role:** Back-end ninja  
 **Contributions:** Database design and implementation. Route handlers and queries. Just making sure the manipulation and display of the data in the database was working well with the design concept.
 **Key code portions:** server.py, Jinja in some of the HTML
 
-* [Jesslyn Landgren](https://github.com/jesslynlandgren/):  
+* [Jesslyn Landgren](https://github.com/jesslynlandgren/)  
 **Primary team role:** Organize all the things, Front-end/Back-end backup  
 **Contributions:** Scrum master. Led daily stand up meetings and maintained virtual scrum board.  Provided initial project concept.  Helped Rob build out initial back-end, including route handlers, SQL queries, and placeholder HTML/Jinja for pages, then assisted with troubleshooting throughout project.  Developed and implemented drop-down sort throughout site.  Developed 2nd iteration of the 'add a review' form with the drop-down filters and add new field functionalities.  
 **Key code portions:** Front-end and back-end for drop-down sort elements for tile-grid pages.  Sections of the HTML that are heavy on the Jinja. Co-wrote user login, sign up, and the 'add a review form'.
@@ -89,8 +90,9 @@ We started incorporating stretch goals about three days before the project deadl
 ## Challenges & Solutions:
 **Some of the biggest challenges we faced with this project build included:**
 
-**Challenge:** Sorting grid pages without implementing a significant amount of JavaScript. Needed to display a list of aliased sort options that would reload the page automatically on selection.  
-**Solution:** We hard coded the sort options for each page.  While this is not ideal, the sort options were customized for each page and this allowed us to more clearly follow the path through the HTML to the backend.  There is a simple ```onchange="this.form.submit()"``` attribute for the form which contains the ```<select>``` tag, so every time the drop-down select menu is used to select a different sort order, a value gets passed to the route handler noting the order.  We run a conditional check on the sort order value and generate two variables corresponding to the relevant SQL 'order by' syntax for that sort order.  The HTML and Jinja for loop to display the tile grid is generalized, but the query generating the loop is then sorted.
+1.  **Challenge:** Sorting grid pages without implementing a significant amount of JavaScript. Needed to display a list of aliased sort options that would reload the page automatically on selection.  
+
+    **Solution:** We hard coded the sort options for each page.  While this is not ideal, the sort options were customized for each page and this allowed us to more clearly follow the path through the HTML to the backend.  There is a simple ```onchange="this.form.submit()"``` attribute for the form which contains the ```<select>``` tag, so every time the drop-down select menu is used to select a different sort order, a value gets passed to the route handler noting the order.  We run a conditional check on the sort order value and generate two variables corresponding to the relevant SQL 'order by' syntax for that sort order.  The HTML and Jinja for loop to display the tile grid is generalized, but the query generating the loop is then sorted.
 
 ##Code Snippets
 
