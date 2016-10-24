@@ -1,22 +1,26 @@
 <!DOCTYPE html>
 {% extends 'layout.html' %}
 
+<!-- Load the "super categories", the four pillars of our site's navigation -->
 {% block nav %}
+<ul>
     <li><a href="/categories">Categories</a></li>
     <li><a href="/brands">Brands</a></li>
     <li><a href="/reviews">Reviews</a></li>
     <li><a href="/users">Users</a></li>
+</ul>
 {% endblock %}
 
 {% block homepage %}
-    <div class="homepage">
-        <h1>Welcome to Nerd Review!</h1>
-        <h2>Let your nerd flag fly</h2>
-        <div class="credit">
-            <p class="team">
-                a <a href="https://github.com/DigitalCrafts-September-2016-Cohort/team_freedom_nerdreview">team freedom</a> product
-            </p>
-            <p class="copyright">Copyright &copy; 2016 Nerd Review All Rights Reserved.</p>
-        </div>
+<div class="homepage">
+    <h1>Welcome to Nerd Review!</h1>
+    <!-- Do not be afraid -->
+    <h2>Let your nerd flag fly</h2>
+    <div class="credit">
+        <p class="team">
+            a <a href="https://github.com/DigitalCrafts-September-2016-Cohort/team_freedom_nerdreview">team freedom</a> product
+        </p>
+        <p class="copyright">Copyright &copy; 2016 Nerd Review All Rights Reserved.</p>
     </div>
+</div>
 {% endblock %}

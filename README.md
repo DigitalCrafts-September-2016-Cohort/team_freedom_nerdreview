@@ -17,7 +17,7 @@ Nerd Review is a centralized platform that brings together product lovers of the
 [NerdReview](https://github.com/DigitalCrafts-September-2016-Cohort/team_freedom_nerdreview.git)
 
 ##Team Members & Roles:
-**Click on each member's name to see their github profile**
+**Click on each member's name to see their GitHub profile**
 All team members are students in the [Digital Crafts](https://digitalcrafts.com) September 2016 cohort. This project was initially completed as the first full-stack project for that curriculum.
 <!-- During this project we utilized the Scrum development process and philosophy.  Paired and mob programming were the focus in the initial and final stages, while mid and late stage work was primarily completed through individual but coordinated and co-located programming.   -->
 
@@ -28,18 +28,18 @@ All team members are students in the [Digital Crafts](https://digitalcrafts.com)
 **Key code portions:**
 
 * [John Coppola](https://github.com/johnnycopes/):  
-**Primary team role:** Front-end dreamer  
-**Contributions:**  
-**Key code portions:**  
+**Primary team role:** Front-end warrior
+**Contributions:** Led the charge on all things visual/client-facing. Built a custom, responsive layout from scratch with focus on clean, robust design. Wrote and refactored HTML/CSS with an emphasis on simplicity, clarity, and flexibility. Organized site navigation. Made sure that we were pulling the right information from the database in the right places.
+**Key code portions:** Most of the HTML, CSS and JavaScript. Made tweaks to route handlers on the back end as well.
 
 * [Robert Dunn](https://github.com/robdunn220/):  
 **Primary team role:** Back-end ninja  
-**Contributions:**  
-**Key code portions:**
+**Contributions:** Database design and implementation. Route handlers and queries. Just making sure the manipulation and display of the data in the database was working well with the design concept.
+**Key code portions:** server.py, Jinja in some of the HTML
 
 * [Jesslyn Landgren](https://github.com/jesslynlandgren/):  
 **Primary team role:** Organize all the things, back-end backup  
-**Contributions:** Scrum master. Led daily stand up meetings and maintained virtual scrum board.  Provided initial project concept.  Helped Rob build out initial back-end, including route handlers, SQL queries, and place holder HTML/Jinja for pages.  Helped troubleshoot and tweak SQL queries throughout project.  Developed and implemented drop-down sort throughout site.  
+**Contributions:** Scrum master. Led daily stand up meetings and maintained virtual scrum board.  Provided initial project concept.  Helped Rob build out initial back-end, including route handlers, SQL queries, and placeholder HTML/Jinja for pages.  Helped troubleshoot and tweak SQL queries throughout project.  Developed and implemented drop-down sort throughout site.  
 **Key code portions:** Front-end and back-end for drop-down sort elements for tile-grid pages.  Co-wrote user login & signup route handlers, HTML.
 
 ##What we used:
@@ -61,20 +61,20 @@ All team members are students in the [Digital Crafts](https://digitalcrafts.com)
   * dotenv
 * HTML5
 * CSS
-* Javascript
+* JavaScript
 
 ##MVP (Minimum Viable Product):
 This was the first full-stack project for all team members, therefore our first experience at deciding on an MVP.  One challenge we faced was a blurring the line between our MVP and stretch goals due to a desire to make efficient use of our time, dispatching some members to advanced tasks if troubleshooting an MVP issue was a one person job.
 
 **Initial MVP**
 * The following pages: individual review, individual project (with all reviews), list of all reviews, list of all brands, list of all users
-* Products organized into a category hierarchy at least 3 levels deep
+* Products organized into a category hierarchy at least three levels deep
 * Consistent formatting for all pages including a vertical fixed-right nav bar and a main content area displaying items as grid tiles
 * User session tracking (log in, log out, sign up)
 * Drop-down sort menu with auto refresh for all pages displaying grid tiles
 * Back button
 
-We started incorporating stretch goals about 3 days before the project deadline (as soon as we knew that we would be able to reach MVP ahead of the deadline), but before our MVP was officially deployed.
+We started incorporating stretch goals about three days before the project deadline (as soon as we knew that we would be able to reach MVP ahead of the deadline), but before our MVP was officially deployed.
 
 **Stretch Goals**
 * Site responsiveness
@@ -91,6 +91,39 @@ We started incorporating stretch goals about 3 days before the project deadline 
 3. Reducing redundancies on the back-end
 
 ##Code Snippets
+```
+// NAV MENU SLIDE
+// Store nav menu panel position in JS local storage. On page refresh, set it to either open or closed and the mobile menu button to the correct color
+function markSliderPosition(position){
+    localStorage.setItem('sliderPosition', position);
+}
+if (localStorage.getItem('sliderPosition') === 'open') {
+    $('.nav-menu').css('left', '0');
+    $('.js-slide').css('color', '#fff');
+} else {
+    $('.nav-menu').css('left', '-320');
+    $('.js-slide').css('color', '#F4CF6F');
+}
+// Change the slider position and mobile menu button on click
+$('.js-slide').on('click', function(){
+    if ($('.nav-menu').position().left === 0) {
+        $('.nav-menu').animate({left: -320});
+        $(this).css('color', '#F4CF6F');
+        markSliderPosition('closed');
+    } else {
+        $('.nav-menu').animate({left: 0});
+        $(this).css('color', '#fff');
+        markSliderPosition('open');
+    }
+});
+// If page width is greater than 1000px, set the nav menu on any kind of page resize
+$(window).resize(function() {
+    if ($(window).width() > 1000) {
+        $('.nav-menu').css('left', '0');
+        markSliderPosition('open');
+    }
+});
+```
 
 ##Screenshots
 
