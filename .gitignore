@@ -1,3 +1,5 @@
 .DS_Store
 icon.html
 product_review.html
+.env
+*.pyc

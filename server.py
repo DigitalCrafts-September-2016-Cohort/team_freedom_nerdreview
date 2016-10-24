@@ -4,9 +4,18 @@ from dotenv import load_dotenv, find_dotenv
 import os
 import datetime
 
-db = pg.DB(dbname='project_db')
+from dotenv import load_dotenv, find_dotenv
+load_dotenv(find_dotenv())
 
-app = Flask('NerdReview')
+db = pg.DB(
+    dbname=os.environ.get('PG_DBNAME'),
+    host=os.environ.get('PG_HOST'),
+    user=os.environ.get('PG_USERNAME'),
+    passwd=os.environ.get('PG_PASSWORD')
+)
+
+tmp_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
+app = Flask('NerdReview', template_folder=tmp_dir)
 app.secret_key = "bigbigbig"
 # Renders the homepage at the root directory
 @app.route('/')
