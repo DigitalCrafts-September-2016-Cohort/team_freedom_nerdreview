@@ -1,7 +1,7 @@
 // Kickstart the jQuery with the good 'ol DOC READY
 $(document).ready(function(){
 
-    // SLIDE NAVBAR MENU
+    // NAV MENU SLIDE
     // Store nav menu panel position in JS local storage. On page refresh, set it to either open or closed and the mobile menu button to the correct color
     function markSliderPosition(position){
         localStorage.setItem('sliderPosition', position);
