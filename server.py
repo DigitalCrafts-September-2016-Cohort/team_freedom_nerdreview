@@ -479,35 +479,37 @@ def render_user_from_login(user_name):
 
 @app.route('/product_review_new', methods=['POST', 'GET'])
 def render_review_new():
-
     #Taking main category choice and returning list of secondary categories to be displayed in next drop down
     main_cat_list = db.query('select name from main_cat').namedresult()
-    new_main_cats = []
-    if request.form.get('added_main') == 'yes':
-        new_main_cat = request.form.get('new_main_cat')
-        new_main_cats.append(new_main_cat)
-
     current_main_cat = request.form.get('main_cat_name')
-    new_sec_cats = []
-    if request.form.get('added_sec') == 'yes':
-        new_sec_cat = request.form.get('new_sec_cat')
-        new_sec_cats.append(new_sec_cat)
+    new_main_cat = request.form.get('new_main_cat')
+
+    if new_main_cat is not None:
+        current_main_cat = new_main_cat
+    else:
+        current_main_cat = request.form.get('main_cat_name')
+
+    if new_main_cat is None:
+        new_main_cat = current_main_cat
+
+
+    print current_main_cat
+    print new_main_cat
 
     if current_main_cat is None:
         sec_cat_list = []
     elif current_main_cat == 'none':
         sec_cat_list = []
-    elif current_main_cat == 'added':
-        new_main_cats.append(request.form.get('main_cat_name'))
     else:
         sec_cat_list = db.query("select secondary_cat.name as sec_cat_name, secondary_cat.id as sec_cat_id, main_cat.name as main_cat_name, main_cat.id as main_cat_id from secondary_cat inner join main_cat on secondary_cat.main_cat_id = main_cat.id where main_cat.name = '%s'" % current_main_cat).namedresult()
 
     #Taking secondary category choice and returning list of brands to be displayed in next drop down
-    current_secondary_cat = request.form.get('sec_cat_name')
-    new_brands = []
-    if request.form.get('added_brand') == 'yes':
-        new_brand = request.form.get('new_brand')
-        new_brands.append(new_brand)
+    new_sec_cat = request.form.get('new_sec_cat')
+    if new_sec_cat is not None:
+        current_secondary_cat = new_sec_cat
+    else:
+        current_secondary_cat = request.form.get('sec_cat_name')
+
     if current_secondary_cat is None:
         brand_list = []
     elif current_secondary_cat == 'none':
@@ -516,11 +518,12 @@ def render_review_new():
         brand_list = db.query("select distinct company.name as brand_name from company inner join product on product.company_id = company.id inner join product_uses_category on product.id = product_uses_category.product_id inner join secondary_cat on product_uses_category.secondary_cat_id = secondary_cat.id where secondary_cat.name = '%s'" % current_secondary_cat).namedresult()
 
     #Taking brand choice and returning list of products to be displayed in next drop down
-    current_brand = request.form.get('brand_name')
-    new_products = []
-    if request.form.get('added_product') == 'yes':
-        new_product = request.form.get('new_product')
-        new_products.append(new_product)
+    new_brand = request.form.get('new_brand')
+    if new_brand is not None:
+        current_brand = new_brand
+    else:
+        current_brand = request.form.get('brand_name')
+
     if current_brand is None:
         product_list = []
     elif current_brand == 'none':
@@ -528,7 +531,11 @@ def render_review_new():
     else:
         product_list = db.query("select product.name as product_name from product inner join company on product.company_id = company.id where company.name = '%s'" % current_brand).namedresult()
 
-    current_product = request.form.get('product_name')
+    new_product = request.form.get('new_product')
+    if new_product is not None:
+        current_product = new_product
+    else:
+        current_product = request.form.get('product_name')
 
     return render_template(
         '/product_review_new.html',
@@ -540,10 +547,10 @@ def render_review_new():
         current_brand = current_brand,
         product_list = product_list,
         current_product = current_product,
-        new_main_cats = new_main_cats,
-        new_sec_cats = new_sec_cats,
-        new_brands = new_brands,
-        new_products = new_products
+        new_main_cat = new_main_cat,
+        new_sec_cat = new_sec_cat,
+        new_brand = new_brand,
+        new_product = new_product
     )
 
 

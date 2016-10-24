@@ -20,7 +20,7 @@
     <div class="row">
         <div class="col-xs-7 col-xs-offset-2">
             <div class="well">
-                <form class="form" action="/product_review_new" method="POST" data-toggle="validator">
+                <form id="review-form" class="form" action="/product_review_new" method="POST" data-toggle="validator">
                     <div class="form-group">
                         <label for="main_cat_name">Main category</label>
                         <select id="main_cat_name" class="form-control" name="main_cat_name" onchange="this.form.submit()" required>
@@ -39,22 +39,19 @@
                             {% for main_cat in main_cat_list %}
                                 <option {% if main_cat.name == current_main_cat %} selected {% endif %} value="{{main_cat.name}}">{{main_cat.name}}</option>
                             {% endfor %}
-                            {% if new_main_cats | length > 0 %}
-                                {% for new_main in new_main_cats %}
-                                    <option selected value="{{new_main}}">{{new_main}}</option>
-                                {% endfor %}
+                            {% if new_main_cat is not none %}
+                                <option selected value="{{new_main_cat}}">{{new_main_cat}}</option>
                             {% endif %}
                         </select>
                     </div>
                     {% if current_main_cat == "addnew" %}
-                    <div class="form-group">
+                    <div class="form-group has-feedback">
                         <div class="col-xs-8">
-                            <input id="review" class="form-control" type="text" name="new_cat" value="" placeholder="Enter New Category!" maxlength="18" data-minlength="3" data-error="Must be longer than 3 characters. No punctuation allowed" required>
-                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                            <input id="new_main_cat" class="form-control" type="text" name="new_main_cat" value="" placeholder="Enter New Category!" maxlength="18" data-minlength="3" data-error="Capitalized, minimum 3 letters. No special characters" required pattern="([A-Z]){1}[A-Z | a-z]+">
                             <div class="help-block with-errors"></div>
                         </div>
                         <div class="col-xs-4">
-                            <button class="nr-btn nr-success sm-btn btn-rnd js-submit formbtn" type="submit" name="added_main" value="yes" formtarget="_self" disabled="true">Add</button>
+                            <button class="nr-btn nr-success sm-btn btn-rnd js-submit formbtn" type="button"><a href="javascript:;" onclick="document.getElementById('review-form').submit();">Add</a></button>
                         </div>
                     </div>
                     {% endif %}
@@ -70,23 +67,30 @@
                                         {% for secondary_cat in sec_cat_list %}
                                             <option {% if secondary_cat.sec_cat_name == current_secondary_cat %} selected {% endif %} value="{{secondary_cat.sec_cat_name}}">{{secondary_cat.sec_cat_name}}</option>
                                         {% endfor %}
+                                        {% if new_sec_cat is not none %}
+                                            <option selected value="new_sec_cat">{{new_sec_cat}}</option>
+                                        {% endif %}
                                     {% else %}
                                         <option value="addnew">ADD NEW</option>
                                         {% for secondary_cat in sec_cat_list %}
                                             <option {% if secondary_cat.sec_cat_name == current_secondary_cat %} selected {% endif %} value="{{secondary_cat.sec_cat_name}}">{{secondary_cat.sec_cat_name}}</option>
                                         {% endfor %}
+                                        {% if new_sec_cat is not none %}
+                                            <option selected value="new_sec_cat">{{new_sec_cat}}</option>
+                                        {% endif %}
                                     {% endif %}
                                 {% endif %}
                             {% endif %}
                         </select>
                     </div>
                     {% if current_secondary_cat == "addnew" %}
-                    <div class="form-group">
+                    <div class="form-group has-feedback">
                         <div class="col-xs-8">
-                            <input id="review" class="form-control" type="text" name="new_cat" value="" placeholder="Enter New Secondary Category!">
+                            <input id="review" class="form-control" type="text" name="new_sec_cat" value="" placeholder="Enter New Secondary Category!" maxlength="18" data-minlength="3" data-error="Capitalized, minimum 3 letters. No special characters" required pattern="([A-Z]){1}[A-Z | a-z]+">
+                            <div class="help-block with-errors"></div>
                         </div>
                         <div class="col-xs-4">
-                            <button class="nr-btn nr-success sm-btn btn-rnd js-submit formbtn" type="submit" disabled="true">Add</button>
+                            <button class="nr-btn nr-success sm-btn btn-rnd js-submit formbtn" type="button"><a href="javascript:;" onclick="document.getElementById('review-form').submit();">Add</a></button>
                         </div>
                     </div>
                     {% endif %}
@@ -97,28 +101,35 @@
                             <option selected disabled value="">Select a company</option>
                             {% if current_secondary_cat is not none %}
                                 {% if current_secondary_cat != "addnew" %}
-                                    {% if current_secondary_cat == "addnew" %}
+                                    {% if current_brand == "addnew" %}
                                         <option selected value="addnew">ADD NEW</option>
                                         {% for brand in brand_list %}
                                             <option {% if brand.brand_name == current_brand %} selected {% endif %} value="{{brand.brand_name}}">{{brand.brand_name}}</option>
                                         {% endfor %}
+                                        {% if new_brand is not none %}
+                                            <option selected value="new_brand">{{new_brand}}</option>
+                                        {% endif %}
                                     {% else %}
                                         <option value="addnew">ADD NEW</option>
                                         {% for brand in brand_list %}
                                             <option {% if brand.brand_name == current_brand %} selected {% endif %} value="{{brand.brand_name}}">{{brand.brand_name}}</option>
                                         {% endfor %}
+                                        {% if new_sec_cat is not none %}
+                                            <option selected value="new_sec_cat">{{new_sec_cat}}</option>
+                                        {% endif %}
                                     {% endif %}
                                 {% endif %}
                             {% endif %}
                         </select>
                     </div>
                     {% if current_brand == "addnew" %}
-                    <div class="form-group">
+                    <div class="form-group has-feedback">
                         <div class="col-xs-8">
-                            <input id="review" class="form-control" type="text" name="new_cat" value="" placeholder="Enter New Brand!">
+                            <input id="review" class="form-control" type="text" name="new_brand" value="" placeholder="Enter New Brand!" maxlength="18" data-minlength="3" data-error="Capitalized, minimum 3 letters. No special characters" required pattern="([A-Z]){1}[A-Z | a-z]+">
+                            <div class="help-block with-errors"></div>
                         </div>
                         <div class="col-xs-4">
-                            <button class="nr-btn nr-success sm-btn btn-rnd js-submit formbtn" type="submit" disabled="true">Add</button>
+                            <button class="nr-btn nr-success sm-btn btn-rnd js-submit formbtn" type="button"><a href="javascript:;" onclick="document.getElementById('review-form').submit();">Add</a></button>
                         </div>
                     </div>
                     {% endif %}
@@ -145,15 +156,38 @@
                         </select>
                     </div>
                     {% if current_product == "addnew" %}
-                    <div class="form-group">
+                    <div class="form-group has-feedback">
                         <div class="col-xs-8">
-                            <input id="review" class="form-control" type="text" name="new_cat" value="" placeholder="Enter New Product Name!">
+                            <input id="review" class="form-control" type="text" name="new_product" value="" placeholder="Enter New Product Name!" maxlength="18" data-minlength="3" data-error="Capitalized, minimum 3 letters. No special characters" required pattern="([A-Z]){1}[A-Z | a-z]+">
+                            <div class="help-block with-errors"></div>
                         </div>
                         <div class="col-xs-4">
-                            <button style= "margin-bottom: 15px;" class="nr-btn nr-success sm-btn btn-rnd js-submit formbtn" type="submit" disabled="true">Add</button>
+                            <button class="nr-btn nr-success sm-btn btn-rnd js-submit formbtn" type="button"><a href="javascript:;" onclick="document.getElementById('review-form').submit();">Add</a></button>
                         </div>
                     </div>
                     {% endif %}
+
+                    <div class="form-group">
+                        <label for="rating">Rating <i class="ion-star"></i></label>
+                        <select id="rating" class="rating form-control" name="rating" required>
+                            <option selected disabled value="">Rate the Product</option>
+                            <option value="1">1</option>
+                            <option value="1.5">1.5</option>
+                            <option value="2">2</option>
+                            <option value="2.5">2.5</option>
+                            <option value="3">3</option>
+                            <option value="3.5">3.5</option>
+                            <option value="4">4</option>
+                            <option value="4.5">4.5</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group set-height">
+                        <label for="review">Review</label>
+                        <input id="review" class="form-control" type="text" name="review" value="{{review}}">
+                    </div>
+
                     <button class="nr-btn nr-success std-btn btn-rnd js-submit" type="submit">Submit</button>
                 </form>
             </div>
