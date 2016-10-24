@@ -32,11 +32,13 @@ def submit_login():
        user = results[0]
        if user.password == password:
            session['username'] = user.user_name
-           flash("Successfully Logged In")
+        #    flash("Successfully Logged In")
            return redirect('/')
        else:
+           flash("Wrong password - try again!")
            return redirect('/')
    else:
+       flash("You don't have an account - sign up instead!")
        return redirect('/')
 
 # Sign up
@@ -48,7 +50,7 @@ def submit_signup():
    try:
        db.insert('users', name=name, user_name=username, password=password)
        session['username'] = username
-       flash('Sign Up Succesful')
+    #    flash('Sign Up Succesful')
        return redirect('/')
    except:
        flash('Sign Up Not Succesful')
