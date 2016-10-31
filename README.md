@@ -64,6 +64,9 @@ All team members are students in the [Digital Crafts](https://digitalcrafts.com)
 * PostgreSQL
 * Amazon Web Services EC2
 * Apache
+* Icons from the Noun project
+  * *NERD made by Nicolas Vicent -- http://www.nicolas-vicent.com/*
+  * *CROWN made by Nikita Kozin -- ya.kozinnikita@ya.ruÂ*
 
 
 ##MVP (Minimum Viable Product):
