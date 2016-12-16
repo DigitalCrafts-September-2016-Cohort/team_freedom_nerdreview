@@ -8,10 +8,10 @@ from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv())
 
 db = pg.DB(
-    dbname=os.environ.get('PG_DBNAME'),
-    host=os.environ.get('PG_HOST'),
-    user=os.environ.get('PG_USERNAME'),
-    passwd=os.environ.get('PG_PASSWORD')
+    dbname=os.environ.get('NERDREVIEW_PG_DBNAME'),
+    host=os.environ.get('NERDREVIEW_PG_HOST'),
+    user=os.environ.get('NERDREVIEW_PG_USERNAME'),
+    passwd=os.environ.get('NERDREVIEW_PG_PASSWORD')
 )
 
 tmp_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
